@@ -1,0 +1,284 @@
+<!-- Copyright 2024 Sony Group Corporation. -->
+<!--
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+
+<!DOCTYPE html>
+<!-- saved from url=(0042)https://support.dl.sony.com/docs/#Tutorial -->
+<html lang="en-US">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="description" content="This is a manual of how to use Neural Network Console.">
+  <meta name="keyword"
+    content="deep learning, sony, neural network, AI, machine learning, framework, Neural Network Libraries">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tutorial.Training using a sample project - Docs - Neural Network Console</title>
+
+  <link rel="shortcut icon" href="/docs/assets/images/common/favicon.ico" type="image/x-icon">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="stylesheet" href="/docs/assets/css/app.css">
+  <script src="/docs/assets/js/app.js"></script>
+  <style>
+    .video-box {
+      position: relative;
+    }
+    .video-box video{
+      display: inline-block;
+      vertical-align: middle;
+      width: 100%;
+      height: auto;
+    }
+    .video-box #video-img{
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      z-index: 10;
+      background: url('/docs/assets/images/common/video_start.png') no-repeat;
+      background-position: center center;
+      background-size: 158px 159px;
+      cursor: pointer;
+    }
+  </style>
+
+</head>
+
+<body class="page-docs docs en-US">
+  <header class="header">
+    <div class="header_inner">
+      <div class="header_content">
+        <p class="header_logo"><img src="/docs/assets/images/common/sony_logo.svg" alt="SONY" width="86"></p>
+      </div>
+    </div>
+  </header>
+  <div class="wrapper" id="js-wrapper">
+    <div class="nav_wrap mf_finder_header" id="js-nav_wrap">
+      <div class="nav_menuBar visibleOnlySmall">
+        <div class="search-box-with-menubar">
+        </div>
+        <div data-toggle="collapse" aria-controls="js-navContent" role="button" aria-label="menu button"
+          class="nav_btnMenu" id="js-nav_btnMenu">
+          <div class="nav_btnMenu_inner">
+            <span class="bar bar-1"></span>
+            <span class="bar bar-2"></span>
+            <span class="bar bar-3"></span>
+          </div>
+        </div>
+      </div>
+      <div class="nav" id="js-nav" aria-expanded="true">
+        <nav aria-expanded="false" class="navContent" id="js-navContent">
+          <div class="navContent_list">
+            <div class="navLeft">
+              <div class="navi-home">
+                <a class="js-hover">
+                  <span class="typo__sstw_L sst_logo">Neural Network</span>
+                  <span class="typo__sstw_B sst_logo">Console</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="contents">
+      <div class="breadcrumbs en-US">
+        <div class="breadcrumbs_inner">
+          <!-- Breadcrumb NavXT 5.7.1 -->
+          <span property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" title="Go to Docs." href="/docs/" class="main-home">
+              <span property="name">Docs</span>
+            </a>
+            <meta property="position" content="1">
+          </span>
+          <span>&gt;</span>
+          <span property="itemListElement" typeof="ListItem">
+            <span property="name">Tutorial. Training using a sample project</span>
+            <meta property="position" content="2">
+          </span>
+        </div>
+      </div>
+      <div class="contents_inner">
+        <a class="contents_home visibleOnlySmall">
+          <span class="typo__sstw_L sst_logo">Neural Network</span>
+          <span class="typo__sstw_B sst_logo">Console</span>
+        </a>
+        <div class="sectionBox">
+          <div class="sectionBox_tit_wrapper">
+            <h1 class="sectionBox_tit">Tutorial. Training using a sample project</h1>
+          </div>
+          <div class="sectionBox_inner">
+            <div class="sectionBox_content">
+              <article class="singleArticle">
+                <div class="articleText">
+                  <div class="video-box">
+                    <video id="video" controls='controls'>
+                      <source src="/docs/assets/videos/training_using_a_sample_project.mp4" type="video/mp4">
+                      <source src="/docs/assets/videos/training_using_a_sample_project.webm" type="video/webm">
+                      <p>Your browser does not support video tags</p>
+                    </video>
+                    <div id="video-img"></div>
+                  </div>                
+                  <h3><a name="_Toc489818959"></a>1 Copying the sample project</h3>
+                  <p>From the list of projects that appear when you open the project tab, select
+                    tutorial.basics.01_logistic_regression, input project name and copy it.</p>
+                  <p><img class="alignnone size-large wp-image-40"
+                      src="/docs/assets/images/training_using_a_sample_project/copy_project_1.png" alt="" width="1024"
+                      height="295"></p>
+
+                  <p>Or from the Sample Project.</p>
+                  <p><img class="alignnone size-large wp-image-40"
+                      src="/docs/assets/images/training_using_a_sample_project/copy_project_2_1.png" alt="" width="1024"
+                      height="295"></p>
+                  <p><img class="alignnone size-large wp-image-40"
+                      src="/docs/assets/images/training_using_a_sample_project/copy_project_2_2.png" alt="" width="1024"
+                      height="295"></p>
+                  <p>&nbsp;</p>
+
+
+                  <h3><a name="_Toc489818960"></a>2 Viewing the contents of the sample project</h3>
+                  <p>Click the new project name to enter the editor page.</p>
+                  <p><img class="alignnone size-large wp-image-41"
+                      src="/docs/assets/images/training_using_a_sample_project/click_project.png" alt="" width="1024"
+                      height="277"></p>
+                  <p>&nbsp;</p>
+                  <p>On the EDIT tab you see the loaded network. It is a single-layer network
+                    (logistic regression) for performing binary discrimination for determining
+                    whether each of the 1 by 28 by 28 monochrome handwritten character images
+                    (images of 4 and 9) from the MNIST handwritten character classification dataset
+                    is a 9.</p>
+                  <p><img class="alignnone size-large wp-image-41"
+                      src="/docs/assets/images/training_using_a_sample_project/confirm_project.png" alt="" width="1024"
+                      height="619"></p>
+                  <p>&nbsp;</p>
+                  <p>On the DATASET tab there are the small MNIST training and validation datasets
+                    (images of 4 and 9 and labels indicating whether each image is a 9, where “4” is
+                    category index 0 and “9” is category index 1) extracted from the full MNIST
+                    dataset.</p>
+                  <p><img class="alignnone size-large wp-image-42"
+                      src="/docs/assets/images/training_using_a_sample_project/confirm_dataset.png" alt="" width="1024"
+                      height="567"></p>
+                  <p>&nbsp;</p>
+                  <h3><a name="_Toc489818961"></a>3 Executing training</h3>
+                  <p>Click the Run Training button on the EDIT tab to start the training process.</p>
+                  <p><img class="alignnone size-full wp-image-43"
+                      src="/docs/assets/images/training_using_a_sample_project/execute_training.png" alt="" width="1024"
+                      height="608"></p>
+                  <p>&nbsp;</p>
+                  <p>The progress of training and the learning curve are shown on the TRAINING tab.
+                  </p>
+                  <p><img class="alignnone size-large wp-image-44"
+                      src="/docs/assets/images/training_using_a_sample_project/learning_curve.png" alt="" width="1024"
+                      height="640"></p>
+                  <p>&nbsp;</p>
+                  <p><em>Epoch</em>, the horizontal axis of the graph, indicates the number of
+                    repeated generations (epochs) of optimization. <em>Cost</em> indicates the
+                    output of the loss function at the optimization stage, and <em>errors</em>
+                    indicate the outputs of the loss functions of the training and validation data
+                    at the end of each epoch. As shown in the figure, if the cost and error values
+                    decrease with the number of epochs, the optimization process can be considered
+                    to be running properly.</p>
+                  <p>&nbsp;</p>
+                  <h3><a name="_Toc489818962"></a>4 Executing evaluation</h3>
+                  <p>Select Evaluate tag and click the Run button to start the evaluation process.
+                  </p>
+                  <p><img class="alignnone size-full wp-image-45"
+                      src="/docs/assets/images/training_using_a_sample_project/execute_evaluation.png" alt="" width="1024"
+                      height="640"></p>
+                  <p>&nbsp;</p>
+                  <p>The EVALUATION tab shows the progress of the evaluation and the evaluation
+                    results.</p>
+                  <p><img class="alignnone size-large wp-image-46"
+                      src="/docs/assets/images/training_using_a_sample_project/evaluation_result.png" alt="" width="1024"
+                      height="498"></p>
+                  <p>&nbsp;</p>
+                  <p>The evaluation results are shown in a table consisting of the validation dataset
+                    and an additional column (y’) that contains the estimated results produced by
+                    the trained neural network. Column y’ in the graph indicates the probability of y
+                    being a 1 (the input image being a 9)</p>
+                  <p>&nbsp;</p>
+                  <p><span lang="EN-US"><span style="color: #000000;font-family: Century">Click
+                        Confusion Matrix to show the accuracy results of the
+                        evaluation.</span></span></p>
+                  <p><img class="alignnone size-large wp-image-47"
+                      src="/docs/assets/images/training_using_a_sample_project/confusion_matrix.png" alt="" width="1024"
+                      height="498"></p>
+                  <p>&nbsp;</p>
+                  <p><strong>Accuracy</strong> indicates the classification accuracy. In this example,
+                    we can see that 4’s and 9’s in the validation dataset were classified with an
+                    accuracy of 95.2%</p>
+                  <p>&nbsp;</p>
+                  <h3><a name="_Toc489818963"></a>5 Executing inference</h3>
+                  <p>Click on the "INFERENCE" tab to access the inference page.
+                  </p>
+                  <p><img class="alignnone size-large wp-image-48"
+                    src="/docs/assets/images/training_using_a_sample_project/inference.png" alt="" width="1024"
+                    height="498"></p>
+                  <p>&nbsp;</p>
+                  <p>Click on the Run icon to input files in popup window.
+                  </p>
+                  <p><img class="alignnone size-large wp-image-49"
+                    src="/docs/assets/images/training_using_a_sample_project/input_file.png" alt="" width="1024"
+                    height="498"></p>
+                  <p>&nbsp;</p>
+                  <p>Click on the Run button to start the inference process in popup window.
+                  </p>
+                  <p><img class="alignnone size-large wp-image-50"
+                    src="/docs/assets/images/training_using_a_sample_project/execute_inference.png" alt="" width="1024"
+                    height="498"></p>
+                  <p>&nbsp;</p>
+                  <p>Check inference result.
+                  </p>
+                  <p><img class="alignnone size-large wp-image-51"
+                    src="/docs/assets/images/training_using_a_sample_project/inference_result.png" alt="" width="1024"
+                    height="498"></p>
+                </div>
+              </article>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- .contents_inner -->
+    </div><!-- .contents -->
+  </div><!-- /.wrapper -->
+  <footer class="footer">
+    <div class="footer_inner">
+      <div class="pageTopBtn">
+        <a href="javascript:void(0)" aria-label="Back to the top of this page." id="js-pageTop">Page Top</a>
+      </div>
+      <div class="footer_sitemap_inner">
+        <div class="sitemap"></div>
+      </div>
+    </div>
+  </footer>
+</body>
+<script type="text/javascript">
+  let videoImg = document.getElementById('video-img');
+  videoImg.onclick = function() {
+    this.hidden = true;
+    let video = document.getElementById("video");
+    video.play();
+  }
+  video.addEventListener('pause', function () {
+    videoImg.hidden = false;
+  });
+  video.addEventListener('play', function () {
+    videoImg.hidden = true;
+  });
+</script>
+
+</html>

@@ -1,0 +1,32 @@
+[Property]
+Input
+Axes
+KeepDims
+Output
+CostAdd
+
+[Property_Input]
+Editable=False
+Type=PIntArray
+Value=*GraphInput
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*SumOutputSize
+
+[Property_Axes]
+Type=UIntArray
+Value=0
+ArgumentName=mean_param.axes -a
+
+[Property_KeepDims]
+Type=Boolean
+Value=False
+ArgumentName=mean_param.keep_dims
+
+[Property_CostAdd]
+Editable=False
+Type=PInt
+Value=*Calc +*Input
+Required=False

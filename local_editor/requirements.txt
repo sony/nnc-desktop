@@ -1,0 +1,13 @@
+requests
+schema==0.7.5
+psutil
+flask
+peewee==3.11.1
+imageio==2.6.1
+matplotlib
+pydicom==1.3
+paramiko
+opencv-python
+retrying 
+scikit-image
+librosa

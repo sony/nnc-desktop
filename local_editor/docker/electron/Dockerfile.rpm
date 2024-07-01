@@ -1,0 +1,112 @@
+# Copyright 2024 Sony Group Corporation.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# source install python
+FROM rockylinux:8 as build-python
+
+ENV PYTHON_VERSION=3.9.13
+
+RUN dnf -y check-update; exit 0
+RUN dnf group install -y "Development Tools"
+RUN dnf -y install wget perl-core zlib-devel fuse-libs libffi-devel openssl-devel
+
+# Source Install Python
+RUN mkdir -p /tmp/python_bundles/lib/
+
+# Install sqlite3
+RUN cd /tmp \
+    && wget --no-check-certificate https://www.sqlite.org/2022/sqlite-autoconf-3390200.tar.gz \
+    && tar xvfz sqlite-autoconf-3390200.tar.gz \
+    && cd sqlite-autoconf-3390200 \
+    && ./configure --prefix=/tmp/sqlite \
+    && make install
+
+RUN cp -P /tmp/sqlite/lib/libsqlite3* /tmp/python_bundles/lib/
+
+ENV LD_LIBRARY_PATH=/tmp/python_bundles/lib:${LD_LIBRARY_PATH}
+
+
+RUN cd /tmp \
+    && wget --no-check-certificate https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz \
+    && tar -xvzf Python-${PYTHON_VERSION}.tgz \
+    && cd Python-${PYTHON_VERSION} \
+    && ./configure \
+         LDFLAGS="-L/tmp/python_bundles/lib " \
+         CPPFLAGS="-I/usr/include/ -I/usr/include/gdbm -I/usr/include/openssl -I/tmp/sqlite/include" \
+         --prefix=/tmp/python_bundles \
+         --enable-optimizations \
+         --with-ensurepip=install \
+    && make -j8 altinstall
+
+ENV NNABLA_VERSION=1.33.1
+ENV PATH=/tmp/python_bundles/bin:${PATH}
+
+# temporarily not needed
+#     nnabla-ext-cuda102==${NNABLA_VERSION} \
+# && python$(echo ${PYTHON_VERSION} | cut -d. -f1-2) -m pip install --extra-index-url https://developer.download.nvidia.com/compute/redist nvidia-dali-cuda102 \
+
+RUN python$(echo ${PYTHON_VERSION} | cut -d. -f1-2) -m pip install \
+        nnabla_converter==${NNABLA_VERSION} \
+https://nnabla.org/whl/nnabla_ext_cuda_alllib/nnabla_ext_cuda_alllib-${NNABLA_VERSION}\
+-cp$(echo ${PYTHON_VERSION} | cut -d. -f1-2 | tr -d '.')-cp$(echo ${PYTHON_VERSION} | cut -d. -f1-2 | tr -d '.')-manylinux_2_17_x86_64.whl
+
+COPY local_editor/requirements.txt /tmp/requirements.txt
+RUN python$(echo ${PYTHON_VERSION} | cut -d. -f1-2) -m pip --no-cache-dir install -r /tmp/requirements.txt
+
+COPY local_editor/runner_component/tools/console_cli /tmp/console_cli
+
+RUN python$(echo ${PYTHON_VERSION} | cut -d. -f1-2) -m pip install /tmp/console_cli/*.whl
+
+FROM rockylinux:8
+ENV PYTHON_VERSION=3.9.13
+
+RUN dnf -y check-update; exit 0
+RUN dnf group install -y "Development Tools"
+RUN dnf -y install wget ca-certificates curl gcc gcc-c++ rpm \
+    && dnf clean all
+
+
+RUN curl -sL https://rpm.nodesource.com/setup_14.x | bash -
+RUN dnf install -y nodejs \
+    && dnf clean all
+
+COPY electron_app/ /tmp/electron_app
+RUN actual_hash=$(sha256sum /tmp/electron_app/opt-ex.zip | awk '{print $1}') \
+    && expected_hash="363c93b4cc77060543fb74dbd7d071c6ff23d52dd5fbbcfd54f5b9c8d35d96c7" \
+    && echo "actual_hash: $actual_hash" \
+    && echo "expected_hash: $expected_hash" \
+    && if [ "$actual_hash" = "$expected_hash" ]; \
+    then \
+        echo -e "\e[32mopt-ex.zip verified successfully.\e[0m"; \
+    else \
+        echo -e "\e[31mwarning:opt-ex.zip verification failed.\e[0m"; \
+    fi
+COPY console/ /tmp/electron_app/console
+COPY local_editor/python_modules /tmp/electron_app/py/server
+COPY local_editor/runner_component/core /tmp/electron_app/py/connector
+COPY local_editor/runner_component/tools/nncd_console /tmp/electron_app/py/server/nncd_console
+COPY local_editor/runner_component/tools/nncd_console /tmp/electron_app/py/connector/nncd_console
+COPY --from=build-python /tmp/python_bundles /tmp/electron_app/python_bundles
+
+RUN chmod 666 /tmp/electron_app/py/server/nncd_console/settings/settings.ini
+RUN chmod 666 /tmp/electron_app/py/connector/nncd_console/settings/settings.ini
+
+RUN ln -s /tmp/electron_app/python_bundles/bin/python$(echo ${PYTHON_VERSION} | cut -d. -f1-2) /tmp/electron_app/python_bundles/bin/python
+ENV PATH=/tmp/electron_app/python_bundles/bin:${PATH}
+ENV LD_LIBRARY_PATH=/tmp/electron_app/python_bundles/lib:${LD_LIBRARY_PATH}
+
+RUN cd /tmp/electron_app \
+    && npm install \
+    && npm run linux-rpm

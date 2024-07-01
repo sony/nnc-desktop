@@ -1,0 +1,9 @@
+{
+  "code": "40014009",
+  "message": {
+    "ja": "パラメータが必要とするメモリサイズが大きすぎるため、選択されたCPU/GPUではジョブ実行ができません。選択されたCPU/GPUのメモリで処理できるようにネットワークの見直しやデータセットサイズの縮小を行うか、上位のGPUでお試しください。",
+    "en": "Due to the memory size required by the parameter is too large, the job cannot be executed on the selected CPU / GPU. Please review the network and reduce the data set size so that it can be processed with the memory of the selected CPU / GPU, or try a superordinate GPU."
+  },
+  "image_1": "",
+  "image_2": ""
+}

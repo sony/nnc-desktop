@@ -1,0 +1,13 @@
+/build/
+tmp*
+electron_app/console/
+electron_app/node_modules/
+electron_app/dist/
+electron_app/py/server
+electron_app/py/connector
+electron_app/python_bundles
+console/
+dist/
+opt*.zip
+node_modules/
+!nnc-web/**/dist

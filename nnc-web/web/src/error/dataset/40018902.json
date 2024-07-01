@@ -1,0 +1,7 @@
+{
+  "code": "40018902",
+  "message": {
+    "ja": "データセットCSVファイルが空です。\nWindows版Neural Network Console、OSS版nnabla、もしくは最新のUploaderを使ってアップロードしてください。",
+    "en": "Dataset CSV file is empty.\nPlease upload using the Windows version of Neural Network Console, nnabla, or the latest uploader."
+  }
+}

@@ -1,0 +1,26 @@
+[Global]
+FunctionName=isnan
+
+[Display]
+Color=0x848484
+
+[Property]
+Input
+Output
+CostIf
+
+[Property_Input]
+Editable=False
+Type=PIntArray
+Value=*GraphIO
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*Input
+
+[Property_CostIf]
+Editable=False
+Type=PInt
+Value=*Calc +*Input
+Required=False

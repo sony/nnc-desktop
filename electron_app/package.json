@@ -1,0 +1,84 @@
+{
+  "name": "nncd",
+  "version": "0.1.0",
+  "description": "NeuralNetworkConsole Desktop version",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pack": "electron-builder --dir",
+    "linux-cpu-deb": "cross-env NODE_ENV=production ELECTRON_GET_USE_PROXY=true GLOBAL_AGENT_HTTPS_PROXY=$http_proxy https_proxy=$https_proxy http_proxy=$http_proxy electron-builder --linux deb --config.extraMetadata.name=nncd_cpu",
+    "linux-gpu-deb": "cross-env NODE_ENV=production ELECTRON_GET_USE_PROXY=true GLOBAL_AGENT_HTTPS_PROXY=$http_proxy https_proxy=$https_proxy http_proxy=$http_proxy electron-builder --linux deb --config.extraMetadata.name=nncd",
+    "linux-rpm": "cross-env NODE_ENV=production ELECTRON_GET_USE_PROXY=true GLOBAL_AGENT_HTTPS_PROXY=$http_proxy https_proxy=$https_proxy http_proxy=$http_proxy electron-builder --linux rpm",
+    "win-cpu-dist": "cross-env NODE_ENV=production ELECTRON_GET_USE_PROXY=true GLOBAL_AGENT_HTTPS_PROXY=%http_proxy% https_proxy=%https_proxy%  http_proxy=%http_proxy% electron-builder --win --config.productName=NeuralNetworkConsoleDesktop-cpu",
+    "win-gpu-dist": "cross-env NODE_ENV=production ELECTRON_GET_USE_PROXY=true GLOBAL_AGENT_HTTPS_PROXY=%http_proxy% https_proxy=%https_proxy%  http_proxy=%http_proxy% electron-builder --win --config.productName=NeuralNetworkConsoleDesktop",
+    "mac-dist": "cross-env NODE_ENV=production ELECTRON_GET_USE_PROXY=true GLOBAL_AGENT_HTTPS_PROXY=$http_proxy https_proxy=$https_proxy  http_proxy=$http_proxy electron-builder --mac",
+    "test-env": "echo cross-env %http_proxy%"
+  },
+  "author": "nncd",
+  "homepage": "https://github.com/nnabla/nnabla-console",
+  "license": "Apache-2.0",
+  "build": {
+    "appId": "com.nncd.nnabla",
+    "productName": "NeuralNetworkConsoleDesktop",
+    "copyright": "Sony Group Corporation",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "node_modules/",
+      "asset/",
+      "main.js",
+      "package.json"
+    ],
+    "extraResources": [
+      "console/",
+      "py/",
+      "python_bundles/",
+      "python_bundles.tar.br",
+      "opt-ex.zip",
+      "splash_screen.html"
+    ],
+    "linux": {
+      "target": [
+        "deb",
+        "rpm"
+      ],
+      "icon": "asset/icon/",
+      "maintainer": "nncd",
+      "category": "Science"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "asset/icon/256x256.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "include": "build/installer.nsh"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "icon": "asset/icon/512x512.png"
+    },
+    "portable": {
+      "artifactName": "NeuralNetworkConsoleDesktop.exe"
+    },
+    "npmRebuild": false,
+    "buildVersion": "0.1.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "electron": "^15.3.2",
+    "electron-builder": "^22.14.5"
+  },
+  "dependencies": {
+    "tar": "^7.0.1",
+    "@trodi/electron-splashscreen": "^1.0.2",
+    "electron-squirrel-startup": "^1.0.0",
+    "electron-window-state": "5.0.3"
+  }
+}

@@ -1,0 +1,26 @@
+[Display]
+Color=0x848484
+
+[IO]
+Input=Multiple
+
+[Property]
+Inputs
+Output
+CostMultiply
+
+[Property_Inputs]
+Editable=False
+Type=PIntArrays
+Value=*GraphInputs
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*BasicMathOutputSizewBC
+
+[Property_CostMultiply]
+Editable=False
+Type=PInt
+Value=*Calc +*Output
+Required=False

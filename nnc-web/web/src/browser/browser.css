@@ -1,0 +1,51 @@
+/* Copyright 2024 Sony Group Corporation. */
+/**
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+*/
+
+#browser_check_dialog_area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(38, 38, 38, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  display: none;
+}
+
+.browser_check_dialog {
+  width: 432px;
+  background: white;
+  padding: 16px;
+}
+
+.browser_check_dialog_button {
+  margin-top: 16px;
+  text-align: right;
+}
+
+.browser_check_dialog_button button {
+  color: white;
+  font-family: "SSTUI-Medium", sans-serif;
+  min-width: 10.0rem;
+  height: 3.2rem;
+  background: rgb(0, 102, 153);
+  border: none;
+  border-radius: 1.6rem;
+  padding: 0 1.6rem;
+  cursor: pointer;
+}

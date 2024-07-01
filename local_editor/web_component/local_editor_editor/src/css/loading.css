@@ -1,0 +1,87 @@
+/* Copyright 2024 Sony Group Corporation. */
+/**
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+*/
+
+.spinner {
+  position: absolute;
+  margin-top: -12px;
+  margin-left: -12px;
+  left: 50%;
+  top: 50%;
+  width: 24px;
+  height: 24px;
+}
+
+.spinner > div {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 24px;
+  width: 24px;
+  display: block;
+  margin: 0;
+  -webkit-animation: stretchdelay 6s infinite ease-in-out;
+  animation: stretchdelay 6s infinite ease-in-out;
+  border-radius: 50%;
+}
+
+.spn1{ background: #77b3d1; }
+.spn2{ background: #df7f6d; }
+
+.spinner .spn2 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+@-webkit-keyframes stretchdelay {
+  0%, 100%{
+    -webkit-transform: translate(-24px, 0);
+  }
+
+  12.5%{
+    -webkit-transform: translate(24px, 0);
+    background: #DF7F6D;
+  }
+
+  25%{
+    -webkit-transform: translate(-24px, 0);
+    background: #7A997A;
+  }
+
+  37.5%{
+    -webkit-transform: translate(24px, 0);
+    background: #CCAF93;
+  }
+
+  50%{
+    -webkit-transform: translate(-24px, 0);
+    background: #AC99BF;
+  }
+
+
+  62.5%{
+    -webkit-transform: translate(24px, 0);
+    background: #77B3D1;
+  }
+
+  75%{
+    -webkit-transform: translate(-24px, 0);
+    background: #D8D8D8;
+  }
+
+  87.5%{
+    -webkit-transform: translate(24px, 0);
+    background: #B2B2B2;
+  }
+}

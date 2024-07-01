@@ -1,0 +1,51 @@
+<!-- Copyright 2024 Sony Group Corporation. -->
+<!--
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Network Console</title>
+    <link rel="stylesheet" href="lib/css/jquery.scrollbar.css">
+    <link rel="stylesheet" href="lib/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/css/VueTimepicker.css">
+    <link rel="stylesheet" href="/src/css/editor.min.css"/>
+    <script src="lib/js/aws-sdk.min.js"></script>
+    <script src="lib/js/moment.min.js"></script>
+    <script src="lib/js/jquery.min.js"></script>
+    <script src="lib/js/popper.min.js"></script>
+    <script src="lib/js/bootstrap.min.js"></script>
+    <script src="lib/js/Chart.min.js"></script>
+    <script src="lib/js/d3.min.js"></script>
+    <script src="lib/js/jquery.scrollbar.min.js"></script>
+    <script src="lib/js/jquery.floatThead.min.js"></script>
+    <script src="lib/js/vue.min.js"></script>
+    <script src="lib/js/Sortable.min.js"></script>
+    <script src="lib/js/vuedraggable.umd.min.js"></script>
+    <script src="lib/js/VueTimepicker.umd.min.js"></script>
+    <script src="lib/js/animsition.min.js"></script>
+    <script src="lib/js/jquery-ui.min.js"></script>
+  </head>
+  <body>
+    <div id="editor"></div>
+    <script>
+      window.global = window;
+    </script>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

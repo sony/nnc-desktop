@@ -1,0 +1,9 @@
+{
+  "code": "40014005",
+  "message": {
+    "ja": "Poolingレイヤーのプロパティに無効な設定があります。",
+    "en": "One or more invalid settings are found in the property of Pooling layer."
+  },
+  "image_1": "/console/error/image/MaxPooling_Layer_Property.png",
+  "image_2": "/console/error/image/Pooling_Layer_Img.png"
+}

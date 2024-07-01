@@ -1,0 +1,17 @@
+# Dependency directory
+node_modules
+
+# Optional npm cache directory
+.npm
+
+# Build
+build
+
+# Dist
+dist
+
+# Coverage
+coverage
+
+# Environment
+src/environment.ts

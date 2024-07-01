@@ -1,0 +1,87 @@
+/* Copyright 2024 Sony Group Corporation. */
+/**
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+*/
+
+div#sideMenu .list-group-item{
+    word-break: break-all;
+}
+
+div.dataset{
+    word-break: break-all;
+}
+
+.navbar {
+    border-bottom: 0px;
+}
+.whiteicon {
+    color: #ffffff;
+}
+.navbar-brand.active {
+    background-color: #337AB7;
+}
+.navbar-brand.active:hover {
+    background-color: #337AB7;
+}
+.navbar-static-top {
+    margin-bottom: 0;
+}
+
+.panel-default:hover {
+    background-color: #F3F5F7;
+}
+
+.panel {
+    min-height: 14em;
+}
+
+.panel-body p {
+    line-height: 1.0em;
+}
+
+#project_menu {
+    display: block;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    width: 8em;
+    z-index: 999999;
+}
+
+#project_menu li:hover {
+    background-color: #F3F5F7;
+}
+
+.progress_bar {
+  width: auto;
+  margin: 10px 0;
+  padding: 3px;
+  border: 1px solid #FFFFFF;
+  font-size: 14px;
+  clear: both;
+}
+
+.percent {
+  background-color: #58bc43;
+  height: auto;
+}
+
+.progress-dialog {
+  padding-top: 150px;
+}
+
+.drop-area-border {
+    padding: 6px 12px;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+}

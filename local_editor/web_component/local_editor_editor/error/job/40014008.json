@@ -1,0 +1,9 @@
+{
+  "code": "40014008",
+  "message": {
+    "ja": "レイヤーの入出力に必要となるメモリサイズが大きすぎるため、選択されたCPU/GPUではジョブ実行ができません。\nレイヤーの入出力構成を変更するか上位のGPUでお試しください。",
+    "en": "Since the memory size required for Layer input / output is too large, the selected CPU / GPU cannot execute the job.\nPlease change the input / output of Layer or try with a superordinate GPU."
+  },
+  "image_1": "",
+  "image_2": ""
+}

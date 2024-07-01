@@ -1,0 +1,34 @@
+[Global]
+FunctionName=softplus
+
+[Display]
+Color=0xd77b6a
+
+[Property]
+Input
+Output
+
+CostAdd
+CostExp
+
+[Property_Input]
+Editable=False
+Type=PIntArray
+Value=*GraphInput
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*Input
+
+[Property_CostAdd]
+Editable=False
+Type=PInt
+Value=*Calc +*Input
+Required=False
+
+[Property_CostExp]
+Editable=False
+Type=PInt
+Value=*Calc +*Input:*2
+Required=False

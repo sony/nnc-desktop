@@ -1,0 +1,17 @@
+[Global]
+FunctionName=atanh
+
+[Property]
+Input
+Output
+
+[Property_Input]
+Editable=False
+Type=PIntArray
+Value=*GraphIO
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*Input
+

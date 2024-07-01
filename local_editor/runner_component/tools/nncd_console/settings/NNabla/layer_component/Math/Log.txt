@@ -1,0 +1,20 @@
+[Property]
+Input
+Output
+CostExp
+
+[Property_Input]
+Editable=False
+Type=PIntArray
+Value=*GraphIO
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*Input
+
+[Property_CostExp]
+Editable=False
+Type=PInt
+Value=*Calc +*Input
+Required=False

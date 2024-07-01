@@ -1,0 +1,7 @@
+{
+  "code": "40018910",
+  "message": {
+    "ja": "データセット内の画像データが壊れているか画像サイズが大きすぎます。壊れている画像データを取り除くか画像サイズを下げて再度アップロードしてください。",
+    "en": "The image data in the dataset is corrupted or the image size is too large. Please remove the corrupted image data or reduce the image size and upload again."
+  }
+}

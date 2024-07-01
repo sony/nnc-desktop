@@ -1,0 +1,16 @@
+[Global]
+FunctionName=reset_nan
+
+[Property]
+Input
+Output
+
+[Property_Input]
+Editable=False
+Type=PIntArray
+Value=*GraphInput
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*Input

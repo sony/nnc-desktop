@@ -1,0 +1,212 @@
+<!-- Copyright 2024 Sony Group Corporation. -->
+<!--
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+
+<!DOCTYPE html>
+<!-- saved from url=(0042)https://support.dl.sony.com/docs/#Tutorial -->
+<html lang="en-US">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="description" content="This is a manual of how to use Neural Network Console.">
+  <meta name="keyword"
+    content="deep learning, sony, neural network, AI, machine learning, framework, Neural Network Libraries">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tutorial.Import a dataset to the Neural Network Console - Docs - Neural Network Console</title>
+
+  <link rel="shortcut icon" href="/docs/assets/images/common/favicon.ico" type="image/x-icon">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="stylesheet" href="/docs/assets/css/app.css">
+  <script src="/docs/assets/js/app.js"></script>
+  <style>
+    .video-box {
+      position: relative;
+    }
+
+    .video-box video {
+      display: inline-block;
+      vertical-align: middle;
+      width: 100%;
+      height: auto;
+    }
+
+    .video-box #video-img {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      z-index: 10;
+      background: url('/docs/assets/images/common/video_start.png') no-repeat;
+      background-position: center center;
+      background-size: 158px 159px;
+      cursor: pointer;
+    }
+  </style>
+
+</head>
+
+<body class="page-docs docs en-US">
+  <header class="header">
+    <div class="header_inner">
+      <div class="header_content">
+        <p class="header_logo"><img src="/docs/assets/images/common/sony_logo.svg" alt="SONY" width="86"></p>
+      </div>
+    </div>
+  </header>
+  <div class="wrapper" id="js-wrapper">
+    <div class="nav_wrap mf_finder_header" id="js-nav_wrap">
+      <div class="nav_menuBar visibleOnlySmall">
+        <div class="search-box-with-menubar">
+        </div>
+        <div data-toggle="collapse" aria-controls="js-navContent" role="button" aria-label="menu button"
+          class="nav_btnMenu" id="js-nav_btnMenu">
+          <div class="nav_btnMenu_inner">
+            <span class="bar bar-1"></span>
+            <span class="bar bar-2"></span>
+            <span class="bar bar-3"></span>
+          </div>
+        </div>
+      </div>
+      <div class="nav" id="js-nav" aria-expanded="true">
+        <nav aria-expanded="false" class="navContent" id="js-navContent">
+          <div class="navContent_list">
+            <div class="navLeft">
+              <div class="navi-home">
+                <a class="js-hover">
+                  <span class="typo__sstw_L sst_logo">Neural Network</span>
+                  <span class="typo__sstw_B sst_logo">Console</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="contents">
+      <div class="breadcrumbs en-US">
+        <div class="breadcrumbs_inner">
+          <!-- Breadcrumb NavXT 5.7.1 -->
+          <span property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" title="Go to Docs." href="/docs/" class="main-home">
+              <span property="name">Docs</span>
+            </a>
+            <meta property="position" content="1">
+          </span>
+          <span>&gt;</span>
+          <span property="itemListElement" typeof="ListItem">
+            <span property="name">Tutorial. Import a dataset to the Neural Network Console</span>
+            <meta property="position" content="2">
+          </span>
+        </div>
+      </div>
+      <div class="contents_inner">
+        <a class="contents_home visibleOnlySmall">
+          <span class="typo__sstw_L sst_logo">Neural Network</span>
+          <span class="typo__sstw_B sst_logo">Console</span>
+        </a>
+        <div class="sectionBox">
+          <div class="sectionBox_tit_wrapper">
+            <h1 class="sectionBox_tit">Tutorial. Import a dataset to the Neural Network Console</h1>
+          </div>
+          <div class="sectionBox_inner">
+            <div class="sectionBox_content">
+              <article class="singleArticle">
+                <div class="articleText">
+                  <div class="video-box">
+                    <video id="video" controls='controls'>
+                      <source src="/docs/assets/videos/import_a_dataset_to_the_Neural_Network_Console.mp4"
+                        type="video/mp4">
+                      <source src="/docs/assets/videos/import_a_dataset_to_the_Neural_Network_Console.webm"
+                        type="video/webm">
+                      <p>Your browser does not support video tags</p>
+                    </video>
+                    <div id="video-img"></div>
+                  </div>
+                  <h3><a name="_Toc489818959"></a>1 Preparing a dataset folder</h3>
+                  <p>The dataset folder must contain a file(the file name must be index.csv)
+                                        and a folder(the folder name must be data). For details, see 
+                                        <a href="./dataset preparation.html">“Dataset preparation”</a>.</p>
+                  <p><img class="alignnone size-large wp-image-40"
+                      src="/docs/assets/images/import_a_dataset_to_the_Neural_Network_Console/dataset_folder.png" alt=""
+                      width="1024" height="295"></p>
+                  <p>And we can get the contents of the dataset folder, as follows:</p>
+                  <p><img class="alignnone size-large wp-image-40"
+                      src="/docs/assets/images/import_a_dataset_to_the_Neural_Network_Console/get_path.png" alt=""
+                      width="1024" height="295"></p>
+                  <p>&nbsp;</p>
+
+
+                  <h3><a name="_Toc489818960"></a>2 Import dataset</h3>
+                  <p>Start Neural Network Console, click 'Import Dataset' button, copy the destination path， and then copy or move
+                    the dataset folder to the destination path.</p>
+                  <p><img class="alignnone size-large wp-image-41"
+                      src="/docs/assets/images/import_a_dataset_to_the_Neural_Network_Console/copy_dataset.png" alt=""
+                      width="1024" height="277"></p>
+                  <p>&nbsp;</p>
+                  <p>Input the fdataset folder name just now. and then click 'Start' button.</p>
+                  <p><img class="alignnone size-large wp-image-41"
+                      src="/docs/assets/images/import_a_dataset_to_the_Neural_Network_Console/upload_dataset.png" alt=""
+                      width="1024" height="277"></p>
+                  <p>&nbsp;</p>
+                  <h3><a name="_Toc489818961"></a>3 Previewing the new dataset</h3>
+                  <p>A preview of the selected dataset appears on the right side of the window.</p>
+                  <p><img class="alignnone size-full wp-image-43"
+                      src="/docs/assets/images/import_a_dataset_to_the_Neural_Network_Console/preview_dataset.png"
+                      alt="" width="1024" height="608"></p>
+                  <p>And use this dataset in the project now.</p>
+                  <p><img class="alignnone size-full wp-image-43"
+                      src="/docs/assets/images/import_a_dataset_to_the_Neural_Network_Console/use_dataset.png" alt=""
+                      width="1024" height="608"></p>
+                  <p>&nbsp;</p>
+                </div>
+              </article>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- .contents_inner -->
+    </div><!-- .contents -->
+  </div><!-- /.wrapper -->
+  <footer class="footer">
+    <div class="footer_inner">
+      <div class="pageTopBtn">
+        <a href="javascript:void(0)" aria-label="Back to the top of this page." id="js-pageTop">Page Top</a>
+      </div>
+      <div class="footer_sitemap_inner">
+        <div class="sitemap"></div>
+      </div>
+    </div>
+  </footer>
+</body>
+<script type="text/javascript">
+  let videoImg = document.getElementById('video-img');
+  let video = document.getElementById("video");
+
+  videoImg.onclick = function () {
+    this.hidden = true;
+    video.play();
+  }
+  video.addEventListener('pause', function () {
+    videoImg.hidden = false;
+  });
+  video.addEventListener('play', function () {
+    videoImg.hidden = true;
+  });
+</script>
+
+</html>

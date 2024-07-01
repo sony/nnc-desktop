@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "outDir": "./built/",
+    "sourceMap": true,
+    "strict": true,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "target": "es2015",
+    "lib": [
+      "dom",
+      "es2017"
+    ],
+    "noImplicitAny": false
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "./src/__tests__/*",
+    "./src/components/__tests__/*",
+    "./src/util/__tests__/*"
+  ]
+}

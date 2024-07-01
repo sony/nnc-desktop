@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon / Asset_Account_Resting</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M11.79,11.23 C13.9244687,9.96903392 14.9515151,7.43594726 14.2979071,5.04454838 C13.6442991,2.65314951 11.4716111,0.994602049 8.9925,0.994602049 C6.51338886,0.994602049 4.34070095,2.65314951 3.68709291,5.04454838 C3.03348488,7.43594726 4.06053131,9.96903392 6.195,11.23 C1.535,12.075 0.575,15.205 0.5,19 L17.5,19 C17.425,15.205 16.45,12.075 11.79,11.23 Z M6.465,12.73 L7.5,12.5 L7.5,10.26 L6.96,9.94 C5.40673488,9.02363159 4.6587581,7.18119366 5.13370917,5.44142785 C5.60866023,3.70166204 7.18906894,2.49486666 8.9925,2.49486666 C10.7959311,2.49486666 12.3763398,3.70166204 12.8512908,5.44142785 C13.3262419,7.18119366 12.5782651,9.02363159 11.025,9.94 L10.5,10.25 L10.5,12.5 L11.5,12.685 C14.29,13.185 15.545,14.5 15.885,17.48 L2.095,17.48 C2.43,14.5 3.68,13.21 6.465,12.705 L6.465,12.73 Z" id="path-1"></path>
+    </defs>
+    <g id="Icon-/-Asset_Account_Resting" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Color/Gray_4" transform="translate(3.000000, 2.000000)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="Mask" fill-rule="nonzero"></g>
+            <g id="Color/Gray_5" mask="url(#mask-2)" fill="#262626">
+                <g transform="translate(-39.000000, -38.000000)" id="Color/Gray_5&amp;Layer8">
+                    <rect x="0" y="0" width="96" height="96"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

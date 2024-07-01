@@ -1,0 +1,9 @@
+{
+  "code": "40014001",
+  "message": {
+    "ja": "データセットに含まれる変数のサイズとInputレイヤーのSizeプロパティで指定されるサイズが異なっている可能性があります。もしくは、隣接しているレイヤーのOutput値とInput値が一致しているかご確認ください。",
+    "en": "The size of the variable included in the dataset may be possibly different from the size specified by \"Size\" property of the Input layer.\nAlternatively, please check that the output and the input of adjacent layers are the same value."
+  },
+  "image_1": "/console/error/image/ReLU_Layer_Property.png",
+  "image_2": "/console/error/image/dataset_size.png"
+}

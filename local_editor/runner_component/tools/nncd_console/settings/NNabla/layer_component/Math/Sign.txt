@@ -1,0 +1,26 @@
+[Property]
+Input
+Alpha
+Output
+CostIf
+
+[Property_Input]
+Editable=False
+Type=PIntArray
+Value=*GraphIO
+
+[Property_Alpha]
+Type=Float
+Value=0.0
+ArgumentName=sign_param.alpha
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*Input
+
+[Property_CostIf]
+Editable=False
+Type=PInt
+Value=*Calc +*Input
+Required=False

@@ -1,0 +1,17 @@
+[Display]
+ComponentType=Setting
+
+[IO]
+Input=None
+Output=None
+
+[Global]
+IsParam=False
+
+[Property]
+Search
+
+[Property_Search]
+Type=Boolean
+Value=True
+Important=True

@@ -1,0 +1,9 @@
+{
+  "code": "40014004",
+  "message": {
+    "ja": "レイヤーに対する入力の数が合っていません。",
+    "en": "The number of inputs for one or more layers does not match."
+  },
+  "image_1": "",
+  "image_2": ""
+}

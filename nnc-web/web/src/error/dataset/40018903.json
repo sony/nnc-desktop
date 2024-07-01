@@ -1,0 +1,7 @@
+{
+  "code": "40018903",
+  "message": {
+    "ja": "データセットCSVファイルのフォーマットが不正です。\nアップロードしたデータセットCSVファイルを確認してください。",
+    "en": "Dataset CSV file is in the wrong format."
+  }
+}

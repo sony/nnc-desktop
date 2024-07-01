@@ -1,0 +1,60 @@
+# Copyright 2024 Sony Group Corporation.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+FROM ubuntu:20.04 AS builder
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y -q --no-install-recommends \
+    build-essential \
+    clang-format \
+    cmake \
+    gcc \
+    make \
+    wget \
+    curl \
+    git \
+    python3 \
+    python3-pip \
+    && apt-get -yqq clean \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash \
+    && export NVM_DIR="$HOME/.nvm" \
+    && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" \
+    && [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" \
+    && nvm install 14.21.3 \
+    && nvm install 20.9.0
+
+COPY nnc-web/common/ /tmp/nnc-web/common
+COPY nnc-web/web/ /tmp/nnc-web/web
+COPY local_editor/ /tmp/nnc-web/local_editor
+
+RUN export NVM_DIR="$HOME/.nvm" \
+    && cd /tmp/nnc-web/local_editor \
+    && cp -rf web_component/local_editor_web/* /tmp/nnc-web/web \
+    && cp -rf web_component/local_editor_editor/ /tmp/nnc-web/new_editor \
+    && cp -rf web_component/local_editor_top/ /tmp/nnc-web/top \
+    && bash init_build.sh \
+    && cd /tmp/nnc-web \
+    && cp -r dist /opt/dist \
+    && cp -r top/dist/assets /opt/dist/console/ \
+    && cp -r top/dist/project /opt/dist/console/ \
+    && cp -r local_editor/resource/docs /opt/dist/console/ \
+    && cp /tmp/nnc-web/common/favicon.ico /opt/dist/console/ \
+    && rm -rf /tmp/*
+
+
+RUN cd /opt/dist/console \
+    && rm -rf lib/dummy

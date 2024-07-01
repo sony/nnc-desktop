@@ -1,0 +1,378 @@
+/* Copyright 2024 Sony Group Corporation. */
+/**
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+*/
+
+.nnc-modal-mask {
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-gray5);
+    opacity: 0.5;
+    transition: opacity .3s ease;
+}
+
+.nnc-modal-background {
+    display: table;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.nnc-modal-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.nnc-modal-container {
+    width: 432px;
+    margin: 0px auto;
+    padding: 16px;
+    color: var(--color-ragular);
+    background-color: var(--color-gray0);
+    border-radius: 2px;
+    transition: all .3s ease;
+}
+
+.nnc-modal-header {
+    display: table-cell;
+    vertical-align: middle;
+    font-family: "SST UI W15 Medium";
+    width: 100%;
+    margin-bottom: 16px;
+    height: 40px;
+    white-space: pre-wrap;
+}
+
+.nnc-modal-header.center-bold {
+    width: 432px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.nnc-modal-header img {
+    width: 24px;
+    height: 24px;
+    margin-right: 4px;
+}
+
+.nnc-modal-body {
+    width: 100%;
+    margin-bottom: 32px;
+}
+
+.pipeline .nnc-modal-body {
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.nnc-modal-body > .message {
+    white-space: pre-wrap;
+    max-height: 300px;
+    overflow-y: auto;
+    line-height: 20px;
+}
+
+.nnc-modal-body .terms {
+    margin-top: 16px;
+}
+
+.nnc-modal-body > span {
+    color: var(--color-system1)
+}
+
+.nnc-modal-body .publish-api-settings {
+    margin-top: 16px;
+}
+
+.nnc-modal-body .day-of-week-checkbox .checkbox-label-span {
+    padding-left: 20px;
+    margin-right: 12px;
+}
+
+.nnc-modal-body .publish-api-message {
+    margin-top: 8px;
+    color: var(--color-system1);
+}
+
+.nnc-modal-body dt {
+    font-weight: normal;
+}
+
+.nnc-modal-body .vue__time-picker .dropdown ul li:not([disabled]).active,
+.nnc-modal-body .vue__time-picker .dropdown ul li:not([disabled]).active:focus,
+.nnc-modal-body .vue__time-picker .dropdown ul li:not([disabled]).active:hover {
+    background-color: var(--color-brand);
+}
+
+.condition-area .row {
+    padding: 0 16px;
+}
+
+.condition-area .row .title {
+    width: 125px;
+}
+
+.condition-area .row {
+    margin-top: 12px;
+}
+
+.condition-area .row .value {
+    width: calc(100% - 125px);
+}
+
+.condition-area .row .value input {
+    width: 100%;
+}
+
+.condition-area .add-area {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.condition-area .add-area.file {
+    margin-top: 8px;
+}
+
+.condition-area label {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.condition-area .checkbox-label {
+    margin-top: -2px;
+}
+
+.condition-area .add-img {
+    width: 20px;
+    height: 20px;
+    border: 1px solid;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.condition-area .file-area {
+    display: flex;
+    justify-content: space-between;
+}
+
+.condition-area .delete-file {
+    width: 20px;
+    height: 20px;
+    border: 1px solid;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.pipeline .error-message {
+    font-size: 13px;
+    color: var(--color-system1);
+}
+
+.condition-area .drop-area {
+    text-align: center;
+    border: 1px dashed #c6c6c6;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+.condition-area .drop-area.on-area {
+    border: 2px dashed #bcbcbc;
+    background-color: #fafdff;
+  }
+
+.nnc-modal-footer {
+    width: 100%;
+    text-align: right;
+}
+
+
+.nnc-modal-button {
+    min-width: 100px;
+    height: 32px;
+    background-color: var(--color-gray2);
+    border: none;
+    border-radius: 16px;
+    margin-right: 16px;
+    cursor: pointer;
+}
+
+.nnc-modal-button:hover {
+    opacity: 0.75;
+}
+
+.nnc-modal-button:focus {
+    opacity: 0.75;
+    outline: none;
+}
+
+.nnc-modal-button.default {
+    background-color: var(--color-brand);
+    color: var(--color-gray0);
+    margin-right: 0;
+}
+
+.nnc-modal-button.disabled {
+    background-color: var(--color-brand);
+    color: var(--color-gray0);
+    margin-right: 0;
+    opacity: 0.5;
+}
+
+.nnc-modal-button:active {
+    box-shadow: inset 0 0 1em var(--color-gray0);
+}
+
+.nnc-modal-reedit {
+    margin-left: 4px;
+}
+
+.nnc-modal-radio {
+    margin-top: 12px;
+}
+
+.nnc-modal-reedit-message {
+    padding-left: 24px;
+}
+
+.nnc-modal-radio-description {
+    padding-left: 24px;
+}
+
+.nnc-modal-radio-description.disabled {
+    opacity: 0.25;
+}
+
+#meta-list textarea {
+    width: 100%;
+    min-height: 100px;
+}
+
+#meta-list .message {
+    margin-bottom: 16px;
+    white-space: pre-wrap;
+}
+
+#meta-list .error {
+    color: var(--color-system1);
+}
+
+.meta-list {
+    max-height: 150px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.meta-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.meta-icon img {
+    cursor: pointer;
+}
+
+.meta-area {
+    width: 350px;
+}
+
+.meta-area input {
+    width: 334px;
+    margin-bottom: 6px;
+}
+
+.nnc-modal-billing-system {
+    white-space: pre-wrap;
+}
+
+.nnc-modal-unit-area .row {
+    padding: 5px 16px;
+}
+
+.nnc-modal-unit-area .row .title {
+    width: 125px;
+}
+
+.nnc-modal-unit-area .row .value {
+    width: calc(100% - 125px);
+}
+
+.nnc-modal-unit-area .row .value input,
+.nnc-modal-unit-area .row .value .select_label,
+.nnc-modal-unit-area .row .value .select_menu {
+    width: 100%;
+}
+
+.nnc-modal-unit-area .error-message {
+    color: var(--color-system1);
+    font-size: 13px;
+}
+
+.nnc-modal-unit-area .nnc-modal-radio {
+    margin-top: 0;
+}
+
+.nnc-modal-unit-area .select_menu {
+    border: 1px solid;
+    border-color: var(--color-gray3);
+    margin-top: 0;
+}
+
+.nnc-modal-confirm-message {
+    font-family: "SST UI W15 Medium";
+    font-weight: bold;
+}
+
+.nnc-modal-input {
+    width: 100%;
+    margin-top: 20px;
+    padding: 3px 8px;
+}
+
+.nnc-modal-input.with-error {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 3px 8px;
+}
+
+/*
+* The following styles are auto-applied to elements with
+* transition="nnc-modal" when their visibility is toggled
+* by Vue.js.
+*/
+
+.nnc-modal-enter {
+    opacity: 0;
+}
+
+.nnc-modal-leave-active {
+    opacity: 0;
+}
+
+.nnc-modal-enter .nnc-modal-container,
+.nnc-modal-leave-active .nnc-modal-container {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.plugin-input-area .error-message {
+    color: var(--color-system1);
+    font-size: 12px;
+}

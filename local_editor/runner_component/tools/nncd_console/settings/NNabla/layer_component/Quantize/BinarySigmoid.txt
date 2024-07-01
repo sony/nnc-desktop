@@ -1,0 +1,39 @@
+[Display]
+Reference=Courbariaux, Matthieu, and Yoshua Bengio. Binarynet: Training deep neural networks with weights and activations constrained to+ 1 or-1. https://arxiv.org/abs/1602.02830
+Color=0xd77b6a
+
+[Property]
+Input
+Output
+
+CostAdd
+CostMultiply
+CostIf
+
+[Property_Input]
+Editable=False
+Type=PIntArray
+Value=*GraphInput
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*Input
+
+[Property_CostAdd]
+Editable=False
+Type=PInt
+Value=*Calc +*Input
+Required=False
+
+[Property_CostMultiply]
+Editable=False
+Type=PInt
+Value=*Calc +*Input
+Required=False
+
+[Property_CostIf]
+Editable=False
+Type=PInt
+Value=*Calc +*Input
+Required=False

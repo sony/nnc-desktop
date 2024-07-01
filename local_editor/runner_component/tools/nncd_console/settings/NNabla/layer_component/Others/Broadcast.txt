@@ -1,0 +1,19 @@
+[Property]
+Input
+OutShape
+Output
+
+[Property_Input]
+Editable=False
+Type=PIntArray
+Value=*GraphInput
+
+[Property_OutShape]
+Type=PIntArray
+Value=*Input
+ArgumentName=broadcast_param.shape -b
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*OutShape

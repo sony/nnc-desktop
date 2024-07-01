@@ -1,0 +1,7 @@
+{
+  "code": "40018907",
+  "message": {
+    "ja": "データセットCSVファイルに空文字が含まれています。\nアップロードしたデータセットCSVファイル内で「,,」となっている箇所がないかご確認ください。",
+    "en": "Empty string is contained in the dataset file."
+  }
+}

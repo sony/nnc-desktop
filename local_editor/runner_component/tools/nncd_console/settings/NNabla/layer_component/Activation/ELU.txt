@@ -1,0 +1,56 @@
+[Global]
+Reference=Clevart et al., Fast and Accurate Deep Network Learning by Exponential Linear Units (ELUs). http://arxiv.org/abs/1511.07289
+FunctionName=elu
+
+[Display]
+Color=0xd77b6a
+
+[Property]
+Input
+Alpha
+Output
+
+CostIf
+CostAdd
+CostMultiply
+CostExp
+
+[Property_Input]
+Editable=False
+Type=PIntArray
+Value=*GraphInput
+
+[Property_Alpha]
+Type=Float
+Value=1.0
+Important=True
+ArgumentName=elu_param.alpha
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*Input
+
+[Property_CostIf]
+Editable=False
+Type=PInt
+Value=*Calc +*Input
+Required=False
+
+[Property_CostAdd]
+Editable=False
+Type=PInt
+Value=*Calc +*Input
+Required=False
+
+[Property_CostMultiply]
+Editable=False
+Type=PInt
+Value=*Calc +*Input
+Required=False
+
+[Property_CostExp]
+Editable=False
+Type=PInt
+Value=*Calc +*Input
+Required=False

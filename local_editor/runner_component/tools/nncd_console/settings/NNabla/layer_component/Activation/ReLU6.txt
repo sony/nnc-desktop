@@ -1,0 +1,27 @@
+[Global]
+FunctionName=relu6
+
+[Display]
+Color=0xd77b6a
+
+[Property]
+Input
+Output
+
+CostIf
+
+[Property_Input]
+Editable=False
+Type=PIntArray
+Value=*GraphInput
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*Input
+
+[Property_CostIf]
+Editable=False
+Type=PInt
+Value=*Calc +*Input:*2
+Required=False

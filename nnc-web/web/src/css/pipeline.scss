@@ -1,0 +1,449 @@
+/* Copyright 2024 Sony Group Corporation. */
+/**
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+*/
+
+#pipeline-area {
+  display: flex;
+  width: calc(100% - 28.0rem);
+  height: 100%;
+  overflow-x: auto;
+  position: relative;
+  -webkit-box-flex: 1;
+  box-flex: 1;
+
+  #tenant-tabs {
+    min-width: 63.6rem;
+  }
+
+  .action-menu:hover {
+    text-decoration: underline;
+    text-decoration-color: rgba(0, 0, 0, 0.5);
+  }
+
+  #pipeline-container {
+    flex: 1;
+    border-left: solid 0.1rem var(--color-gray2);
+    border-right: solid 0.1rem var(--color-gray2);
+    box-sizing: border-box;
+    height: 100%;
+    overflow: hidden;
+    overflow-x: auto;
+  }
+
+  .pipeline-title {
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    padding-left: 1.6rem;
+    min-width: 64.5rem;
+  }
+
+  .pipeline-header, .pipeline-items {
+    height: 4rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .pipeline-header {
+    padding: 0 1.6rem;
+  }
+
+  .pipeline-container {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding-left: 1.6rem;
+  }
+
+  #pipeline-list {
+    .pipeline-items {
+      padding: 1.6rem 0;
+      height: auto;
+      align-items: start;
+      cursor: pointer;
+      &:hover {
+        background-color: var(--color-gray1);
+        .action img {
+          display: inline;
+        }
+      }
+      &.selected {
+        background-color: var(--color-gray1);
+      }
+      .action img {
+        width: 2.4rem;
+        height: 2.4rem;
+        display: none;
+      }
+    }
+    .pipeline-item {
+      &.name {
+        flex-direction: column;
+      }
+      &.type {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  }
+
+  .pipeline-item {
+    display: flex;
+    align-items: center;
+    &.name {
+      width: 40%;
+      .pipeline-name-area {
+        display: flex;
+        width: 100%;
+      }
+      .pipeline-name {
+        width: calc(100% - 2.4rem);
+      }
+      .job-name {
+        width: calc(100% - 2.4rem);
+        padding-left: 2.4rem;
+      }
+    }
+    &.modified {
+      width: 30%;
+    }
+    &.action {
+      width: 30%;
+      justify-content: flex-end;
+      img {
+        width: 1.6rem;
+        height: 1.6rem;
+      }
+    }
+  }
+
+  #pipeline-details {
+    position: relative;
+    min-width: 28rem;
+    width: 28rem;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  #history-area {
+    padding: 0 1.6rem;
+    .title {
+      height: 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  #job-list {
+    overflow-y: auto;
+    height: 280px;
+    width: 100%;
+
+    &.full {
+      height: calc(100% - 4rem);
+    }
+
+    .job-list {
+      height: auto;
+      padding: 12px 0px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+
+      &.selected {
+        background-color: var(--color-gray1);
+      }
+
+      canvas {
+        height: 24px;
+        margin-right: 8px;
+      }
+
+      .job-info {
+        width: calc(100% - 24px);
+        &> div {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  #job-detail-area {
+    height: calc(100vh - 40px - 280px - 8px - 3.2rem);
+    padding: 1.6rem;
+    .detail-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 4rem;
+    }
+    .title {
+      height: 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .progress {
+      height: calc(100% - 4rem);
+      overflow-y: auto;
+      min-height: 150px;
+    }
+
+    .task {
+      border-bottom: 0.1rem solid;
+      border-color: var(--color-gray2);
+      padding: 8px 0;
+      width: 100%;
+
+      &> div {
+        width: 100%;
+      }
+
+      .status {
+        display: flex;
+        align-items: center;
+        .running {
+          color: var(--color-brand);
+        }
+        .failed {
+          color: var(--color-system1);
+        }
+        img {
+          width: 16px;
+          height: 16px;
+          vertical-align: middle;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .min-width {
+    min-width: 64.5rem;
+  }
+
+  .progressing {
+    color: var(--color-brand);
+    animation: typing 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+  }
+
+  #upload-data-source-dialog, .pipeline-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    background-color: rgba(38, 38, 38, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .error-message {
+      color: var(--color-system1);
+    }
+
+    .dialog-content {
+      margin-top: 8px;
+    }
+
+    .data-source-select {
+      display: flex;
+      align-items: center;
+    }
+
+    .select-menu {
+      min-width: 25%;
+      max-width: 30rem;
+    }
+    .input-file-name-area {
+      white-space: pre-line;
+      margin-bottom: 8px;
+    }
+    .input-file-name {
+      margin-top: 8px;
+      width: calc(100% - 1.6rem);
+      padding: 0.3rem 0.8rem;
+      height: 2.4rem;
+    }
+
+    .button-area {
+      margin-top: 1.6rem;
+      text-align: right;
+    }
+
+    .button {
+      font-family: "SSTUI-Medium", sans-serif;
+      width: 10.0rem;
+      height: 3.2rem;
+      border: none;
+      border-radius: 1.6rem;
+      margin-right: 1.6rem;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      opacity: 0.75;
+    }
+
+    .button.cancel {
+      color: var(--color-brand);
+      background: var(--color-gray1);
+    }
+
+    .button.cancel[disabled] {
+      opacity: 0.4;
+    }
+
+    .button.update {
+      color: var(--color-gray0);
+      background: var(--color-brand);
+    }
+
+    .button.update[disabled] {
+      color: var(--color-gray0);
+      background: var(--color-brand);
+      opacity: 0.4;
+    }
+
+    .checkbox-area {
+      display: flex;
+      align-items: center;
+      width: auto;
+      margin-right: 0.8rem;
+      span {
+        margin-left: 0.4rem;
+      }
+    }
+
+    .data-source-name {
+      display: flex;
+      .title {
+        padding-right: 1.6rem;
+      }
+      .name {
+        flex: 1;
+        word-break: break-all;
+        input {
+          width: calc(100% - 1.6rem);
+          padding: 0.3rem 0.8rem;
+        }
+      }
+    }
+
+    .trigger-area {
+      display: flex;
+      align-items: center;
+    }
+
+    .file-names {
+      margin-top: 8px;
+    }
+
+    .output-file-name {
+      width: calc(100% - 1.6rem);
+      height: 2.4rem;
+      padding: 0.3rem 0.8rem;
+      margin-top: 8px;
+    }
+
+    .add-area {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 8px;
+    }
+
+    .add-img {
+      width: 20px;
+      height: 20px;
+      border: 1px solid;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
+
+  #upload-data-source-dialog-main, .pipeline-dialog-main {
+    width: 43.2rem;
+    padding: 1.6rem;
+    background: var(--color-gray0);
+    font-family: "SSTUI-Medium", sans-serif;
+    padding-top: 2.5rem;
+
+    .operation-type {
+      margin-top: 8px;
+    }
+  }
+
+  .primary-button {
+    background-color: var(--color-brand);
+    color: var(--color-gray0);
+    border-color: var(--color-brand);
+    border: 1px solid;
+    height: 32px;
+    text-align: center;
+    border-radius: 16px;
+    width: 120px;
+    cursor: pointer;
+
+    &.disabled {
+      cursor: auto;
+    }
+
+    span {
+      line-height: 32px;
+    }
+  }
+
+  .current-script-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .img-area {
+      display: flex;
+      align-items: center;
+    }
+    img {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+    }
+  }
+
+  .post-process-area {
+    margin-top: 8px;
+  }
+
+  .row {
+    display: flex;
+    padding: 4px 0;
+
+    .name {
+      width: 125px;
+    }
+    .value {
+      width: calc(100% - 125px);
+
+      input {
+        width: calc(100% - 1.6rem);
+        height: 1.6rem;
+        padding: 0.3rem 0.8rem;
+      }
+    }
+  }
+}

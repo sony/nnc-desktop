@@ -1,0 +1,34 @@
+[Global]
+Reference=Wenling Shang, Kihyuk Sohn, Diogo Almeida, Honglak Lee. Understanding and Improving Convolutional Neural Networks via Concatenated Rectified Linear Units. https://arxiv.org/abs/1603.05201
+FunctionName=crelu
+
+[Display]
+Color=0xd77b6a
+
+[Property]
+Input
+Axis
+Output
+
+CostIf
+
+[Property_Input]
+Editable=False
+Type=PIntArray
+Value=*GraphInput
+
+[Property_Axis]
+Type=UInt
+Value=0
+ArgumentName=crelu_param.axis -a
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*ConcatenateActivationOutputSize
+
+[Property_CostIf]
+Editable=False
+Type=PInt
+Value=*Calc +*Output
+Required=False

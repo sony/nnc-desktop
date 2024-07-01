@@ -1,0 +1,22 @@
+[IO]
+Input=Multiple
+
+[Property]
+Inputs
+Axis
+Output
+
+[Property_Inputs]
+Editable=False
+Type=PIntArrays
+Value=*GraphInputs
+
+[Property_Axis]
+Type=UInt
+Value=0
+ArgumentName=stack_param.axis -a
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*StackOutputSize

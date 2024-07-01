@@ -1,0 +1,118 @@
+[Adadelta]
+reference=Matthew D. Zeiler. ADADELTA: An Adaptive Learning Rate Method. https://arxiv.org/abs/1212.5701
+argument_name=adadelta_param
+num_param=3
+param_0=LearningRate;lr;1.0
+param_1=Decay;decay;0.95
+param_2=Epsilon;eps;1.0e-6s
+
+[Adagrad]
+reference=John Duchi, Elad Hazan and Yoram Singer (2011). Adaptive Subgradient Methods for Online Learning and Stochastic Optimization. http://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf
+argument_name=adagrad_param
+num_param=2
+param_0=LearningRate;lr;0.01
+param_1=Epsilon;eps;1.0e-8
+
+[Adam]
+reference=Kingma and Ba, Adam: A Method for Stochastic Optimization. https://arxiv.org/abs/1412.6980
+argument_name=adam_param
+num_param=4
+param_0=Alpha;alpha;0.001
+param_1=Beta1;beta1;0.9
+param_2=Beta2;beta2;0.999
+param_3=Epsilon;eps;1.0e-8
+default=1
+
+[AdamW]
+reference=Ilya Loshchilov, Frank Hutter. Decoupled Weight Decay Regularization. https://arxiv.org/abs/1711.05101
+argument_name=adamw_param
+num_param=5
+param_0=Alpha;alpha;0.001
+param_1=Beta1;beta1;0.9
+param_2=Beta2;beta2;0.999
+param_3=Epsilon;eps;1.0e-8
+param_4=Weight Decay;wd;0.0001
+
+[Adamax]
+reference=Kingma and Ba, Adam: A Method for Stochastic Optimization. https://arxiv.org/abs/1412.6980
+argument_name=adamax_param
+num_param=4
+param_0=Alpha;alpha;0.002
+param_1=Beta1;beta1;0.9
+param_2=Beta2;beta2;0.999
+param_3=Epsilon;eps;1.0e-8
+
+[AdaBound]
+reference=L. Luo, Y. Xiong, Y. Liu and X. Sun. Adaptive Gradient Methods with Dynamic Bound of Learning Rate. https://arxiv.org/abs/1902.09843
+argument_name=adabound_param
+num_param=6
+param_0=Alpha;alpha;0.001
+param_1=Beta1;beta1;0.9
+param_2=Beta2;beta2;0.999
+param_3=Epsilon;eps;1.0e-8
+param_4=FinalLR;final_lr;0.1
+param_5=Gamma;gamma;0.001
+
+[AMSGRAD]
+reference=Reddi et al. On the convergence of ADAM and beyond. https://openreview.net/pdf?id=ryQu7f-RZ
+argument_name=amsgrad_param
+num_param=4
+param_0=Alpha;alpha;0.001
+param_1=Beta1;beta1;0.9
+param_2=Beta2;beta2;0.999
+param_3=Epsilon;eps;1.0e-8
+
+[AMSBound]
+reference=L. Luo, Y. Xiong, Y. Liu and X. Sun. Adaptive Gradient Methods with Dynamic Bound of Learning Rate. https://arxiv.org/abs/1902.09843
+argument_name=amsbound_param
+num_param=6
+param_0=Alpha;alpha;0.001
+param_1=Beta1;beta1;0.9
+param_2=Beta2;beta2;0.999
+param_3=Epsilon;eps;1.0e-8
+param_4=FinalLR;final_lr;0.1
+param_5=Gamma;gamma;0.001
+
+[Lars]
+reference=Yang You, Igor Gitman, Boris Ginsburg. Large Batch Training of Convolutional Networks. https://arxiv.org/abs/1708.03888
+argument_name=lars_param
+num_param=4
+param_0=LearningRate;lr;0.001
+param_1=Momentum;momentum;0.9
+param_2=Coefficient;coefficient;0.001
+param_3=Epsilon;eps;1.0e-6
+
+[Momentum]
+reference=Ning Qian : On the Momentum Term in Gradient Descent Learning Algorithms. http://www.columbia.edu/~nq6/publications/momentum.pdf
+argument_name=momentum_param
+num_param=2
+param_0=LearningRate;lr;0.01
+param_1=Momentum;momentum;0.9
+
+[Nesterov]
+reference=Yurii Nesterov. A method for unconstrained convex minimization problem with the rate of convergence :math:`o(1/k2)
+argument_name=nesterov_param
+num_param=2
+param_0=LearningRate;lr;0.01
+param_1=Momentum;momentum;0.9
+
+[RMSprop]
+reference=Geoff Hinton. Lecture 6a : Overview of mini-batch gradient descent. http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf
+argument_name=rmsprop_param
+num_param=3
+param_0=LearningRate;lr;0.001
+param_1=Decay;decay;0.9
+param_2=Epsilon;eps;1.0e-8
+
+[Sgd]
+argument_name=sgd_param
+num_param=1
+param_0=LearningRate;lr;0.01
+
+[SgdW]
+reference=Ilya Loshchilov, Frank Hutter. Decoupled Weight Decay Regularization. https://arxiv.org/abs/1711.05101
+argument_name=sgdw_param
+num_param=3
+param_0=LearningRate;lr;0.001
+param_1=Momentum;momentum;0.9
+param_2=Weight Decay;wd;0.0001

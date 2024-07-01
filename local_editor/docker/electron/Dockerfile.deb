@@ -1,0 +1,145 @@
+# Copyright 2024 Sony Group Corporation.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# source install python
+FROM ubuntu:20.04 as build-python
+
+ENV PYTHON_VERSION=3.9.13
+ARG BUILD_TYPE 
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        build-essential \
+        zlib1g-dev \
+        libncurses5-dev \
+        libgdbm-dev \
+        libnss3-dev \
+        libreadline-dev \
+        wget
+
+# Install libffi for Ubuntu18, 20, 22
+RUN wget --no-check-certificate https://github.com/libffi/libffi/releases/download/v3.4.2/libffi-3.4.2.tar.gz \
+    && tar xvfz libffi-3.4.2.tar.gz \
+    && cd libffi-3.4.2 \
+    && ./configure --prefix=/tmp/python_bundles \
+    && make \
+    && make install
+
+RUN wget --no-check-certificate https://www.openssl.org/source/openssl-3.0.5.tar.gz \
+    && tar xvfz openssl-3.0.5.tar.gz \
+    && cd openssl-3.0.5 \
+    && ./Configure --prefix=/tmp/python_bundles --libdir=/tmp/python_bundles/lib\
+    && make \
+    && make install
+
+RUN wget --no-check-certificate https://www.sqlite.org/2022/sqlite-autoconf-3390200.tar.gz \
+    && tar xvfz sqlite-autoconf-3390200.tar.gz \
+    && cd sqlite-autoconf-3390200 \
+    && ./configure --prefix=/tmp/python_bundles \
+    && make \
+    && make install
+
+ENV LD_LIBRARY_PATH=/tmp/python_bundles/lib:${LD_LIBRARY_PATH}
+ENV LDFLAGS="-L/tmp/python_bundles/lib"
+ENV CPPFLAGS="-I/tmp/python_bundles/include -I/tmp/python_bundles/include/openssl"
+
+RUN wget --no-check-certificate https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz \
+    && tar -xvzf Python-${PYTHON_VERSION}.tgz \
+    && cd Python-${PYTHON_VERSION} \
+    && ./configure \
+        --prefix=/tmp/python_bundles \
+        --enable-optimizations \
+        --with-ensurepip=install \
+        --with-openssl=/tmp/python_bundles \
+    && make -j8 altinstall \
+    && ln -s /tmp/python_bundles/bin/pip$(echo ${PYTHON_VERSION} | cut -d. -f1-2) /tmp/python_bundles/bin/pip
+
+ENV NNABLA_VERSION=1.33.1
+ENV PATH=/tmp/python_bundles/bin:${PATH}
+
+RUN if [ "$BUILD_TYPE" = "cpu" ]; then \
+        pip install --upgrade pip && \
+        pip install \
+            nnabla==${NNABLA_VERSION} \
+            nnabla_converter==${NNABLA_VERSION}; \
+    else \
+        pip install --upgrade pip && \
+        pip install \
+            nnabla_converter==${NNABLA_VERSION} \
+            https://nnabla.org/whl/nnabla_ext_cuda_alllib/nnabla_ext_cuda_alllib-${NNABLA_VERSION}-cp$(echo ${PYTHON_VERSION} | cut -d. -f1-2 | tr -d '.')-cp$(echo ${PYTHON_VERSION} | cut -d. -f1-2 | tr -d '.')-manylinux_2_17_x86_64.whl; \
+    fi
+
+COPY local_editor/requirements.txt /tmp/requirements.txt
+RUN pip --no-cache-dir install -r /tmp/requirements.txt
+
+COPY local_editor/runner_component/tools/console_cli /tmp/console_cli
+
+RUN pip install /tmp/console_cli/*.whl
+
+
+FROM ubuntu:20.04
+
+ARG BUILD_TYPE
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    ca-certificates \
+    wget \
+    curl \
+    && apt-get -yqq clean \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
+    && apt-get install -y nodejs \
+    && apt-get -yqq clean \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY electron_app/ /tmp/electron_app
+
+RUN actual_hash=$(sha256sum /tmp/electron_app/opt-ex.zip | awk '{print $1}') \
+    && expected_hash="363c93b4cc77060543fb74dbd7d071c6ff23d52dd5fbbcfd54f5b9c8d35d96c7" \
+    && echo "actual_hash: $actual_hash" \
+    && echo "expected_hash: $expected_hash" \
+    && if [ "$actual_hash" = "$expected_hash" ]; \
+    then \
+        echo -e "\e[32mopt-ex.zip verified successfully.\e[0m"; \
+    else \
+        echo -e "\e[31mwarning:opt-ex.zip verification failed.\e[0m"; \
+    fi
+    
+COPY console/ /tmp/electron_app/console
+COPY local_editor/python_modules /tmp/electron_app/py/server
+COPY local_editor/runner_component/core /tmp/electron_app/py/connector
+COPY local_editor/runner_component/tools/nncd_console /tmp/electron_app/py/server/nncd_console
+COPY local_editor/runner_component/tools/nncd_console /tmp/electron_app/py/connector/nncd_console
+COPY --from=build-python /tmp/python_bundles /tmp/electron_app/python_bundles
+
+RUN if [ "$BUILD_TYPE" = "cpu" ]; then \
+        echo "using cpu"; \
+    else \
+        chmod 666 /tmp/electron_app/py/server/nncd_console/settings/settings.ini && \
+        chmod 666 /tmp/electron_app/py/connector/nncd_console/settings/settings.ini; \
+    fi
+
+RUN cd /tmp/electron_app \
+    && npm install
+    
+RUN if [ "$BUILD_TYPE" = "cpu" ]; then \
+        cd /tmp/electron_app && \
+        npm run linux-cpu-deb; \
+    else \
+        cd /tmp/electron_app && \
+        npm run linux-gpu-deb; \
+    fi

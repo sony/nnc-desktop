@@ -1,0 +1,21 @@
+[Property]
+Input
+Axes
+Output
+
+[Property_Input]
+Editable=False
+Type=PIntArray
+Value=*GraphInput
+
+[Property_Axes]
+Editable=True
+Type=UIntArray
+Value=0,1,2
+ArgumentName=transpose_param.axes -a -0
+Important=True
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*TransposeOutputSize

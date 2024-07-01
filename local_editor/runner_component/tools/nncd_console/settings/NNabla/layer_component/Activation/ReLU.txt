@@ -1,0 +1,34 @@
+[Global]
+FunctionName=relu
+Reference=Vinod Nair, Geoffrey E. Hinton. Rectified Linear Units Improve Restricted Boltzmann Machines. http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.165.6419&rep=rep1&type=pdf
+
+[Display]
+Color=0xd77b6a
+
+[Property]
+Input
+InPlace
+Output
+
+CostIf
+
+[Property_Input]
+Editable=False
+Type=PIntArray
+Value=*GraphInput
+
+[Property_InPlace]
+Type=BooleanOrMacro
+Value=*AutoInPlaceOnce
+ArgumentName=relu_param.inplace
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*Input
+
+[Property_CostIf]
+Editable=False
+Type=PInt
+Value=*Calc +*Input
+Required=False

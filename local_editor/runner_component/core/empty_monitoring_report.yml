@@ -1,0 +1,4 @@
+1:
+  cost: 0
+  train_error: 0
+  valid_error: 0

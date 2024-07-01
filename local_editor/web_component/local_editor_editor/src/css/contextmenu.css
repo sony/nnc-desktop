@@ -1,0 +1,107 @@
+/* Copyright 2024 Sony Group Corporation. */
+/**
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+*/
+
+/* JavaScriptで表示するコンテキストメニュー */
+.context-menu {
+  position: absolute;
+  min-width: 200px;
+  padding: 8px 16px;
+  font-size: 13px;
+  background-color: white;
+  border: lightgray 1px solid;
+  color: black;
+  border-radius: 0px;
+  z-index: 999999;
+}
+
+.context-menu.sub {
+  visibility: hidden;
+}
+
+.context-menu-item:hover .context-menu.sub {
+  visibility: visible;
+}
+
+.context-menu > .context-menu-item {
+  position: relative;
+  display: block;
+  margin-bottom: 1px;
+  background-color: #fff;
+  border: none;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.context-menu-item:hover {
+  background-color: var(--color-gray1);
+}
+
+.context-menu a {
+  text-decoration: none;
+  color: black;
+}
+
+.menu-item.enabled:hover {
+  background-color: var(--color-gray1);
+  margin-right: -15px;
+  margin-left: -15px;
+  padding: 0px 15px;
+}
+
+.disabled {
+  color: darkgray;
+}
+
+.item-text {
+  padding: 0px 20px;
+  display: block;
+}
+
+.item-separator {
+  padding: 0px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  width: 100%;
+  border-top: solid 1px lightgray;
+  display: block;
+}
+
+.item-submenu:after{
+  content: ' ';
+  width: 0;
+  height: 0;
+  position: absolute;
+  border: solid 4px transparent;
+  border-left-color:#000;
+  border-left-width: 7px;
+  top: 30%;
+  left: 95%;
+}
+
+.action-menu-item {
+  top: auto;
+  left: auto;
+  right: -70px !important;
+  padding: 0px;
+  border-color: var(--color-gray0);
+}
+
+.check-mark-context {
+  float: left;
+}

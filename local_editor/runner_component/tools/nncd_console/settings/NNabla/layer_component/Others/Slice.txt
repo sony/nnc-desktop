@@ -1,0 +1,36 @@
+[Property]
+Input
+Start
+Stop
+Step
+Output
+
+[Property_Input]
+Editable=False
+Type=PIntArray
+Value=*GraphInput
+
+[Property_Start]
+Editable=True
+Type=UIntArray
+Value=0,0,0
+ArgumentName=slice_param.start -r -f
+Important=True
+
+[Property_Stop]
+Editable=True
+Type=UIntArray
+Value=*Input
+ArgumentName=slice_param.stop -r -f
+Important=True
+
+[Property_Step]
+Editable=True
+Type=UIntArray
+Value=1,1,1
+ArgumentName=slice_param.step -r -f
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*SliceOutputSize

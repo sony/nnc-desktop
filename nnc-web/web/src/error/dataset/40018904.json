@@ -1,0 +1,7 @@
+{
+  "code": "40018904",
+  "message": {
+    "ja": "データファイルが存在しません。\nWindows版Neural Network Console、nnabla、もしくは最新のUploaderを使ってアップロードしてください。",
+    "en": "One or more data files are not found.\nPlease upload using the Windows version of Neural Network Console, nnabla, or the latest uploader."
+  }
+}

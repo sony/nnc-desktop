@@ -1,0 +1,228 @@
+<!-- Copyright 2024 Sony Group Corporation. -->
+<!--
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+
+<!DOCTYPE html>
+<!-- saved from url=(0042)https://support.dl.sony.com/docs/#Tutorial -->
+<html lang="en-US">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="description" content="This is a manual of how to use Neural Network Console.">
+  <meta name="keyword"
+    content="deep learning, sony, neural network, AI, machine learning, framework, Neural Network Libraries">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>>Dataset preparation  –  Docs  - Neural Network Console</title>
+
+  <link rel="shortcut icon" href="/docs/assets/images/common/favicon.ico" type="image/x-icon">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="stylesheet" href="/docs/assets/css/app.css">
+  <script src="/docs/assets/js/app.js"></script>
+
+</head>
+
+<body class="page-docs docs en-US">
+  <header class="header">
+    <div class="header_inner">
+      <div class="header_content">
+        <p class="header_logo"><img src="/docs/assets/images/common/sony_logo.svg" alt="SONY" width="86"></p>
+      </div>
+    </div>
+  </header>
+  <div class="wrapper" id="js-wrapper">
+    <div class="nav_wrap mf_finder_header" id="js-nav_wrap">
+      <div class="nav_menuBar visibleOnlySmall">
+        <div class="search-box-with-menubar">
+        </div>
+        <div data-toggle="collapse" aria-controls="js-navContent" role="button" aria-label="menu button"
+          class="nav_btnMenu" id="js-nav_btnMenu">
+          <div class="nav_btnMenu_inner">
+            <span class="bar bar-1"></span>
+            <span class="bar bar-2"></span>
+            <span class="bar bar-3"></span>
+          </div>
+        </div>
+      </div>
+      <div class="nav" id="js-nav" aria-expanded="true">
+        <nav aria-expanded="false" class="navContent" id="js-navContent">
+          <div class="navContent_list">
+            <div class="navLeft">
+              <div class="navi-home">
+                <a class="js-hover">
+                  <span class="typo__sstw_L sst_logo">Neural Network</span>
+                  <span class="typo__sstw_B sst_logo">Console</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="contents">
+      <div class="breadcrumbs en-US">
+        <div class="breadcrumbs_inner">
+          <!-- Breadcrumb NavXT 5.7.1 -->
+          <span property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" title="Go to Docs." href="/docs/" class="main-home">
+              <span property="name">Docs</span>
+            </a>
+            <meta property="position" content="1">
+          </span>
+          <span>&gt;</span>
+          <span property="itemListElement" typeof="ListItem">
+            <span property="name">Dataset preparation</span>
+            <meta property="position" content="2">
+          </span>
+        </div>
+      </div>
+      <div class="contents_inner">
+        <a class="contents_home visibleOnlySmall">
+          <span class="typo__sstw_L sst_logo">Neural Network</span>
+          <span class="typo__sstw_B sst_logo">Console</span>
+        </a>
+        <div class="sectionBox">
+          <div class="sectionBox_tit_wrapper">
+            <h1 class="sectionBox_tit">Dataset preparation</h1>
+          </div>
+          <div class="sectionBox_inner">
+            <div class="sectionBox_content">
+              <article class="singleArticle">
+                <div class="articleText">
+                  <p>A dataset is a collection of data used for neural network training and
+                    performance evaluation.</p>
+                  <p>&nbsp;</p>
+                  <p>Reference</p>
+                  <p>The Neural Network Console(local) contains the functionality to import a dataset to
+                    the Neural Network Console. For details,
+                    see <a href="/docs/import_a_dataset_to_the_Neural_Network_Console.html">“Import
+                      a dataset to the Neural Network Console”</a>.</p>
+                  <p>&nbsp;</p>
+                  <p>Dataset must be a folder that contains a file(the file name must be index.csv)
+                    and a folder(the folder name must be data).</p>
+                  <p>&nbsp;</p>
+                  <h3><a name="_Toc489818952"></a>2 Basic structure of index.csv</h3>
+                  <p>The dataset CSV file consists of a header (the first row) and data (all
+                    subsequent rows).</p>
+                  <p><img class="alignnone size-full wp-image-57"
+                      src="/docs/assets/images/dataset_preparaton/index_csv_file.png" alt="" width="765" height="604"></p>
+                  <p>&nbsp;</p>
+                  <h4><a name="_Toc489818953"></a>2.1 Header</h4>
+                  <p>Each cell in the header row indicates the variable name, dimensional index, and
+                    label name of the data in each column of the CSV file. The value of each cell in
+                    the header is expressed as variable name[_dimensional index][:label name].</p>
+                  <p>&nbsp;</p>
+                  <p>The variable name represents the variable name used for identification within the
+                    Neural Network Console. You can use any character string for the variable name,
+                    but typically x is assigned to input data and y to output data. If there are
+                    multiple inputs and outputs, they are distinguished by appending a suffix number
+                    after x and y as in x1, x2, …, and y1, y2 … y is placed in a column to the right
+                    of x. Each of the x and y variables is placed in ascending order by suffix from
+                    the left.</p>
+                  <p>&nbsp;</p>
+                  <p>The dimensional index indicates which dimension of the vector each column of the
+                    CSV corresponds to, when the variable is in vector form. A dimensional index is
+                    expressed as a variable name followed by two underscores and a number. The
+                    dimensional index starts at 0. For example, a 10-dimensional vector takes on
+                    index numbers 0 to 9.</p>
+                  <p>&nbsp;</p>
+                  <p>The label name indicates a simple name that represents each variable or each
+                    dimension of a variable. Unlike variable names, any character string that is
+                    easy for the user to understand can be assigned to a label name with no
+                    particular restrictions.</p>
+                  <p>&nbsp;</p>
+                  <p>Notes</p>
+                  <p>The Neural Network Console handles spaces in CSV files as normal characters. Be
+                    careful not to insert extraneous spaces after commas or the like.</p>
+                  <p>&nbsp;</p>
+                  <h4><a name="_Toc489818954"></a>2.2 Data</h4>
+                  <p>Each row, starting from the second row, contains a data sample. For example, a
+                    CSV file with 1001 rows contains a total of 1000 data samples. A data sample
+                    consists of multiple variables specified by the header. Each cell from the
+                    second row contains a file name or value depending on the variable type.</p>
+                  <p>&nbsp;</p>
+                  <p isrender="true">If the variable is image data, enter an image file name in each
+                    cell. For a file name, you can use an absolute path or a relative path to the
+                    dataset CSV file. The Neural Network Console supports image files with .png,
+                    .jpg, .jpeg, .gif, .bmp, and .tif extensions with one (grayscale) or three (RGB)
+                    color channels. Images in core library are handled as arrays containing the
+                    number of channels, height, and width as elements of each dimension.</p>
+                  <p>&nbsp;</p>
+                  <p>If the variable is a vector or matrix instead of an image, enter the name of the
+                    data CSV file in each cell. Data CSV files are CSV files that you prepare for
+                    each data sample separately from the dataset CSV file. A data CSV file does not
+                    have a header and consists only of value cells. The Neural Network Console
+                    handles CSV files consisting of multiple rows and multiple columns as arrays
+                    with (rows, columns) elements. The actual values need to be processed in
+                    advance, so that range of the data is roughly between -1.0 and 1.0.</p>
+                  <p>&nbsp;</p>
+                  <p>Notes</p>
+                  <p>The number of elements of all arrays must be the same for the same variables
+                    contained in a single dataset CSV file. For example, images with different
+                    number of color channels, width, and height must not be mixed as images for the
+                    same variable x. If they are different, the resolution of all images must be
+                    consolidated in advance through preprocessing (e.g., resizing).</p>
+                  <p>&nbsp;</p>
+                  <h3><a name="_Toc489818955"></a>3 Example of an image classification dataset</h3>
+                  <p>This section explains the format of datasets for training an image classifier
+                    using the MNIST handwritten digit classification sample dataset generated in the
+                    following folder as an example.</p>
+                  <p>&nbsp;</p>
+                  <p>This dataset consists of monochrome images of digits of size 28 by 28 pixels and
+                    label data that indicates which digit each image represents, from 0 to 9.</p>
+                  <p><img class="alignnone size-full wp-image-57"
+                      src="/docs/assets/images/dataset_preparaton/example.png" alt="" width="765" height="604"></p>
+                  <p>&nbsp;</p>
+                  <p>In row 1, column 1, <em>x:image</em> indicates that the variable name of column 1
+                    is <em>x</em> and that its label name is <em>image</em>. In row 1, column 2,
+                    <em>y:label</em> indicates that the variable name of column 2 is <em>y</em> and
+                    that its label name is <em>label</em>.</p>
+                  <p>&nbsp;</p>
+                  <p>Each row from the second row indicates a single data sample. Column 1 indicates
+                    the image file name (relative path from the CSV file) of input <em>x</em> while
+                    column 2 indicates the correct category index. As there are 10 types of digits
+                    (0 to 9) for classification in the MNIST dataset, the category indexes take on
+                    values 0 to 9, which correspond to the digits “0” to “9.” For example, if the
+                    image given in column 1 is the digit “7,” category index 7, which corresponds to
+                    the digit “7,” is specified in column 2.</p>
+                  <p>&nbsp;</p>
+                  <p>In the MNIST dataset, the image data file indicated by variable <em>x</em> is a
+                    monochrome image of 28 by 28 pixels. As such, the array size of <em>x</em> on
+                    the Neural Network Console is (1,28,28). As the data indicated by variable
+                    <em>y</em> is one-dimensional, the array size of <em>y</em> is (1).</p>
+                </div>
+              </article>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- .contents_inner -->
+    </div><!-- .contents -->
+  </div><!-- /.wrapper -->
+  <footer class="footer">
+    <div class="footer_inner">
+      <div class="pageTopBtn">
+        <a href="javascript:void(0)" aria-label="Back to the top of this page." id="js-pageTop">Page Top</a>
+      </div>
+      <div class="footer_sitemap_inner">
+        <div class="sitemap"></div>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,2954 @@
+<!-- Copyright 2024 Sony Group Corporation. -->
+<!--
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+
+<!DOCTYPE html>
+<!-- saved from url=(0057)#Sigmoid -->
+<html lang="en-US">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="description" content="This is a manual of how to use Neural Network Console.">
+  <meta name="keyword"
+    content="deep learning, sony, neural network, AI, machine learning, framework, Neural Network Libraries">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Layer reference – Docs - Neural Network Console</title>
+
+  <link rel="shortcut icon" href="/docs/assets/images/common/favicon.ico" type="image/x-icon">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="stylesheet" href="/docs/assets/css/app.css">
+  <script src="/docs/assets/js/app.js"></script>
+
+</head>
+
+<body class="page-docs docs en-US">
+
+  <header class="header">
+    <div class="header_inner">
+      <div class="header_content">
+        <p class="header_logo"><img src="/docs/assets/images/common/sony_logo.svg" alt="SONY" width="86"></p>
+      </div>
+    </div>
+  </header>
+  <div class="wrapper" id="js-wrapper">
+    <div class="nav_wrap mf_finder_header" id="js-nav_wrap">
+      <div class="nav_menuBar visibleOnlySmall">
+        <div class="search-box-with-menubar"></div>
+        <div data-toggle="collapse" aria-controls="js-navContent" role="button" aria-label="menu button"
+          class="nav_btnMenu" id="js-nav_btnMenu">
+          <div class="nav_btnMenu_inner">
+            <span class="bar bar-1"></span>
+            <span class="bar bar-2"></span>
+            <span class="bar bar-3"></span>
+          </div>
+        </div>
+      </div>
+      <div class="nav" id="js-nav" aria-expanded="true">
+        <nav aria-expanded="false" class="navContent" id="js-navContent">
+          <div class="navContent_list">
+            <div class="navLeft">
+              <div class="navi-home">
+                <a class="js-hover">
+                  <span class="typo__sstw_L sst_logo">Neural Network</span>
+                  <span class="typo__sstw_B sst_logo">Console</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="contents">
+      <div class="breadcrumbs en-US">
+        <div class="breadcrumbs_inner">
+          <!-- Breadcrumb NavXT 5.7.1 -->
+          <span property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" title="Go to Docs." href="/docs/" class="main-home">
+              <span property="name">Docs</span>
+            </a>
+            <meta property="position" content="1">
+          </span>
+          <span>&gt;</span>
+          <span property="itemListElement" typeof="ListItem">
+            <span property="name">Layer reference</span>
+            <meta property="position" content="2">
+          </span>
+        </div>
+      </div>
+      <div class="contents_inner">
+        <a class="contents_home visibleOnlySmall">
+          <span class="typo__sstw_L sst_logo">Neural Network</span>
+          <span class="typo__sstw_B sst_logo">Console</span>
+        </a>
+        <div class="sectionBox">
+          <div class="sectionBox_tit_wrapper">
+            <h1 class="sectionBox_tit">Layer reference</h1>
+          </div>
+
+          <div class="sectionBox_inner">
+            <p class="sectionBox_detailText">This chapter describes the layers and their properties that can
+              be used with the Neural Network Libraries.</p>
+            <div class="sectionBox_content layer_reference">
+              <div class="sectionBox_content_item">
+                <ul class="layer_menu">
+                  <li><a href="javascript:void(0)">&gt; IO</a>
+                    <ul id="list">
+                      <li><a href="#Input">–Input</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="javascript:void(0)">&gt; Loss</a>
+                    <ul id="list">
+                      <li><a href="#SquaredError">–SquaredError</a></li>
+                      <li><a href="#HuberLoss">–HuberLoss</a></li>
+                      <li><a href="#AbsoluteError">–AbsoluteError</a></li>
+                      <li><a href="#EpsilonInsensitiveLoss">–EpsilonInsensitiveLoss</a></li>
+                      <li><a href="#BinaryCrossEntropy">–BinaryCrossEntropy</a></li>
+                      <li><a href="#SigmoidCrossEntropy">–SigmoidCrossEntropy</a></li>
+                      <li><a href="#CategoricalCrossEntropy">–CategoricalCrossEntropy</a></li>
+                      <li><a href="#SoftmaxCrossEntropy">–SoftmaxCrossEntropy</a></li>
+                      <li><a href="#KLMultinomial">–KLMultinomial</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="javascript:void(0)">&gt;Parameter</a>
+                    <ul id="list">
+                      <li><a href="#Parameter">–Parameter</a></li>
+                      <li><a href="#WorkingMemory">–WorkingMemory</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="javascript:void(0)">&gt;Basic</a>
+                    <ul id="list">
+                      <li><a href="#Affine">–Affine</a></li>
+                      <li><a href="#Convolution">–Convolution</a></li>
+                      <li><a href="#DepthwiseConvolution">–DepthwiseConvolution</a></li>
+                      <li><a href="#Deconvolution">–Deconvolution</a></li>
+                      <li><a href="#DepthwiseDeconvolution">–DepthwiseDeconvolution</a></li>
+                      <li><a href="#Embed">–Embed</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="javascript:void(0)">&gt;Pooling</a>
+                    <ul id="list">
+                      <li><a href="#MaxPooling">–MaxPooling</a></li>
+                      <li><a href="#AveragePooling">–AveragePooling</a></li>
+                      <li><a href="#GlobalAveragePooling">–GlobalAveragePooling</a></li>
+                      <li><a href="#SumPooling">–SumPooling</a></li>
+                      <li><a href="#Unpooling">–Unpooling</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="javascript:void(0)">&gt;Activation</a>
+                    <ul id="list">
+                      <li><a href="#Tanh">–Tanh</a></li>
+                      <li><a href="#Sigmoid">–Sigmoid</a></li>
+                      <li><a href="#Abs">–Abs</a></li>
+                      <li><a href="#ReLU">–ReLU</a></li>
+                      <li><a href="#CReLU">–CReLU</a></li>
+                      <li><a href="#LeakyReLU">–LeakyReLU</a></li>
+                      <li><a href="#PReLU">–PReLU</a></li>
+                      <li><a href="#ELU">–ELU</a></li>
+                      <li><a href="#CELU">–CELU</a></li>
+                      <li><a href="#SELU">–SELU</a></li>
+                      <li><a href="#Swish">–Swish</a></li>
+                      <li><a href="#Softmax">–Softmax</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="javascript:void(0)">&gt;LoopControl</a>
+                    <ul id="list">
+                      <li><a href="#RepeatStart">–RepeatStart</a></li>
+                      <li><a href="#RepeatEnd">–RepeatEnd</a></li>
+                      <li><a href="#RecurrentInput">–RecurrentInput</a></li>
+                      <li><a href="#RecurrentOutput">–RecurrentOutput</a></li>
+                      <li><a href="#Delay">–Delay</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="javascript:void(0)">&gt;Quantization</a>
+                    <ul id="list">
+                      <li><a href="#FixedPointQuantize">–FixedPointQuantize</a></li>
+                      <li><a href="#Pow2Quantize">–Pow2Quantize</a></li>
+                      <li><a href="#BinaryConnectAffine">–BinaryConnectAffine</a></li>
+                      <li><a href="#BinaryConnectConvolution">–BinaryConnectConvolution</a></li>
+                      <li><a href="#BinaryWeightAffine">–BinaryWeightAffine</a></li>
+                      <li><a href="#BinaryWeightConvolution">–BinaryWeightConvolution</a></li>
+                      <li><a href="#BinaryTanh">–BinaryTanh</a></li>
+                      <li><a href="#BinarySigmoid">–BinarySigmoid</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="javascript:void(0)">&gt; Unit</a>
+                    <ul id="list">
+                      <li><a href="#Unit">–Unit</a></li>
+                      <li><a href="#Argument">–Argument</a></li>
+                      <li><a href="#LSTM">–LSTM</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="javascript:void(0)">&gt;Spectral</a>
+                    <ul id="list">
+                      <li><a href="#FFT">–FFT</a></li>
+                      <li><a href="#IFFT">–IFFT</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="javascript:void(0)">&gt; Math</a>
+                    <ul id="list">
+                      <li><a href="#Sum">–Sum</a></li>
+                      <li><a href="#Mean">–Mean</a></li>
+                      <li><a href="#Prod">–Prod</a></li>
+                      <li><a href="#Max">–Max</a></li>
+                      <li><a href="#Min">–Min</a></li>
+                      <li><a href="#Log">–Log</a></li>
+                      <li><a href="#Exp">–Exp</a></li>
+                      <li><a href="#Sign">–Sign</a></li>
+                      <li><a href="#BatchMatmul">–BatchMatmul</a></li>
+                      <li><a href="#Round">–Round</a></li>
+                      <li><a href="#Ceil">–Ceil</a></li>
+                      <li><a href="#Floor">–Floor</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="javascript:void(0)">&gt;Trigonometric</a>
+                    <ul id="list">
+                      <li><a href="#Sin">–Sin</a></li>
+                      <li><a href="#Cos">–Cos</a></li>
+                      <li><a href="#Tan">–Tan</a></li>
+                      <li><a href="#Sinh">–Sinh</a></li>
+                      <li><a href="#Cosh">–Cosh</a></li>
+                      <li><a href="#ASin">–ASin</a></li>
+                      <li><a href="#ACos">–ACos</a></li>
+                      <li><a href="#ATan">–ATan</a></li>
+                      <li><a href="#ASinh">–ASinh</a></li>
+                      <li><a href="#ACosh">–ACosh</a></li>
+                      <li><a href="#ATanh">–ATanh</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="javascript:void(0)">&gt;Arithmetic (Scalar)</a>
+                    <ul id="list">
+                      <li><a href="#AddScalar">–AddScalar</a></li>
+                      <li><a href="#MulScalar">–MulScalar</a></li>
+                      <li><a href="#RSubScalar">–RSubScalar</a></li>
+                      <li><a href="#RDivScalar">–RDivScalar</a></li>
+                      <li><a href="#PowScalar">–PowScalar</a></li>
+                      <li><a href="#RPowScalar">–RPowScalar</a></li>
+                      <li><a href="#MaximumScalar">–MaximumScalar</a></li>
+                      <li><a href="#MinimumScalar">–MinimumScalar</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="javascript:void(0)">&gt;Arithmetic (2 Inputs)</a>
+                    <ul id="list">
+                      <li><a href="#Add2">–Add2</a></li>
+                      <li><a href="#Sub2">–Sub2</a></li>
+                      <li><a href="#Mul2">–Mul2</a></li>
+                      <li><a href="#Div2">–Div2</a></li>
+                      <li><a href="#Pow2">–Pow2</a></li>
+                      <li><a href="#Maximum2">–Maximum2</a></li>
+                      <li><a href="#Minimum2">–Minimum2</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="javascript:void(0)">&gt;Logical</a>
+                    <ul id="list">
+                      <li><a href="#LogicalAnd">–LogicalAnd</a></li>
+                      <li><a href="#LogicalOr">–LogicalOr</a></li>
+                      <li><a href="#LogicalXor">–LogicalXor</a></li>
+                      <li><a href="#Equal">–Equal</a></li>
+                      <li><a href="#NotEqual">–NotEqual</a></li>
+                      <li><a href="#GreaterEqual">–GreaterEqual</a></li>
+                      <li><a href="#Greater">–Greater</a></li>
+                      <li><a href="#LessEqual">–LessEqual</a></li>
+                      <li><a href="#Less">–Less</a></li>
+                      <li><a href="#LogicalAndScalar">–LogicalAndScalar</a></li>
+                      <li><a href="#LogicalOrScalar">–LogicalOrScalar</a></li>
+                      <li><a href="#LogicalXorScalar">–LogicalXorScalar</a></li>
+                      <li><a href="#EqualScalar">–EqualScalar</a></li>
+                      <li><a href="#NotEqualScalar">–NotEqualScalar</a></li>
+                      <li><a href="#GreaterEqualScalar">–GreaterEqualScalar</a></li>
+                      <li><a href="#GreaterScalar">–GreaterScalar</a></li>
+                      <li><a href="#LessEqualScalar">–LessEqualScalar</a></li>
+                      <li><a href="#LessScalar">–LessScalar</a></li>
+                      <li><a href="#LogicalNot">–LogicalNot</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="javascript:void(0)">&gt;Validation</a>
+                    <ul id="list">
+                      <li><a href="#BinaryError">–BinaryError</a></li>
+                      <li><a href="#TopNError">–TopNError</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="javascript:void(0)">&gt;Others</a>
+                    <ul id="list">
+                      <li><a href="#BatchNormalization">–BatchNormalization</a></li>
+                      <li><a href="#Dropout">–Dropout</a></li>
+                      <li><a href="#Concatenate">–Concatenate</a></li>
+                      <li><a href="#Reshape">–Reshape</a></li>
+                      <li><a href="#Broadcast">–Broadcast</a></li>
+                      <li><a href="#BroadcastTo">–BroadcastTo</a></li>
+                      <li><a href="#Pad">–Pad</a></li>
+                      <li><a href="#Flip">–Flip</a></li>
+                      <li><a href="#Shift">–Shift</a></li>
+                      <li><a href="#Transpose">–Transpose</a></li>
+                      <li><a href="#Slice">–Slice</a></li>
+                      <li><a href="#Stack">–Stack</a></li>
+                      <li><a href="#MatrixDiag">–MatrixDiag</a></li>
+                      <li><a href="#MatrixDiagPart">–MatrixDiagPart</a></li>
+                      <li><a href="#ClipGradByValue">–ClipGradByValue</a></li>
+                      <li><a href="#ClipGradByNorm">–ClipGradByNorm</a></li>
+                      <li><a href="#TopKData">–TopKData</a></li>
+                      <li><a href="#TopKGrad">–TopKGrad</a></li>
+                      <li><a href="#Sort">–Sort</a></li>
+                      <li><a href="#Prune">–Prune</a></li>
+                      <li><a href="#Interpolate">–Interpolate</a></li>
+                      <li><a href="#NmsDetection2d">–NmsDetection2d</a></li>
+                      <li><a href="#VATNoise">–VATNoise</a></li>
+                      <li><a href="#Unlink">–Unlink</a></li>
+                      <li><a href="#Identity">–Identity</a></li>
+                      <li><a href="#Comment">–Comment</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="javascript:void(0)">&gt;Others(Pre Process)</a>
+                    <ul id="list">
+                      <li><a href="#OneHot">–OneHot</a></li>
+                      <li><a href="#RandomCrop">–RandomCrop</a></li>
+                      <li><a href="#RandomFlip">–RandomFlip</a></li>
+                      <li><a href="#RandomShift">–RandomShift</a></li>
+                      <li><a href="#MeanSubtraction">–MeanSubtraction</a></li>
+                      <li><a href="#ImageAugmentation">–ImageAugmentation</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="javascript:void(0)">&gt;Configulation</a>
+                    <ul id="list">
+                      <li><a href="#StructureSearch">–StructureSearch</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div class="sectionBox_content_item">
+                <h2><a name="_Toc489819176"></a>Color of each layer</h2>
+                <ul class="layer_table">
+                  <li>
+                    <p class="layer_name layer_0">IO</p>
+                    <p class="layer_description">Input/output data.</p>
+                  </li>
+                  <li>
+                    <p class="layer_name layer_1">Basic</p>
+                    <p class="layer_description">Perform computatoins on artificial neurons.
+                      <br><span>(Binary layer required for binary neural networks)</span></p>
+                  </li>
+                  <li>
+                    <p class="layer_name layer_2">Activation</p>
+                    <p class="layer_description">
+                      Apply non-linear conversion to input data for activation.<br><span>(Binary
+                        layer required for binary neural networks)</span></p>
+                  </li>
+                  <li>
+                    <p class="layer_name layer_3">Pooling</p>
+                    <p class="layer_description">Perform pooling.</p>
+                  </li>
+                  <li>
+                    <p class="layer_name layer_4">Parameter</p>
+                    <p class="layer_description">Parameters to be optimized.</p>
+                  </li>
+                  <li>
+                    <p class="layer_name layer_5">LoopControl</p>
+                    <p class="layer_description">Control repetitive processes.</p>
+                  </li>
+                  <li>
+                    <p class="layer_name layer_6">Unit, Math, Loss, Others, Others (Pre Process)</p>
+                    <p class="layer_description">For various purposes, from arithmetic operations on
+                      tensor elements to preprocessing data.</p>
+                  </li>
+                  <li>
+                    <p class="layer_name layer_7">Arithmetic (Scalar, 2 Inputs), Logical, Validation</p>
+                    <p class="layer_description">
+                      For arithmetic/logical opertaions, precision computation, etc.</p>
+                  </li>
+                </ul>
+                <p>&nbsp;</p>
+                <h2><a name="_Toc490568673"></a>Common layer properties</h2>
+                <p>Common layer properties include the layer name and the properties that are
+                  automatically calculated based on the inter-layer link status and layer-specific
+                  properties.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Name</td>
+                      <td>This indicates the layer name.<p></p>
+                        <p>Each layer name must be unique in the graph.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Input</td>
+                      <td>This indicates the layer’s input size.</td>
+                    </tr>
+                    <tr>
+                      <td>Output</td>
+                      <td>This indicates the layer’s output size.</td>
+                    </tr>
+                    <tr>
+                      <td>CostParameter</td>
+                      <td>This indicates the number of parameters that the layer contains.</td>
+                    </tr>
+                    <tr>
+                      <td>CostAdd</td>
+                      <td>This indicates the number of multiplications required in forward
+                        calculation and the number of additions that cannot be performed during
+                        the same time.</td>
+                    </tr>
+                    <tr>
+                      <td>CostMultiply</td>
+                      <td>This indicates the number of additions required in forward calculation
+                        and the number of multiplications that cannot be performed during the
+                        same time.</td>
+                    </tr>
+                    <tr>
+                      <td>CostMultiplyAdd</td>
+                      <td>This indicates the number of multiplications and additions required in
+                        forward calculation (the number of multiplications and the number of
+                        additions that can be performed during the same time).</td>
+                    </tr>
+                    <tr>
+                      <td>CostDivision</td>
+                      <td>This indicates the number of divisions required in forward calculation.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>CostExp</td>
+                      <td>This indicates the number of exponentiation required in forward
+                        calculation.</td>
+                    </tr>
+                    <tr>
+                      <td>CostIf</td>
+                      <td>This indicates the number of conditional decisions required in forward
+                        calculation.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h2><a name="_Toc490568674"></a>Input and output layers</h2>
+                <p>&nbsp;</p>
+                <h3><a name="Input"></a>Input</h3>
+                <p>This is the neural network input layer.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Size</td>
+                      <td>Specifies the input size.<p></p>
+                        <p>For image data, the size is specified in the “the number of
+                          colors,height,width” format. For example, for a RGB color image
+                          whose width is 32 and height is 24, specify “3,24,32”. For a
+                          monochrome image whose width is 64 and height is 48, specify
+                          “1,48,64”.</p>
+                        <p>For CSV data, the size is specified in the “the number of rows, the
+                          number of columns” format. For example, for CSV data consisting of
+                          16 rows and 1 column, specify “16,1”. For CSV data consisting of 12
+                          rows and 3 columns, specify “12,3”.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Dataset</td>
+                      <td>Specifies the name of the variable to input into this Input layer.</td>
+                    </tr>
+                    <tr>
+                      <td>Generator</td>
+                      <td>Specifies the generator to use in this input layer. If the Generator
+                        property is not set to None, the data that the generator generates is
+                        used in place of the variable specified by Dataset during optimization.
+                        <p></p>
+                        <p>None: Data generation is not performed.</p>
+                        <p>Uniform: Uniform random numbers between -1.0 and 1.0 are generated.
+                        </p>
+                        <p>Normal: Gaussian random numbers with 0.0 mean and 1.0 variance are
+                          generated.</p>
+                        <p>Constant: Data whose elements are all constant (1.0) is generated.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>GeneratorMultiplier</td>
+                      <td>Specifies the multiplier to apply to the values that the generator
+                        generates.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h2><a name="_Toc490568676"></a>Loss layer</h2>
+                <p>&nbsp;</p>
+                <h3><a name="SquaredError"></a>SquaredError</h3>
+                <p>This is the output layer of a neural network that minimizes the squared errors
+                  between the variables and dataset variables. It is used when solving regression
+                  problems with neural networks (when optimizing neural networks that output
+                  continuous values).</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>T.Dataset</td>
+                      <td>Specifies the name of the variable expected to be the output of this
+                        SquaredError layer.</td>
+                    </tr>
+                    <tr>
+                      <td>T.Generator</td>
+                      <td>Specifies the generator to use in place of the dataset. If the Generator
+                        property is not set to None, the data that the generator generates is
+                        used in place of the variable specified by T.Dataset during
+                        optimization.<p></p>
+                        <p>None: Data generation is not performed.</p>
+                        <p>Uniform: Uniform random numbers between -1.0 and 1.0 are generated.
+                        </p>
+                        <p>Normal: Gaussian random numbers with 0.0 mean and 1.0 variance are
+                          generated.</p>
+                        <p>Constant: Data whose elements are all constant (1.0) is generated.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>T.GeneratorMultiplier</td>
+                      <td>Specifies the multiplier to apply to the values that the generator
+                        generates.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="HuberLoss"></a>HuberLoss</h3>
+                <p>This is the output layer of a neural network that minimizes the Huber loss between
+                  the variables and dataset variables. Like Squared Error, this is used when solving
+                  regression problems with neural networks. Using this in place of Squared Error has
+                  the effect of stabilizing the training process.</p>
+                <p><img src="/docs/assets/images/layer_reference/HuberLoss.png" alt="" width="160" height="49"
+                    class="alignnone size-full wp-image-704"><br>
+                  (i indicates the difference between the dataset and inputs.)</p>
+                <p><img src="/docs/assets/images/layer_reference/layer_3_2_huber_loss.png" alt="" width="752"
+                    height="452" class="alignnone size-full wp-image-194"></p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Delta</td>
+                      <td>Specify δ, which is used as a threshold for increasing the loss
+                        linearly.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>Other properties are the same as those of SquaredError.</p>
+                <p>&nbsp;</p>
+                <h3><a name="AbsoluteError"></a>AbsoluteError</h3>
+                <p>This is the output layer of a neural network that minimizes absolute error between
+                  the variables and dataset variables. Like Squared Error, this is used when solving
+                  regression problems with neural networks. The properties are the same as those of
+                  SquaredError.</p>
+                <p>&nbsp;</p>
+                <h3><a name="EpsilonInsensitiveLoss"></a>EpsilonInsensitiveLoss</h3>
+                <p>This is the output layer of a neural network that minimizes absolute error exceeding
+                  the range specified by Epsilon between the variables and dataset variables. Like
+                  Squared Error, this is used when solving regression problems with neural networks.
+                </p>
+                <p><img src="/docs/assets/images/layer_reference/EpsilonInsensitiveLoss.png" alt="" width="290"
+                    height="139" class="alignnone size-full wp-image-705"></p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Epsilon</td>
+                      <td>Specify ε</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>Other properties are the same as those of SquaredError.</p>
+                <p>&nbsp;</p>
+                <h3><a name="BinaryCrossEntropy"></a>BinaryCrossEntropy</h3>
+                <p>This is the output layer of a neural network that minimizes the mutual information
+                  between the variable and dataset variables. It is used to solve binary
+                  classification problems (0 or 1). The input to BinaryCrossEntropy must be between
+                  0.0 and 1.0 (probability), and the dataset variable must be 0 or 1. All the
+                  properties are the same as those of SquaredError.</p>
+                <p>&nbsp;</p>
+                <h3><a name="SigmoidCrossEntropy"></a>SigmoidCrossEntropy</h3>
+                <p>This is the output layer of a neural network that minimizes the cross entropy between
+                  the variables and dataset variables. SigmoidCrossEntropy is equivalent to
+                  Sigmoid+BinaryCrossEntropy during training, but computing them at once has the
+                  effect of reducing computational error. The properties are the same as those of
+                  SquaredError.</p>
+                <p>Reference</p>
+                <p>If SigmoidCrossEntropy is used in place of Sigmoid+BinaryCrossEntropy, continuous
+                  values without undergoing Sigmoid processing will be output for the evaluation
+                  results.</p>
+                <p>&nbsp;</p>
+                <h3><a name="CategoricalCrossEntropy"></a>CategoricalCrossEntropy</h3>
+                <p>This is the output layer of a neural network that minimizes the cross entropy between
+                  the variables and dataset variables provided by the category index. The properties
+                  are the same as those of SquaredError.</p>
+                <p>&nbsp;</p>
+                <h3><a name="SoftmaxCrossEntropy"></a>SoftmaxCrossEntropy</h3>
+                <p>This is the output layer of a neural network that minimizes the cross entropy between
+                  the variables and dataset variables provided by the category index.
+                  SoftmaxCrossEntropy is equivalent to Softmax+CategoricalCrossEntropy during
+                  training, but computing them at once has the effect of reducing computational error.
+                  The properties are the same as those of SquaredError.</p>
+                <p>Reference</p>
+                <p>If SoftmaxCrossEntropy is used in place of Softmax+CategoricalCrossEntropy,
+                  continuous values without undergoing Softmax processing will be output for the
+                  evaluation results.</p>
+                <p>&nbsp;</p>
+                <h3><a name="KLMultinomial"></a>KLMultinomial</h3>
+                <p>This is the output layer of a neural network that minimizes the Kullback Leibler
+                  distance between the probability distribution (p), which is a polynomial
+                  distribution input, and the dataset variable (q). The properties are the same as
+                  those of SquaredError.</p>
+                <p>&nbsp;</p>
+                <h2>Parameter layer</h2>
+                <p>&nbsp;</p>
+                <h3><a name="Parameter"></a>Parameter</h3>
+                <p>This is a neural network parameter.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Size</td>
+                      <td>Specify the size of the parameter.</td>
+                    </tr>
+                    <tr>
+                      <td>File</td>
+                      <td>When using a pre-trained parameter, specify the file containing the
+                        parameter with an absolute path.<br>
+                        If a file is specified and the parameter is to be loaded from a file,
+                        initialization with the initializer will be disabled.</td>
+                    </tr>
+                    <tr>
+                      <td>Initializer</td>
+                      <td>Specify the initialization method for the parameter.<br>
+                        Uniform: Initialization is performed using uniform random numbers
+                        between -1.0 and 1.0.<br>
+                        UniformAffineGlorot: Initialization is performed by applying the
+                        multiplier recommended by Xavier Glorot to uniform random numbers.<br>
+                        UniformConvolutionGlorot: Initialization is performed by applying the
+                        multiplier recommended by Xavier Glorot to uniform random numbers.<br>
+                        Normal: Initialization is performed using Gaussian random numbers with
+                        0.0 mean and 1.0 variance (default).<br>
+                        NormalAffineHeForward: Initialization is performed by applying the
+                        multiplier recommended by Kaiming He to Gaussian random numbers (Forward
+                        Case).<br>
+                        NormalAffineHeBackward: Initialization is performed by applying the
+                        multiplier recommended by Kaiming He to Gaussian random numbers
+                        (Backward Case).<br>
+                        NormalAffineGlorot: Initialization is performed by applying the
+                        multiplier recommended by Xavier Glorot to Gaussian random numbers.<br>
+                        NormalConvolutionHeForward: Initialization is performed by applying the
+                        multiplier recommended by Kaiming He to Gaussian random numbers (Forward
+                        Case).<br>
+                        NormalConvolutionHeBackward: Initialization is performed by applying the
+                        multiplier recommended by Kaiming He to Gaussian random numbers
+                        (Backward Case).<br>
+                        NormalConvolutionGlorot: Initialization is performed by applying the
+                        multiplier recommended by Xavier Glorot to Gaussian random numbers.<br>
+                        Constant: All elements are initialized with a constant (1.0).</td>
+                    </tr>
+                    <tr>
+                      <td>InitializerMultiplier</td>
+                      <td>Specify the multiplier to apply to the values that the initializer
+                        generates.</td>
+                    </tr>
+                    <tr>
+                      <td>LRateMultiplier</td>
+                      <td>Specify the multiplier to apply to the Learning Rate specified on the
+                        Config tab. This multiplier is used to update the parameter.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;<br>
+                  Reference<br>
+                  A parameter defined with the Parameter layer can be used by connecting to the W and
+                  b side connectors of Affine or Convolution or in other similar ways.</p>
+                <p>&nbsp;</p>
+                <h3><a name="WorkingMemory"></a>WorkingMemory</h3>
+                <p>This is a buffer for temporarily storing computation results. Data input in
+                  WorkingMemory is stored in WorkingMemory. Data stored in WorkingMemory can be
+                  retrieved from the output of WorkingMemory with the same name placed in another
+                  network.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Size</td>
+                      <td>Specify the size of the buffer.</td>
+                    </tr>
+                    <tr>
+                      <td>File</td>
+                      <td>To specify the content of the buffer in advance, specify the file
+                        containing the data with an absolute path.<br>
+                        If a file is specified and the data is to be loaded from a file,
+                        initialization with the initializer will be disabled.</td>
+                    </tr>
+                    <tr>
+                      <td>Initializer</td>
+                      <td>Specify the initialization method for the parameter.<br>
+                        Uniform: Initialization is performed using uniform random numbers
+                        between -1.0 and 1.0.<br>
+                        Normal: Initialization is performed using Gaussian random numbers with
+                        0.0 mean and 1.0 variance (default).<br>
+                        Constant: All elements are initialized with a constant (1.0).</td>
+                    </tr>
+                    <tr>
+                      <td>InitializerMultiplier</td>
+                      <td>Specify the multiplier to apply to the values that the initializer
+                        generates.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h2><a name="_Toc490568684"></a>Basic layers</h2>
+                <p>&nbsp;</p>
+                <h3><a name="Affine"></a>Affine</h3>
+                <p>The affine layer is a fully-connected layer that has connections from all inputs to
+                  all output neurons specified with the OutShape property.</p>
+                <p>o = Wi+b</p>
+                <p>(where i is the input, o is the output, W is the weight, and b is the bias term.)</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>OutShape</td>
+                      <td>Specifies the number of output neurons of the Affine layer.</td>
+                    </tr>
+                    <tr>
+                      <td>WithBias</td>
+                      <td>Specifies whether to include a bias term (b).</td>
+                    </tr>
+                    <tr>
+                      <td>ParameterScope</td>
+                      <td>Specifies the name of the parameter used by this layer.<p></p>
+                        <p>The parameter is shared between layers with the same ParameterScope.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>W.File</td>
+                      <td>When using pre-trained weight W, specifies the file containing W with an
+                        absolute path.<p></p>
+                        <p>If a file is specified and weight W is to be loaded from a file,
+                          initialization with the initializer will be disabled.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>W.Initializer</td>
+                      <td>Specifies the initialization method for weight W.<p></p>
+                        <p>Uniform: Initialization is performed using uniform random numbers
+                          between -1.0 and 1.0.</p>
+                        <p>UniformAffineGlorot: Initialization is performed by applying the
+                          multiplier recommended by Xavier Glorot to uniform random numbers.
+                        </p>
+                        <p>Normal: Initialization is performed using Gaussian random numbers
+                          with 0.0 mean and 1.0 variance.</p>
+                        <p>NormalAffineHeForward: Initialization is performed by applying the
+                          multiplier recommended by Kaiming He to Gaussian random numbers
+                          (Forward Case).</p>
+                        <p>NormalAffineHeBackward: Initialization is performed by applying the
+                          multiplier recommended by Kaiming He to Gaussian random numbers
+                          (Backward Case).</p>
+                        <p>NormalAffineGlorot: Initialization is performed by applying the
+                          multiplier recommended by Xavier Glorot to Gaussian random numbers
+                          (default).</p>
+                        <p>Constant: All elements are initialized with a constant (1.0).</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>W.InitializerMultiplier</td>
+                      <td>Specifies the multiplier to apply to the values that the initializer
+                        generates.</td>
+                    </tr>
+                    <tr>
+                      <td>W.LRateMultiplier</td>
+                      <td>Specifies the multiplier to apply to the Learning Rate specified on the
+                        CONFIG tab. This multiplier is used to update weight W.<p></p>
+                        <p>For example, if the Learning Rate specified on the CONFIG tab is 0.01
+                          and W.LRateMultiplier is set to 2, weight W will be updated using a
+                          Learning Rate of 0.02.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>b.*</td>
+                      <td>This is used to set the bias b. The properties are the same as those of
+                        W.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="Convolution"></a>Convolution</h3>
+                <p>The convolution layer is used to convolve the input.</p>
+                <p>O<sub>x,m</sub> = Σ<sub>_i,n</sub> W<sub>i,n,m</sub> I<sub>x+i,n</sub> +
+                  b<sub>m</sub> (one-dimensional convolution)</p>
+                <p>O<sub>x,y,m</sub> = Σ<sub>_i,j,n</sub> W<sub>i,j,n,m</sub> I<sub>x+i,y+j,n</sub> +
+                  b<sub>m</sub> (two-dimensional convolution)</p>
+                <p>(where O is the output; I is the input; i,j is the kernel size; x,y,n is the input
+                  index; m is the output map (OutMaps property), W is the kernel weight, and b is the
+                  bias term of each kernel)</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>KernelShape</td>
+                      <td>Specifies the convolution kernel size.<p></p>
+                        <p>For example, to convolve an image with a 3 (height) by 5 (width)
+                          two-dimensional kernel, specify “3,5”.</p>
+                        <p>For example, to convolve a one-dimensional time series signal with a
+                          7-tap filter, specify “7”.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>WithBias</td>
+                      <td>Specifies whether to include the bias term (b).</td>
+                    </tr>
+                    <tr>
+                      <td>OutMaps</td>
+                      <td>Specifies the number of convolution kernels (which is equal to the
+                        number of output data samples).<p></p>
+                        <p>For example, to convolve an input with 16 types of filters, specify
+                          “16”.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>BorderMode</td>
+                      <td>Specifies the type of convolution border.<p></p>
+                        <p>valid: Convolution is performed within the border of the kernel shape
+                          for the input data size of each axis.</p>
+                        <p>In this case, the size of each axis of the output data is equal to
+                          input size – kernel shape + 1.</p>
+                        <p>full: Convolution is performed within the border even with a single
+                          sample for the input data of each axis.</p>
+                        <p>Insufficient data (kernel shape – 1 to the top, bottom, left, and
+                          right) within the border are padded with zeros.</p>
+                        <p>In this case, the size of each axis of the output data is equal to
+                          input size + kernel shape – 1.</p>
+                        <p>same: Convolution is performed within a border that would make the
+                          input data size the same as the output data size.</p>
+                        <p>Insufficient data (kernel shape/2 – 1 to the top, bottom, left, and
+                          right) within the border are padded with zeros.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Padding</td>
+                      <td>Specifies the size of zero padding to add to the ends of the arrays
+                        before the convolution process. For example, to insert 3 pixels
+                        vertically and 2 pixels horizontally, specify “3,2”.<p></p>
+                        <p>* ConvolutionPaddingSize: A value calculated from BorderMode is used
+                          for Padding.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Strides</td>
+                      <td>Specifies the period of performing the convolution (after how many
+                        samples kernel convolution is performed)<p></p>
+                        <p>The output size of an axis with Stride set to a value other than 1
+                          will be downsampled by the specified value.</p>
+                        <p>For example, to convolve every two samples in the X-axis direction
+                          and every three samples in the Y-axis direction, specify “3,2”.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Dilation</td>
+                      <td>Specifies the factor by which the kernel is to be dilated using a stride
+                        value in unit of kernel size. For example, to dilate a 3 (height) by 5
+                        (width) two-dimensional kernel to three times the height and two times
+                        the width and perform convolution on a 7 by 9 area, specify “3,2”.</td>
+                    </tr>
+                    <tr>
+                      <td>Group</td>
+                      <td>Specifies the unit for grouping OutMaps.</td>
+                    </tr>
+                    <tr>
+                      <td>ParameterScope</td>
+                      <td>Specifies the name of the parameter used by this layer.<p></p>
+                        <p>The parameter is shared between layers with the same ParameterScope.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>W.File</td>
+                      <td>When using pre-trained weight W, specify the file containing W with an
+                        absolute path.<p></p>
+                        <p>If a file is specified and weight W is to be loaded from a file,
+                          initialization with the initializer will be disabled.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>W.Initializer</td>
+                      <td>Specifies the initialization method for weight W.<p></p>
+                        <p>Uniform: Initialization is performed using uniform random numbers
+                          between -1.0 and 1.0.</p>
+                        <p>UniformConvolutionGlorot: Initialization is performed by applying the
+                          multiplier recommended by Xavier Glorot to uniform random numbers.
+                        </p>
+                        <p>Normal: Initialization is performed using Gaussian random numbers
+                          with 0.0 mean and 1.0 variance.</p>
+                        <p>NormalConvolutionHeForward: Initialization is performed by applying
+                          the multiplier recommended by Kaiming He to Gaussian random numbers
+                          (Forward Case).</p>
+                        <p>NormalConvolutionHeBackward: Initialization is performed by applying
+                          the multiplier recommended by Kaiming He to Gaussian random numbers
+                          (Backward Case).</p>
+                        <p>NormalConvolutionGlorot: Initialization is performed by applying the
+                          multiplier recommended by Xavier Glorot to Gaussian random numbers
+                          (default).</p>
+                        <p>Constant: All elements are initialized with a constant (1.0).</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>W.InitializerMultiplier</td>
+                      <td>Specifies the multiplier to apply to the values that the initializer
+                        generates.</td>
+                    </tr>
+                    <tr>
+                      <td>W.LRateMultiplier</td>
+                      <td>Specify the multiplier to apply to the Learning Rate specified on the
+                        CONFIG tab. This multiplier is used to update weight W.<p></p>
+                        <p>For example, if the Learning Rate specified on the CONFIG tab is 0.01
+                          and W.LRateMultiplier is set to 2, weight W will be updated using a
+                          Learning Rate of 0.02.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>b.*</td>
+                      <td>This is used to set the bias b. The properties are the same as those of
+                        W.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="DepthwiseConvolution"></a>DepthwiseConvolution</h3>
+                <p>The convolution layer is used to convolve the input for each map. The operation of
+                  DepthwiseConvolution is equivalent to setting Group of a convolution whose number of
+                  input and output maps is the same to OutMaps.</p>
+                <p>O<sub>x,y,n</sub> = Σ<sub>_i,j</sub> W<sub>i,j</sub> I<sub>x+i,y+j,n</sub> +
+                  b<sub>n</sub> (two-dimensional convolution, when Multiplier=1)</p>
+                <p>(where O is the output; I is the input; i,j is the kernel size; x,y,n is the input
+                  index; W is the kernel weight, and b is the bias term of each kernel)</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>KernelShape</td>
+                      <td>Specifies the convolution kernel size.<p></p>
+                        <p>For example, to convolve an image with a 3 (height) by 5 (width)
+                          two-dimensional kernel, specify “3,5”.</p>
+                        <p>For example, to convolve a one-dimensional time series signal with a
+                          7-tap filter, specify “7”.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>WithBias</td>
+                      <td>Specifies whether to include the bias term (b).</td>
+                    </tr>
+                    <tr>
+                      <td>BorderMode</td>
+                      <td>Specifies the type of convolution border.<p></p>
+                        <p>valid: Convolution is performed within the border of the kernel shape
+                          for the input data size of each axis.</p>
+                        <p>In this case, the size of each axis of the output data is equal to
+                          input size – kernel shape + 1.</p>
+                        <p>full: Convolution is performed within the border even with a single
+                          sample for the input data of each axis.</p>
+                        <p>Insufficient data (kernel shape – 1 to the top, bottom, left, and
+                          right) within the border are padded with zeros.</p>
+                        <p>In this case, the size of each axis of the output data is equal to
+                          input size + kernel shape – 1.</p>
+                        <p>same: Convolution is performed within a border that would make the
+                          input data size the same as the output data size.</p>
+                        <p>Insufficient data (kernel shape/2 – 1 to the top, bottom, left, and
+                          right) within the border are padded with zeros.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Padding</td>
+                      <td>Specifies the size of zero padding to add to the ends of the arrays
+                        before the convolution process. For example, to insert 3 pixels
+                        vertically and 2 pixels horizontally, specify “3,2”.<p></p>
+                        <p>* ConvolutionPaddingSize: A value calculated from BorderMode is used
+                          for Padding.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Strides</td>
+                      <td>Specifies the period of performing the convolution (after how many
+                        samples kernel convolution is performed)<p></p>
+                        <p>The output size of an axis with Stride set to a value other than 1
+                          will be downsampled by the specified value.</p>
+                        <p>For example, to convolve every two samples in the X-axis direction
+                          and every three samples in the Y-axis direction, specify “3,2”.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Dilation</td>
+                      <td>Specifies the factor by which the kernel is to be dilated using a stride
+                        value in unit of kernel size. For example, to dilate a 3 (height) by 5
+                        (width) two-dimensional kernel to three times the height and two times
+                        the width and perform convolution on a 7 by 9 area, specify “3,2”.</td>
+                    </tr>
+                    <tr>
+                      <td>Multiplier</td>
+                      <td>Specify the magnification of the number of output images relative to the
+                        number of input images.</td>
+                    </tr>
+                    <tr>
+                      <td>ParameterScope</td>
+                      <td>Specifies the name of the parameter used by this layer.<p></p>
+                        <p>The parameter is shared between layers with the same ParameterScope.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>W.File</td>
+                      <td>When using pre-trained weight W, specify the file containing W with an
+                        absolute path.<p></p>
+                        <p>If a file is specified and weight W is to be loaded from a file,
+                          initialization with the initializer will be disabled.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>W.Initializer</td>
+                      <td>Specifies the initialization method for weight W.<p></p>
+                        <p>Uniform: Initialization is performed using uniform random numbers
+                          between -1.0 and 1.0.</p>
+                        <p>UniformConvolutionGlorot: Initialization is performed by applying the
+                          multiplier recommended by Xavier Glorot to uniform random numbers.
+                        </p>
+                        <p>Normal: Initialization is performed using Gaussian random numbers
+                          with 0.0 mean and 1.0 variance.</p>
+                        <p>NormalConvolutionHeForward: Initialization is performed by applying
+                          the multiplier recommended by Kaiming He to Gaussian random numbers
+                          (Forward Case).</p>
+                        <p>NormalConvolutionHeBackward: Initialization is performed by applying
+                          the multiplier recommended by Kaiming He to Gaussian random numbers
+                          (Backward Case).</p>
+                        <p>NormalConvolutionGlorot: Initialization is performed by applying the
+                          multiplier recommended by Xavier Glorot to Gaussian random numbers
+                          (default).</p>
+                        <p>Constant: All elements are initialized with a constant (1.0).</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>W.InitializerMultiplier</td>
+                      <td>Specifies the multiplier to apply to the values that the initializer
+                        generates.</td>
+                    </tr>
+                    <tr>
+                      <td>W.LRateMultiplier</td>
+                      <td>Specify the multiplier to apply to the Learning Rate specified on the
+                        CONFIG tab. This multiplier is used to update weight W.<p></p>
+                        <p>For example, if the Learning Rate specified on the CONFIG tab is 0.01
+                          and W.LRateMultiplier is set to 2, weight W will be updated using a
+                          Learning Rate of 0.02.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>b.*</td>
+                      <td>This is used to set the bias b. The properties are the same as those of
+                        W.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="Deconvolution"></a>Deconvolution</h3>
+                <p>The deconvolution layer is used to deconvolve the input. The properties of
+                  deconvolution are the same as those of convolution.</p>
+                <p>&nbsp;</p>
+                <h3><a class="layer_1" name="DepthwiseDeconvolution"></a>DepthwiseDeconvolution</h3>
+                <p>The DepthwiseDeconvolution layer is used to deconvolve the input for each map. The
+                  operation of DepthwiseDeconvolution is equivalent to that of deconvolution whose
+                  Group value is the same as the number of input maps and OutMaps.</p>
+                <p>&nbsp;</p>
+                <h3><a name="Embed"></a>Embed</h3>
+                <p>Inputs are assumed to be discrete symbols represented by integers ranging from 0 to
+                  N-1 (where N is the number of classes), and arrays of a specified size are assigned
+                  to each symbol. For example, this is used when the inputs are word indexes, and each
+                  word is converted into vectors in the beginning of a network. The output size is
+                  equal to input size × array size.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>NumClass</td>
+                      <td>Specifies the number of classes N.</td>
+                    </tr>
+                    <tr>
+                      <td>Shape</td>
+                      <td>Specifies the size of the array assigned to a single symbol.</td>
+                    </tr>
+                    <tr>
+                      <td>ParameterScope</td>
+                      <td>Specifies the name of the parameter used by this layer.<p></p>
+                        <p>The parameter is shared between layers with the same ParameterScope.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>W.File</td>
+                      <td>When using pre-trained weight W, specify the file containing W with an
+                        absolute path.<p></p>
+                        <p>If a file is specified and weight W is to be loaded from a file,
+                          initialization with the initializer will be disabled.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>W.Initializer</td>
+                      <td>Specifies the initialization method for weight W.<p></p>
+                        <p>Uniform: Initialization is performed using uniform random numbers
+                          between -1.0 and 1.0.</p>
+                        <p>Normal: Initialization is performed using Gaussian random numbers
+                          with 0.0 mean and 1.0 variance.</p>
+                        <p>Constant: All elements are initialized with a constant (1.0).</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>W.InitializerMultiplier</td>
+                      <td>Specifies the multiplier to apply to the values that the initializer
+                        generates.</td>
+                    </tr>
+                    <tr>
+                      <td>W.LRateMultiplier</td>
+                      <td>Specifies the multiplier to apply to the Learning Rate specified on the
+                        CONFIG tab. This multiplier is used to update weight W.<p></p>
+                        <p>For example, if the Learning Rate specified on the CONFIG tab is 0.01
+                          and W.LRateMultiplier is set to 2, weight W will be updated using a
+                          Learning Rate of 0.02.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h2><a name="_Toc490568689"></a>Pooling layer</h2>
+                <p>&nbsp;</p>
+                <h3><a name="MaxPooling"></a>MaxPooling</h3>
+                <p>MaxPooling outputs the maximum value of local inputs.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>KernelShape</td>
+                      <td>Specifies the size of the local region for sampling the maximum value.
+                        <p></p>
+                        <p>For example, to output the maximum value over a 3 (height) by 5
+                          (width) region, specify “3,5”.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Strides</td>
+                      <td>Specifies the period for sampling maximum values (after how many samples
+                        maximum values are determined)<p></p>
+                        <p>The output size of each axis will be downsampled by the specified
+                          value.</p>
+                        <p>For example, to sample maximum values every two samples in the X-axis
+                          direction and every three samples in the Y-axis direction, specify
+                          “3,2”.</p>
+                        <p>* Use the same value as KernelShape for KernelShape:Strides.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>IgnoreBorder</td>
+                      <td>Specifies the border processing method.<p></p>
+                        <p>True: Processing is performed over regions that have enough samples
+                          to fill KernelShape. Samples near the border where there are not
+                          enough samples to fill KernelShape are ignored.</p>
+                        <p>False: Samples near the border are not discarded. Processing is
+                          performed even over regions that only have one sample.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Padding</td>
+                      <td>Specifies the size of zero padding to add to the ends of the arrays
+                        before the pooling process.<p></p>
+                        <p>For example, to add two pixels of zero padding to the top and bottom
+                          and one pixel of zero padding to the left and right of an image,
+                          specify “2,1”.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="AveragePooling"></a>AveragePooling</h3>
+                <p>AveragePooling outputs the average of local inputs. The properties are the same as
+                  those of MaxPooling.</p>
+                <p>&nbsp;</p>
+                <h3><a name="GlobalAveragePooling"></a>GlobalAveragePooling</h3>
+                <p>GlobalAveragePooling outputs the average of the entire last two dimensions of an
+                  array. GlobalAveragePooling is equivalent to AveragePooling with PoolShape and
+                  Strides set to the number of samples in the last two dimensions of the input array.
+                </p>
+                <p>&nbsp;</p>
+                <h3><a name="SumPooling"></a>SumPooling</h3>
+                <p>SumPooling outputs the sum of local inputs. The properties are the same as those of
+                  MaxPooling.</p>
+                <p>&nbsp;</p>
+                <h3><a name="Unpooling"></a>Unpooling</h3>
+                <p>Unpooling copies a single input to multiple inputs in order to generate data larger
+                  in size than the input data.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>KernelShape</td>
+                      <td>Specify the size of data to copy.<p></p>
+                        <p>For example, if you want to copy a data sample twice in the vertical
+                          direction and three times in the horizontal direction (output data
+                          whose size is twice as large in the vertical direction and three
+                          times as large in the horizontal direction), specify “2,3”.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h2><a name="_Toc490568694"></a>Activation layer</h2>
+                <p>&nbsp;</p>
+                <h3><a name="Tanh"></a>Tanh</h3>
+                <p>Tanh outputs the result of taking the hyperbolic tangent of the input.</p>
+                <p>o=tanh(i)</p>
+                <p>(where o is the output and i is the input)</p>
+                <p><img src="/docs/assets/images/layer_reference/layer_6_1_tanh.png" alt="" width="752" height="452"
+                    class="alignnone size-full wp-image-196"></p>
+                <p>&nbsp;</p>
+                <h3><a name="Sigmoid"></a>Sigmoid</h3>
+                <p>Sigmoid outputs the result of taking the sigmoid of the input. This is used when you
+                  want to obtain probabilities or output values ranging from 0.0 to 1.0.</p>
+                <p>o=sigmoid(i)</p>
+                <p>(where o is the output and i is the input)</p>
+                <p><img src="/docs/assets/images/layer_reference/layer_6_2_sigmoid.png" alt="" width="752" height="452"
+                    class="alignnone size-full wp-image-197"></p>
+                <p>&nbsp;</p>
+                <h3><a name="ReLU"></a>ReLU</h3>
+                <p>ReLU outputs the result of applying the rectified linear unit (ReLU) to the input.
+                </p>
+                <p>o=max(0, i)</p>
+                <p>(where o is the output and i is the input)</p>
+                <p><img src="/docs/assets/images/layer_reference/layer_6_3_relu.png" alt="" width="752" height="452"
+                    class="alignnone size-full wp-image-198"></p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>InPlace</td>
+                      <td>If set to True, the memory needed for training is conserved by sharing
+                        the input and output buffers.<br>
+                        To apply InPlace automatically when it is possible, specify
+                        *AutoInPlaceOnce.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="CReLU"></a>CReLU</h3>
+                <p>Concatenated ReLU (CReLU) applies Relu to each of the negated input signals,
+                  concatenates each result on the axis indicated by the Axis property, and outputs the
+                  final result.</p>
+                <p>&nbsp;</p>
+                <h3><a name="LeakyReLU"></a>LeakyReLU</h3>
+                <p>Unlike ReLU, which always outputs 0 for inputs less than 0, LeakyReLU multiplies
+                  inputs less than 0 with a constant value to output results.</p>
+                <p>o=max(0, i) + a min(0, i)</p>
+                <p>(where o is the output and i is the input)</p>
+                <p><img src="/docs/assets/images/layer_reference/layer_6_5_prelu.png" alt="" width="752" height="452"
+                    class="alignnone size-full wp-image-199"></p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>alpha</td>
+                      <td>Specify negative gradient a.</td>
+                    </tr>
+                    <tr>
+                      <td>InPlace</td>
+                      <td>If set to True, the memory needed for training is conserved by sharing
+                        the input and output buffers.<br>
+                        To apply InPlace automatically when it is possible, specify
+                        *AutoInPlaceOnce.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="PReLU"></a>PReLU</h3>
+                <p>Unlike ReLU, which always outputs 0 for inputs less than 0, parametric ReLU (PReLU)
+                  multiplies inputs less than 0 with a constant value to output results. The value of
+                  a, which is a gradient less than 0, is obtained from training.</p>
+                <p>o=max(0, i) + a min(0, i)</p>
+                <p>(where o is the output and i is the input)</p>
+                <p><img src="/docs/assets/images/layer_reference/layer_6_5_prelu.png" alt="" width="752" height="452"
+                    class="alignnone size-full wp-image-199"></p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>BaseAxis</td>
+                      <td>Of the available inputs, specifies the index (that starts at 0) of the
+                        axis that individual a’s are to be trained on. For example, for inputs
+                        4,3,5, to train individual a’s for the first dimension (four elements),
+                        set BaseAxis to 0.</td>
+                    </tr>
+                    <tr>
+                      <td>ParameterScope</td>
+                      <td>Specifies the name of the parameter used by this layer.<p></p>
+                        <p>The parameter is shared between layers with the same ParameterScope.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>slope.File</td>
+                      <td>When using pre-trained gradient a, specifies the file containing a with
+                        an absolute path.<p></p>
+                        <p>If a file is specified and weight slope is to be loaded from a file,
+                          initialization with the initializer will be disabled.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>slope.Initializer</td>
+                      <td>Specifies the initialization method for gradient a.<p></p>
+                        <p>Uniform: Initialization is performed using uniform random numbers
+                          between -1.0 and 1.0.</p>
+                        <p>Normal: Initialization is performed using Gaussian random numbers
+                          with 0.0 mean and 1.0 variance.</p>
+                        <p>Constant: All elements are initialized with a constant (1.0).</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>slope.InitializerMultiplier</td>
+                      <td>Specifies the multiplier to apply to the values that the initializer
+                        generates.</td>
+                    </tr>
+                    <tr>
+                      <td>slope.LRateMultiplier</td>
+                      <td>Specifies the multiplier to apply to the Learning Rate specified on the
+                        CONFIG tab. This multiplier is used to update gradient a.<p></p>
+                        <p>For example, if the Learning Rate specified on the CONFIG tab is 0.01
+                          and slope.LRateMultiplier is set to 2, gradient a will be updated
+                          using a Learning Rate of 0.02.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="ELU"></a>ELU</h3>
+                <p>ELU outputs the result of applying the exponential linear unit (ELU) to the input.
+                </p>
+                <p>o=max(0, i) + alpha(exp(min(0, i)) – 1)</p>
+                <p>(where o is the output and i is the input)</p>
+                <p><img src="/docs/assets/images/layer_reference/layer_6_6_elu.png" alt="" width="752" height="452"
+                    class="alignnone size-full wp-image-200"></p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Alpha</td>
+                      <td>Specify coefficient alpha for negative outputs.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="CELU"></a>CELU</h3>
+                <p>Concatenated ELU (CELU) applies ELU to each of the negated input signals,
+                  concatenates each result on the axis indicated by the Axis property, and outputs the
+                  final result.</p>
+                <p>&nbsp;</p>
+                <h3><a name="SELU"></a>SELU</h3>
+                <p>SELU outputs the result of applying the scaled exponential linear unit (SELU) to the
+                  input.</p>
+                <p>o=lambda {max(0, i) + alpha(exp(min(0, i)) – 1)}</p>
+                <p>(where o is the output and i is the input)</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Scale</td>
+                      <td>Specify the whole scale lambda.</td>
+                    </tr>
+                    <tr>
+                      <td>Alpha</td>
+                      <td>Specify coefficient alpha for negative outputs.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="Swish"></a>Swish</h3>
+                <p>Swish outputs the result of taking the swish of the input.</p>
+                <p>o=i/(1+exp(-i))</p>
+                <p>(where o is the output and i is the input)</p>
+                <p><img src="/docs/assets/images/layer_reference/layer_swish.png" alt="" width="752" height="458"
+                    class="alignnone size-full wp-image-176" sizes="(max-width: 752px) 100vw, 752px"></p>
+                <p>&nbsp;</p>
+                <h3><a name="Abs"></a>Abs</h3>
+                <p>Abs outputs the absolute values of inputs.</p>
+                <p>o=abs(i)</p>
+                <p>(where o is the output and i is the input)</p>
+                <p><img src="/docs/assets/images/layer_reference/layer_6_8_abs.png" alt="" width="752" height="452"
+                    class="alignnone size-full wp-image-201"></p>
+                <p>&nbsp;</p>
+                <h3><a name="Softmax"></a>Softmax</h3>
+                <p>Softmax outputs the Softmax of inputs. This is used when you want to obtain
+                  probabilities in a categorization problem or output values ranging from 0.0 to 1.0
+                  that sum up to 1.0.</p>
+                <p>o<sub>x</sub>=exp(i<sub>x</sub>) / Σ<sub>_j</sub>exp(i<sub>j</sub>)</p>
+                <p>(where o is the output, i is the input, and x is the data index)</p>
+                <p>&nbsp;</p>
+                <h2><a name="_Toc490568711"></a>Loop Control layer</h2>
+                <p>The Loop Control layer is useful for configuring networks with a loop structure, such
+                  as residual networks and recurrent neural networks.</p>
+                <p>&nbsp;</p>
+                <h3><a name="RepeatStart"></a>RepeatStart</h3>
+                <p>RepeatStart is a layer that indicates the start position of a loop. Layers placed
+                  between RepeatStart and RepeatEnd are created repeatedly for the number of times
+                  specified by the Times property of Repeat Start.</p>
+                <p>Notes</p>
+                <p>The array sizes of the layers between RepeatStart and RepeatEnd must be the same.
+                  Structures whose array sizes differ between repetitions cannot be written.</p>
+                <p>&nbsp;</p>
+                <h3><a name="RepeatEnd"></a>RepeatEnd</h3>
+                <p>RepeatEnd is a layer that indicates the end position of a loop.</p>
+                <p>&nbsp;</p>
+                <h3><a name="RecurrentInput"></a>RecurrentInput</h3>
+                <p>RecurrentInput is a layer that indicates the time loop start position of a recurrent
+                  neural network. The axis specified by the Axis property is handled as the time axis.
+                  The length of a time loop is defined by the number of elements specified by the Axis
+                  property of the input data.</p>
+                <p>&nbsp;</p>
+                <h3><a name="RecurrentOutput"></a>RecurrentOutput</h3>
+                <p>RecurrentOutput is a layer that indicates the time loop end position of a recurrent
+                  neural network.</p>
+                <p>&nbsp;</p>
+                <h3><a name="Delay"></a>Delay</h3>
+                <p>Delay is a layer that indicates the time delay signal in a recurrent neural network.
+                </p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Size</td>
+                      <td>Specifies the size of the time delay signal.</td>
+                    </tr>
+                    <tr>
+                      <td>Initial.Dataset</td>
+                      <td>Specifies the name of the variable to be used as the initial value of
+                        the time delay signal.</td>
+                    </tr>
+                    <tr>
+                      <td>Initial.Generator</td>
+                      <td>Specifies the generator to use in place of the dataset. If the Generator
+                        property is not set to None, the data that the generator generates is
+                        used in place of the variable specified by T.Dataset during
+                        optimization.<p></p>
+                        <p>None: Data generation is not performed.</p>
+                        <p>Uniform: Uniform random numbers between -1.0 and 1.0 are generated.
+                        </p>
+                        <p>Normal: Gaussian random numbers with 0.0 mean and 1.0 variance are
+                          generated.</p>
+                        <p>Constant: Data whose elements are all constant (1.0) is generated.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Initial.GeneratorMultiplier</td>
+                      <td>Specifies the multiplier to apply to the values that the generator
+                        generates.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h2><a name="_Toc490568704"></a>Quantization layer</h2>
+                <p>The quantization layer is used to quantize weights and data.</p>
+                <p>&nbsp;</p>
+                <h3><a name="FixedPointQuantize"></a>FixedPointQuantize</h3>
+                <p>FixedPointQuantize performs linear quantization.</p>
+                <table width="619" border="1">
+                  <tbody>
+                    <tr>
+                      <td width="206">Sign</td>
+                      <td width="413">Specify whether to include signs.<p></p>
+                        <p>When set to false, all values after quantization will be positive.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="206">N</td>
+                      <td width="413">Specify the number of quantization bits.</td>
+                    </tr>
+                    <tr>
+                      <td width="206">Delta</td>
+                      <td width="413">Specify the quantization step size.</td>
+                    </tr>
+                    <tr>
+                      <td width="206">STEFineGrained</td>
+                      <td width="413">Specify the gradient calculation method for backward
+                        processing.<p></p>
+                        <p>True: The gradient is always 1.</p>
+                        <p>False: The gradient is 1 between the maximum and minimum values of
+                          the range that can be expressed through quantization; otherwise it
+                          is 0.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="Pow2Quantize"></a>Pow2Quantize</h3>
+                <p>Pow2Quantize performs power-of-two quantization.</p>
+                <table width="619" border="1">
+                  <tbody>
+                    <tr>
+                      <td width="206">Sign</td>
+                      <td width="413">Specify whether to include signs.<p></p>
+                        <p>When set to false, all values after quantization will be positive.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="206">WithZero</td>
+                      <td width="413">Specify whether to include zeros.<p></p>
+                        <p>When set to false, values after quantization will not include zeros.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="206">N</td>
+                      <td width="413">Specify the number of quantization bits.</td>
+                    </tr>
+                    <tr>
+                      <td width="206">M</td>
+                      <td width="413">Specify the maximum value after quantization as 2^M.</td>
+                    </tr>
+                    <tr>
+                      <td width="206">STEFineGrained</td>
+                      <td width="413">Specify the gradient calculation method for backward
+                        processing.<p></p>
+                        <p>True: The gradient is always 1.</p>
+                        <p>False: The gradient is 1 between the maximum and minimum values of
+                          the range that can be expressed through quantization; otherwise it
+                          is 0.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="BinaryConnectAffine"></a>BinaryConnectAffine</h3>
+                <p>BinaryConnectAffine is an Affine layer that uses W, which has been converted into the
+                  binary values of -1 and +1.</p>
+                <p>o = sign(W)i+b</p>
+                <p>(where i is the input, o is the output, W is the weight, and b is the bias term.)</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Wb.*</td>
+                      <td>Specifies the weight Wb settings to use after the conversion into binary
+                        values. The properties are the same as those of W for the Affine layer.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>For details on other properties, see the Affine layer.</p>
+                <p>&nbsp;</p>
+                <h3><a name="BinaryConnectConvolution"></a>BinaryConnectConvolution</h3>
+                <p>BinaryConnectConvolution is a convolution layer that uses W, which has been converted
+                  into the binary values of -1 and +1.</p>
+                <p>O<sub>x,y,m</sub> = Σ<sub>_i,j,n</sub> sign(W<sub>i,j,n,m</sub>)
+                  I<sub>x+i,y+j,n</sub> + b<sub>m</sub> (two-dimensional convolution)</p>
+                <p>(where O is the output; I is the input; i,j is the kernel size; x,y,n is the input
+                  index; m is the output map (OutMaps property), W is the kernel weight, and b is the
+                  bias term of each kernel)</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Wb.*</td>
+                      <td>Specifies the weight Wb settings to use after the conversion into binary
+                        values. The properties are the same as those of W for the Convolution
+                        layer.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>For details on other properties, see the Convolution layer.</p>
+                <p>&nbsp;</p>
+                <h3><a name="BinaryWeightAffine"></a>BinaryWeightAffine</h3>
+                <p>BinaryWeightAffine is an affine layer that uses W, which has been converted into
+                  binary values of -1 and +1, and then scaled in order to make the output closer to
+                  the normal Affine layer.</p>
+                <p>o = a sign(W)i +b</p>
+                <p>(where i is the input, o is the output, W is the weight, a is the scale, and b is the
+                  bias term.)</p>
+                <p>&nbsp;</p>
+                <h3><a name="BinaryWeightConvolution"></a>BinaryWeightConvolution</h3>
+                <p>BinaryWeightConvolution is an affine layer that uses W, which has been converted into
+                  binary values of -1 and +1, and then scaled to make the output closer to the normal
+                  Convolution layer.</p>
+                <p>O<sub>x,y,m</sub> = Σ<sub>_i,j,n</sub> sign(W<sub>i,j,n,m</sub>)
+                  I<sub>x+i,y+j,n</sub> * a+ b<sub>m</sub> (two-dimensional convolution)</p>
+                <p>(where O is the output; I is the input; i,j is the kernel size; x,y,n is the input
+                  index; m is the output map (OutMaps property), W is the kernel weight, a is the
+                  scale, and b is the bias term of each kernel)</p>
+                <p>&nbsp;</p>
+                <h3><a name="BinaryTanh"></a>BinaryTanh</h3>
+                <p>Binarytanh outputs -1 for inputs less than or equal to 0 and +1 for inputs great than
+                  0.</p>
+                <p><img src="/docs/assets/images/layer_reference/layer_7_5_binarytanh.png" alt="" width="752"
+                    height="452" class="alignnone size-full wp-image-202"></p>
+                <p>&nbsp;</p>
+                <h3><a name="BinarySigmoid"></a>BinarySigmoid</h3>
+                <p>BinarySigmoid outputs 0 for inputs less than or equal to 0 and +1 for inputs great
+                  than 0.</p>
+                <p><img src="/docs/assets/images/layer_reference/layer_7_6_binarysigmoid.png" alt="" width="752"
+                    height="452" class="alignnone size-full wp-image-203"></p>
+                <p>&nbsp;</p>
+                <h2>Unit layer</h2>
+                <p>The unit layer provides a function for inserting other networks in the middle of a
+                  network. By using the unit layer, you can insert a collection of layers defined as a
+                  network in the middle of another network.</p>
+                <p>A network that another network is inserted into using the unit layer is called a
+                  caller network, and the network to be inserted into another network using the unit
+                  layer is called a unit network.</p>
+                <p>&nbsp;</p>
+                <h3><a name="Unit"></a>Unit</h3>
+                <p>Inserts a unit network into the current caller network.</p>
+                <table width="619" border="1">
+                  <tbody>
+                    <tr>
+                      <td width="206">Network</td>
+                      <td width="413">Specify the name of the unit network to be inserted.</td>
+                    </tr>
+                    <tr>
+                      <td width="206">ParameterScope</td>
+                      <td width="413">Specify the name of the parameter used by this unit.<p></p>
+                        <p>The parameter is shared between units with the same ParameterScope.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="206">(Other properties)</td>
+                      <td width="413">Specify the properties of the unit network to be inserted.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="Argument"></a>Argument</h3>
+                <p>Set the parameters of the unit network to allow editing as unit properties from the
+                  caller network. You can specify the name of an argument layer for the other layer
+                  properties in the unit network to use the argument layer values from the other
+                  layers in the unit network. The implemented argument layer values can be specified
+                  through the unit properties implemented in the caller network.</p>
+                <table width="619" border="1">
+                  <tbody>
+                    <tr>
+                      <td width="206">Value</td>
+                      <td width="413">Specify the default parameter value.</td>
+                    </tr>
+                    <tr>
+                      <td width="206">Type</td>
+                      <td width="413">Specify the parameter type.<p></p>
+                        <p>Boolean: True or False</p>
+                        <p>Int: Integer</p>
+                        <p>IntArray: Array of integers</p>
+                        <p>PInt: Integer greater than equal to 1</p>
+                        <p>PIntArray: Array of integers greater than equal to 1</p>
+                        <p>PIntArrays: Array of array of integers greater than equal to 1</p>
+                        <p>UInt: Unsigned integer</p>
+                        <p>UIntArray: Array of unsigned integers</p>
+                        <p>Float: Floating-point number</p>
+                        <p>FloatArray: Array of floating-point numbers</p>
+                        <p>FloatArrays: Array of array of floating-point numbers</p>
+                        <p>Text: Character string</p>
+                        <p>File: File name</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="206">Search</td>
+                      <td width="413">Specify for the caller network whether to include the
+                        parameter in the automatic structure search.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h2>Spectral layer</h2>
+                <p>&nbsp;</p>
+                <h3><a name="FFT"></a>FFT</h3>
+                <p>Performs a Fourier transform of the complex input and complex output. The last
+                  dimension of the input array must be complex (real part and imaginary part).</p>
+                <p>&nbsp;</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td width="206">SignalNDim</td>
+                      <td width="413">Specify the number of dimensions of the signal to perform
+                        the Fourier transform of.<br>
+                        For example, specify 1 for a one-dimensional Fourier transform and 2 for
+                        a two-dimensional Fourier transform.</td>
+                    </tr>
+                    <tr>
+                      <td width="206">Normalized</td>
+                      <td width="413">Scales the Fourier transform result by a constant factor
+                        indicated by the following formula and exports the final result.<br>
+                        <img src="/docs/assets/images/layer_reference/FFT.png" alt="" width="92" height="65"
+                          class="alignnone size-full wp-image-706"></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="IFFT"></a>IFFT</h3>
+                <p>Performs an inverse Fourier transform of the complex input and complex output.</p>
+                <p>&nbsp;</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td width="206">SignalNDim</td>
+                      <td width="413">Specify the number of dimensions of the signal to perform
+                        the inverse Fourier transform of.<br>
+                        For example, specify 1 for a one-dimensional inverse Fourier transform
+                        and 2 for a two-dimensional inverse Fourier transform.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="206">Normalized</td>
+                      <td width="413">Specify the constant to multiply the inverse Fourier
+                        transform result by.<br>
+                        <img src="/docs/assets/images/layer_reference/IFFT.png" alt="" width="83" height="207"
+                          class="alignnone size-full wp-image-707"><br>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="LSTM"></a>LSTM</h3>
+                <p>LSTM unit is an experimentally implemented unit. For now, we recommend that you write
+                  the structure of LSTM directly instead of using LSTM unit.</p>
+                <p>Reference:<a
+                    href="/#/project?project_id=19">tutorial.recurrent_neural_networks.long_short_term_memory(LSTM)</a><br>
+                  &nbsp;</p>
+                <h2><a name="_Toc490568717"></a>Arithmetic operation layer</h2>
+                <p>&nbsp;</p>
+                <h3><a name="Sum"></a>Sum</h3>
+                <p>Sum determines the sum of the values of the specified dimension.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Axis</td>
+                      <td>Specifies the index (starting at 0) of the axis to sum the values of.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>KeepDims</td>
+                      <td>Specifies whether to hold the axis whose values have been summed.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="Mean"></a>Mean</h3>
+                <p>Mean determines the average of the values of the specified dimension.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Axis</td>
+                      <td>Specifies the index (starting at 0) of the axis whose values will be
+                        averaged</td>
+                    </tr>
+                    <tr>
+                      <td>KeepDims</td>
+                      <td>Specifies whether to hold the axis whose values have been averaged.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="Prod"></a>Prod</h3>
+                <p>Prod determines the product of the values of the specified dimension.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Axis</td>
+                      <td>Specifies the index (starting at 0) of the axis to multiply the values
+                        of.</td>
+                    </tr>
+                    <tr>
+                      <td>KeepDims</td>
+                      <td>Specifies whether to hold the axis whose values have been multiplied.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="Max"></a>Max</h3>
+                <p>Max determines the maximum of the values of the specified dimension.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Axis</td>
+                      <td>Specifies the index (starting at 0) of the axis on which to determine
+                        the maximum value.</td>
+                    </tr>
+                    <tr>
+                      <td>KeepDims</td>
+                      <td>Specifies whether to hold the axis whose maximum value has been
+                        determined.</td>
+                    </tr>
+                    <tr>
+                      <td>OnlyIndex</td>
+                      <td>Specify the Max output type.<br>
+                        True: The index with the maximum value is output.<br>
+                        False: The maximum value is output.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="Min"></a>Min</h3>
+                <p>Min determines the minimum of the values of the specified dimension.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Axis</td>
+                      <td>Specifies the index (starting at 0) of the axis on which to determine
+                        the minimum value.</td>
+                    </tr>
+                    <tr>
+                      <td>KeepDims</td>
+                      <td>Specifies whether to hold the axis whose minimum value has been
+                        determined.</td>
+                    </tr>
+                    <tr>
+                      <td>OnlyIndex</td>
+                      <td>Specify the Min output type.<br>
+                        True: The index with the minimum value is output.<br>
+                        False: The minimum value is output.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="Log"></a>Log</h3>
+                <p>Log calculates the natural logarithm with base e.</p>
+                <p>&nbsp;</p>
+                <h3><a name="Exp"></a>Exp</h3>
+                <p>Exp calculates the exponential function with base e.</p>
+                <p>&nbsp;</p>
+                <h3><a name="Sign"></a>Sign</h3>
+                <p>Sign outputs -1 for negative inputs, +1 for positive inputs, and alpha for 0.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Alpha</td>
+                      <td>Specifies the output corresponding to input 0.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>Reference</p>
+                <p>When compared to BinaryTanh, the operation is similar to forward computation (except
+                  for the behavior when the input is 0), but the operation of backward computation is
+                  completely different. Unlike BinaryTanh, which sets the derivative to 0 when the
+                  absolute value of the input data is 1 or greater, Sign passes through the back
+                  propagation derivative as its own derivative.</p>
+                <p>&nbsp;</p>
+                <h3><a name="BatchMatmul"></a>BatchMatmul</h3>
+                <p>BatchMatmul calculates the matrix multiplication of the matrix expressed by the last
+                  two dimensions of input (A) and connector R input (B). If matrix A is L×N and matrix
+                  B is N×M, the output matrix will be L×M.</p>
+                <p>&nbsp;</p>
+                <h3><a name="Round"></a>Round</h3>
+                <p>Round rounds the input value.</p>
+                <p>&nbsp;</p>
+                <h3><a name="Ceil"></a>Ceil</h3>
+                <p>Ceil rounds up the fraction of the input value.</p>
+                <p>&nbsp;</p>
+                <h3><a name="Floor"></a>Floor</h3>
+                <p>Floor truncates the fraction of the input value.</p>
+                <p>&nbsp;</p>
+                <h2>Trigonometric layer</h2>
+                <p>The trigonometric layer calculates the trigonometric function of each element.</p>
+                <p>&nbsp;</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td width="132">Layer name</td>
+                      <td width="472">Expression</td>
+                    </tr>
+                    <tr>
+                      <td width="132">Sin</td>
+                      <td width="472">o=sin(i)</td>
+                    </tr>
+                    <tr>
+                      <td width="132">Cos</td>
+                      <td width="472">o=cos(i)</td>
+                    </tr>
+                    <tr>
+                      <td width="132">Tan</td>
+                      <td width="472">o=tan(i)</td>
+                    </tr>
+                    <tr>
+                      <td width="132">Sinh</td>
+                      <td width="472">o=sinh(i)</td>
+                    </tr>
+                    <tr>
+                      <td width="132">Cosh</td>
+                      <td width="472">o=cosh(i)</td>
+                    </tr>
+                    <tr>
+                      <td width="132">ASin</td>
+                      <td width="472">o=arcsin(i)</td>
+                    </tr>
+                    <tr>
+                      <td width="132">ACos</td>
+                      <td width="472">o=arccos(i)</td>
+                    </tr>
+                    <tr>
+                      <td width="132">ATan</td>
+                      <td width="472">o=arctan(i)</td>
+                    </tr>
+                    <tr>
+                      <td width="132">ASinh</td>
+                      <td width="472">o=asinh(i)</td>
+                    </tr>
+                    <tr>
+                      <td width="132">ACosh</td>
+                      <td width="472">o=asinh(i)</td>
+                    </tr>
+                    <tr>
+                      <td width="132">ATanh</td>
+                      <td width="472">o=atanh(i)</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>(where i is the input and o is the output)</p>
+                <p>&nbsp;</p>
+                <h2><a name="_Toc490568726"></a>Scalar arithmetic operation layer (Arithmetic (Scalar))
+                </h2>
+                <p>Various arithmetic operations can be performed on each element using a real number
+                  specified by the Value property.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Layer name</td>
+                      <td>Expression</td>
+                    </tr>
+                    <tr>
+                      <td>AddScalar</td>
+                      <td>o=i+value</td>
+                    </tr>
+                    <tr>
+                      <td>MulScalar</td>
+                      <td>o=i*value</td>
+                    </tr>
+                    <tr>
+                      <td>RSubScalar</td>
+                      <td>o=value-i</td>
+                    </tr>
+                    <tr>
+                      <td>RDivScalar</td>
+                      <td>o=value/i</td>
+                    </tr>
+                    <tr>
+                      <td>PowScalar</td>
+                      <td>o=i <sup>value</sup></td>
+                    </tr>
+                    <tr>
+                      <td>RPowScalar</td>
+                      <td>o=value <sup>i</sup></td>
+                    </tr>
+                    <tr>
+                      <td>MaximumScalar</td>
+                      <td>o=max (i,value)</td>
+                    </tr>
+                    <tr>
+                      <td>MinimumScalar</td>
+                      <td>o=min(i,value)</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>(where i is the input, o is the output, and value is the real number)</p>
+                <p>&nbsp;</p>
+                <h2><a name="_Toc490568727"></a>Two-input arithmetic operation layer (Arithmetic (2
+                  Inputs))</h2>
+                <p>Various arithmetic operations can be performed on each element using two inputs.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Layer</td>
+                      <td>Expression</td>
+                    </tr>
+                    <tr>
+                      <td>Add2</td>
+                      <td>o=i<sub>1</sub>+i<sub>2</sub></td>
+                    </tr>
+                    <tr>
+                      <td>Sub2</td>
+                      <td>o=i<sub>1</sub>-i<sub>2</sub></td>
+                    </tr>
+                    <tr>
+                      <td>Mul2</td>
+                      <td>o=i<sub>1</sub>*i<sub>2</sub></td>
+                    </tr>
+                    <tr>
+                      <td>Div2</td>
+                      <td>o=i<sub>1</sub>/i<sub>2</sub>
+                        <p></p>
+                        <p>Connect the input for i<sub>2</sub> in the right hand side to
+                          connector R.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Pow2</td>
+                      <td>o=i<sub>1</sub><sup>i2</sup>
+                        <p></p>
+                        <p>Connect the input for i<sub>2</sub> in the right hand side to
+                          connector R.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Maxmum2</td>
+                      <td>o=max(i<sub>1</sub>,i<sub>2</sub>)</td>
+                    </tr>
+                    <tr>
+                      <td>Minimum2</td>
+                      <td>o=min(i<sub>1</sub>,i<sub>2</sub>)</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>(where i<sub>1</sub> and i<sub>2</sub> are inputs and o is the output)</p>
+                <p>&nbsp;</p>
+                <h2><a name="_Toc490568728"></a>Logical operation layer</h2>
+                <p>Various logical operations can be performed on each element using two inputs or one
+                  input and a value specified by the Value property. The logical operation output is 0
+                  or 1.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Layer name</td>
+                      <td>Process</td>
+                    </tr>
+                    <tr>
+                      <td>LogicalAnd</td>
+                      <td>o= i<sub>1</sub> and i<sub>2</sub></td>
+                    </tr>
+                    <tr>
+                      <td>LogicalOr</td>
+                      <td>o= i<sub>1</sub> or i<sub>2</sub></td>
+                    </tr>
+                    <tr>
+                      <td>LogicalXor</td>
+                      <td>o= i<sub>1</sub> xor i<sub>2</sub></td>
+                    </tr>
+                    <tr>
+                      <td>Equal</td>
+                      <td>o= i<sub>1</sub> == i<sub>2</sub></td>
+                    </tr>
+                    <tr>
+                      <td>NotEqual</td>
+                      <td>o= i<sub>1</sub> != i<sub>2</sub></td>
+                    </tr>
+                    <tr>
+                      <td>GreaterEqual</td>
+                      <td>o= i<sub>1</sub> &gt;= i<sub>2</sub></td>
+                    </tr>
+                    <tr>
+                      <td>Greater</td>
+                      <td>o= i<sub>1</sub> &gt; i<sub>2</sub></td>
+                    </tr>
+                    <tr>
+                      <td>LessEqual</td>
+                      <td>o= i<sub>1</sub> &lt;= i<sub>2</sub></td>
+                    </tr>
+                    <tr>
+                      <td>Less</td>
+                      <td>o= i<sub>1</sub> &lt; i<sub>2</sub></td>
+                    </tr>
+                    <tr>
+                      <td>LogicalAndScalar</td>
+                      <td>o= i and value</td>
+                    </tr>
+                    <tr>
+                      <td>LogicalOrScalar</td>
+                      <td>o= i or value</td>
+                    </tr>
+                    <tr>
+                      <td>LogicalXorScalar</td>
+                      <td>o= i xor value</td>
+                    </tr>
+                    <tr>
+                      <td>EqualScalar</td>
+                      <td>o= i == value</td>
+                    </tr>
+                    <tr>
+                      <td>NotEqualScalar</td>
+                      <td>o= i != value</td>
+                    </tr>
+                    <tr>
+                      <td>GreaterEqualScalar</td>
+                      <td>o= i &gt;= value</td>
+                    </tr>
+                    <tr>
+                      <td>GreaterScalar</td>
+                      <td>o= i &gt; value</td>
+                    </tr>
+                    <tr>
+                      <td>LessEqualScalar</td>
+                      <td>o= i &lt;= value</td>
+                    </tr>
+                    <tr>
+                      <td>LessScalar</td>
+                      <td>o= i &lt; value</td>
+                    </tr>
+                    <tr>
+                      <td>LogicalNot</td>
+                      <td>o= !i</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>Notes</p>
+                <p>A logical operation layer does not support back propagation.</p>
+                <p>&nbsp;</p>
+                <h2><a name="_Toc490568729"></a>Evaluation layer</h2>
+                <p>&nbsp;</p>
+                <h3><a name="BinaryError"></a>BinaryError</h3>
+                <p>The input data and variable T in the dataset indicating correct values are converted
+                  into binary values (0 or 1) depending on whether the values are greater than or
+                  equal to 0.5. Then, each unmatched data sample is evaluated. If the input data match
+                  the correct binary value, 0 is output. Otherwise, 1 is output.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>T.Dataset</td>
+                      <td>Specifies the name of the variable expected to be the output of this
+                        layer.</td>
+                    </tr>
+                    <tr>
+                      <td>T.Generator</td>
+                      <td>Specifies the generator to use in place of the dataset. If the Generator
+                        property is not set to None, the data that the generator generates is
+                        used in place of the variable specified by T.Dataset during
+                        optimization.<p></p>
+                        <p>None: Data generation is not performed.</p>
+                        <p>Uniform: Uniform random numbers between -1.0 and 1.0 are generated.
+                        </p>
+                        <p>Normal: Gaussian random numbers with 0.0 mean and 1.0 variance are
+                          generated.</p>
+                        <p>Constant: Data whose elements are all constant (1.0) is generated.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>T.GeneratorMultiplier</td>
+                      <td>Specifies the multiplier to apply to the values that the generator
+                        generates.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="TopNError"></a>TopNError</h3>
+                <p>Based on the input data indicating the probability or score of each category and
+                  variable T in the dataset indicating the category index, each data sample is
+                  evaluated as to whether the probability or score of the correct category is within
+                  the top N of all categories. If the probability or score of the correct category is
+                  within the top N, 0 is output. Otherwise, 1 is output.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Axis</td>
+                      <td>Specifies the index of the axis indicating the category.</td>
+                    </tr>
+                    <tr>
+                      <td>N</td>
+                      <td>Specifies the lowest ranking N that will be considered correct.<p></p>
+                        <p>For example, if you want to allow only the maximum probability or
+                          score of the correct category to be considered correct, specify 1.
+                          If you want to allow only the top five probabilities or scores of
+                          the correct category to be considered correct, specify 5.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>T.Dataset</td>
+                      <td>Specifies the name of the variable expected to be the output of this
+                        layer.</td>
+                    </tr>
+                    <tr>
+                      <td>T.Generator</td>
+                      <td>Specifies the generator to use in place of the dataset. If the Generator
+                        property is not set to None, the data that the generator generates is
+                        used in place of the variable specified by T.Dataset during
+                        optimization.<p></p>
+                        <p>None: Data generation is not performed.</p>
+                        <p>Uniform: Uniform random numbers between -1.0 and 1.0 are generated.
+                        </p>
+                        <p>Normal: Gaussian random numbers with 0.0 mean and 1.0 variance are
+                          generated.</p>
+                        <p>Constant: Data whose elements are all constant (1.0) is generated.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>T.GeneratorMultiplier</td>
+                      <td>Specifies the multiplier to apply to the values that the generator
+                        generates.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h2><a name="_Toc490568732"></a>Other layers</h2>
+                <p>&nbsp;</p>
+                <h3><a name="BatchNormalization"></a>BatchNormalization</h3>
+                <p>The input is normalized to 0 mean and 1 variance. Inserting this layer after
+                  Convolution or Affine has the effect of improving accuracy and accelerating
+                  convergence.</p>
+                <p>o<sub>x</sub>=(i<sub>x</sub>-mean<sub>i</sub>) *gamma<sub>x</sub>/sigma<sub>x</sub>
+                  +beta<sub>x</sub></p>
+                <p>(where o is the output, i is the input, and x is the data index)</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Axes</td>
+                      <td>Of the available inputs, specifies the index (that starts at 0) of the
+                        axis to be normalized individually. For example, for inputs 4,3,5, to
+                        individually normalize the first dimension (four elements), set Axis to
+                        0. To individually normalize the second and third dimensions (elements
+                        3,5), set Axes to 1,2.</td>
+                    </tr>
+                    <tr>
+                      <td>DecayRate</td>
+                      <td>Specifies the decay rate (0.0 to 1.0) to apply when updating the mean
+                        and standard deviation of the input data during training. The closer the
+                        value is to 1.0, the more the mean and standard deviation determined
+                        from past data are retained.</td>
+                    </tr>
+                    <tr>
+                      <td>Epsilon</td>
+                      <td>Specifies the value to add to the denominator (standard deviation of the
+                        input data) to prevent division by zero during normalization.</td>
+                    </tr>
+                    <tr>
+                      <td>BatchStat</td>
+                      <td>Specifies whether to use the average variance calculated for each
+                        mini-batch in batch normalization.<p></p>
+                        <p>True: The average variance calculated for each mini-batch is used.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>ParameterScope</td>
+                      <td>Specifies the name of the parameter used by this layer.<p></p>
+                        <p>The parameter is shared between layers with the same ParameterScope.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>beta.File</td>
+                      <td>When using pre-trained beta, specifies the file containing beta with an
+                        absolute path.<p></p>
+                        <p>If a beta is specified and is to be loaded from a file,
+                          initialization with the initializer will be disabled.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>beta.Initializer</td>
+                      <td>Specifies the initialization method for beta.<p></p>
+                        <p>Uniform: Initialization is performed using uniform random numbers
+                          between -1.0 and 1.0.</p>
+                        <p>Normal: Initialization is performed using Gaussian random numbers
+                          with 0.0 mean and 1.0 variance.</p>
+                        <p>Constant: All elements are initialized with a constant (1.0).</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>beta.InitializerMultiplier</td>
+                      <td>Specifies the multiplier to apply to the values that the initializer
+                        generates.</td>
+                    </tr>
+                    <tr>
+                      <td>beta.LRateMultiplier</td>
+                      <td>Specifies the multiplier to apply to the Learning Rate specified on the
+                        CONFIG tab. This multiplier is used to update weight W.<p></p>
+                        <p>For example, if the Learning Rate specified on the CONFIG tab is 0.01
+                          and W.LRateMultiplier is set to 2, weight W will be updated using a
+                          Learning Rate of 0.02.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>gamma.*</td>
+                      <td>Specifies the standard deviation after normalization.</td>
+                    </tr>
+                    <tr>
+                      <td>mean.*</td>
+                      <td>Specifies the mean of the input data.</td>
+                    </tr>
+                    <tr>
+                      <td>var.*</td>
+                      <td>Specifies the standard deviation of the input data.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="Dropout"></a>Dropout</h3>
+                <p>Dropout sets input elements to 0 with a given probability.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>P</td>
+                      <td>Specifies the probability to set an element to 0, within the range from
+                        0.0 to 1.0.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="Concatenate"></a>Concatenate</h3>
+                <p>Concatenate joins two or more arrays on an existing axis.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Axis</td>
+                      <td>Specifies the axis on which to concatenate arrays.<p></p>
+                        <p>Axis indexes take on values 0, 1, 2, and so on from the left.</p>
+                        <p>For example, to concatenate two inputs “3,28,28” and “5,28,28” on the
+                          first (the leftmost) axis, specify “0”. In this case, the output
+                          size will be “8,28,28”.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="Reshape"></a>Reshape</h3>
+                <p>Reshape transforms the shape of an array into the specified shape.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>OutShape</td>
+                      <td>Specifies the shape of the array after the transform.<p></p>
+                        <p>For example, to output an array “2,5,5” as “10,5”, specify “10,5”.
+                        </p>
+                        <p>The number of elements in the input and output arrays must be the
+                          same.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="Broadcast"></a>Broadcast</h3>
+                <p>Broadcast transforms the dimension of an array whose number of elements is 1 to the
+                  specified size.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>OutShape</td>
+                      <td>Specify the shape of the array after the transform.<p></p>
+                        <p>For example, to copy elements of the second axis of an array “3,1,2”
+                          10 times specify “3,10,2”.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="BroadcastTo"></a>BroadcastTo</h3>
+                <p>This layer is provided for compatibility with Neural Network Libraries.</p>
+                <p>&nbsp;</p>
+                <h3><a name="Pad"></a>Pad</h3>
+                <p>Pad adds an element with the specified size to each dimension of a array.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>PadWidth</td>
+                      <td>Specify the number of elements to add.<br>
+                        For example, to add an element to the head and two elements to the end
+                        of the first dimension and three elements to the head and four elements
+                        to the end of the second dimension to a “10,12” array, specify
+                        “1,2,3,4”.<br>
+                        Elements are added to the axis that is len(PadWidth)/2 from the end of
+                        the input array. Therefore, the length of PadWidth must be an integer
+                        multiple of 2 and less than or equal to the number of dimensions of the
+                        input element ×2</td>
+                    </tr>
+                    <tr>
+                      <td>Mode</td>
+                      <td>Specify the mode to add elements.<br>
+                        constant: The constant specified by ConstantValue is added.<br>
+                        replicate: The first and last values of each element are added.<br>
+                        reflect: The reversed first and last values of each element are added.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>ConstantValue</td>
+                      <td>Specify the constant value to add when Mode is set to constant.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <p>Notes<br>
+                  Currently, only constant is supported for Pad Mode.</p>
+                <p>&nbsp;</p>
+                <h3><a name="Flip"></a>Flip</h3>
+                <p>Flip reverses the order of elements of the specified dimension of an array.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Axes</td>
+                      <td>Specifies the index of the dimension you want to reverse the order of
+                        the elements.<p></p>
+                        <p>Axis indexes take on values 0, 1, 2, and so on from the left.</p>
+                        <p>For example, to flip a 32 (W) by 24 (H) RGB image “3,24,32”
+                          vertically and horizontally, specify “1,2”.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="Shift"></a>Shift</h3>
+                <p>Shift shifts the array elements by the specified amount.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Shift</td>
+                      <td>Specifies the amount to shift elements.<p></p>
+                        <p>For example, to shift image data to the right by 2 pixels and up 3
+                          pixels, specify “-3,2”.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>BorderMode</td>
+                      <td>Specifies how to process the ends of arrays whose values will be
+                        undetermined as a result of shifting.<p></p>
+                        <p>nearest: The data at the borders (beginning and end) of the original
+                          array is copied and used.</p>
+                        <p>reflect: Original data at the borders of the original array is
+                          reflected (reversed) and used.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="Transpose"></a>Transpose</h3>
+                <p>Transpose swaps data dimensions.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Axes</td>
+                      <td>Specifies the axis indexes on the output data for each dimension of the
+                        input data.<p></p>
+                        <p>Axis indexes take on values 0, 1, 2, and so on from the left.</p>
+                        <p>For example, to swap the second and third dimensions of input data
+                          “3,20,10” and output the result, specify “0,2,1” (the output data
+                          size in this case is 3,10,20).</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="Slice"></a>Slice</h3>
+                <p>Slice extracts part of the array.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Start</td>
+                      <td>Specify the start point of extraction</td>
+                    </tr>
+                    <tr>
+                      <td>Stop</td>
+                      <td>Specify the end point of extraction</td>
+                    </tr>
+                    <tr>
+                      <td>Step</td>
+                      <td>Specify the interval of extraction<p></p>
+                        <p>For example, to extract the center 24 x 32 pixels of an image data of
+                          size “3,48,64” at two pixel intervals, specify “0,12,16” for Start,
+                          “3,36,48” for Stop, and “1,2,2” for Step</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="Stack"></a>Stack</h3>
+                <p>Stack joins two or more arrays on a new axis. The sizes of all the arrays to be
+                  stacked must be the same. Unlike Concatenate, which joins arrays on an existing
+                  axis, Stack joins arrays on a new axis.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Axis</td>
+                      <td>Specifies the axis on which to concatenate arrays.<p></p>
+                        <p>Axis indexes take on values 0, 1, 2, and so on from the left.</p>
+                        <p>For example, to stack four “3,28,28” inputs on the second axis,
+                          specify “1”. In this case, the output size will be “3,4,28,28”.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="MatrixDiag"></a>MatrixDiag</h3>
+                <p>MatrixDiag performs a matrix diagonalization of the last one dimension of an array.
+                </p>
+                <p>&nbsp;</p>
+                <h3><a name="MatrixDiagPart"></a>MatrixDiagPart</h3>
+                <p>MatrixDiagPart extracts the diagonal component of the last two dimensions of an
+                  array.</p>
+                <p>&nbsp;</p>
+                <h3><a name="ClipGradByValue"></a>ClipGradByValue</h3>
+                <p>ClipGradByValue fits the gradient value within the specified range.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td width="176">min.Dataset</td>
+                      <td width="429">Specify the name of the dataset variable to be used as the
+                        minimum value.</td>
+                    </tr>
+                    <tr>
+                      <td width="176">min.Generator</td>
+                      <td width="429">Specify the generator to use for the minimum value. If the
+                        Generator property is not set to None, the data that the generator
+                        generates is used in place of the variable specified by Dataset during
+                        optimization.<br>
+                        None: Data generation is not performed.<br>
+                        Uniform: Uniform random numbers between -1.0 and 1.0 are generated.<br>
+                        Normal: Gaussian random numbers with 0.0 mean and 1.0 variance are
+                        generated.<br>
+                        Constant: Data whose elements are all constant (1.0) is generated.</td>
+                    </tr>
+                    <tr>
+                      <td width="176">min.GeneratorMultiplier</td>
+                      <td width="429">Specify the multiplier to apply to the values that the
+                        minimum-value generator generates.</td>
+                    </tr>
+                    <tr>
+                      <td width="176">max.Dataset</td>
+                      <td width="429">Specify the name of the dataset variable to be used as the
+                        maximum value.</td>
+                    </tr>
+                    <tr>
+                      <td width="176">max.Generator</td>
+                      <td width="429">Specify the generator to use for the maximum value. If the
+                        Generator property is not set to None, the data that the generator
+                        generates is used in place of the variable specified by Dataset during
+                        optimization.<br>
+                        None: Data generation is not performed.<br>
+                        Uniform: Uniform random numbers between -1.0 and 1.0 are generated.<br>
+                        Normal: Gaussian random numbers with 0.0 mean and 1.0 variance are
+                        generated.<br>
+                        Constant: Data whose elements are all constant (1.0) is generated.</td>
+                    </tr>
+                    <tr>
+                      <td width="176">max.GeneratorMultiplier</td>
+                      <td width="429">Specify the multiplier to apply to the values that the
+                        maximum-value generator generates.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <p>Reference<br>
+                  To specify the minimum and maximum values with constants, set min.Generator and
+                  max.Generator to Constant, and set min.GeneratorMultiplier to the minimum value and
+                  max.GeneratorMultiplier to the maximum value.</p>
+                <p>&nbsp;</p>
+                <h3><a name="ClipGradByNorm"></a>ClipGradByNorm</h3>
+                <p>8.17.158.18.15 ClipGradByNorm</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td width="176">ClipNorm</td>
+                      <td width="429">Specify the norm value.</td>
+                    </tr>
+                    <tr>
+                      <td width="176">Axes</td>
+                      <td width="429">Specify the axis to calculate the norm on.<br>
+                        Axis indexes take on values 0, 1, 2, and so on from the left.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="TopKData"></a>TopKData</h3>
+                <p>TopKData retains K values in order from the largest data included in the input and
+                  sets the other values to zero. Or, it exports only the K values in order from the
+                  largest value included in the input.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td width="176">K</td>
+                      <td width="429">Specify the number of large values to retain.</td>
+                    </tr>
+                    <tr>
+                      <td width="176">Abs</td>
+                      <td width="429">Specify whether to retain large absolute values.<br>
+                        True: K values from the largest absolute value are retained.<br>
+                        False: K values from the largest value are retained.</td>
+                    </tr>
+                    <tr>
+                      <td width="176">Reduce</td>
+                      <td width="429">Specify whether to output only the K values from the largest
+                        value.<br>
+                        True: The K values from the largest value are output. The size of the
+                        output array will be equal to the dimension with K elements added to the
+                        size up to that specified by BaseAxis.<br>
+                        False: The input array size is retained, values not included in K values
+                        are set to zero, and the result is output.</td>
+                    </tr>
+                    <tr>
+                      <td width="176">BaseAxis</td>
+                      <td width="429">Specify the index of the first axis to take the maximum
+                        value of.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <p>Reference<br>
+                  If the input array size is “4,5,6”, K=3, Reduce=False, and BaseAxis=1, the output
+                  array size will be “4,5,6”.<br>
+                  If the input array size is “4,5,6”, K=3, Reduce=True, and BaseAxis=1, the output
+                  array size will be “4,3”.<br>
+                  If the input array size is “4,5,6”, K=3, Reduce=True, and BaseAxis=2, the output
+                  array size will be “4,5,3”.</p>
+                <p>&nbsp;</p>
+                <h3><a name="TopKGrad"></a>TopKGrad</h3>
+                <p>TopKGrad retains K values in order from the largest gradient and sets the other
+                  values to zero.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td width="176">K</td>
+                      <td width="429">Specify the number of large gradients to retain.</td>
+                    </tr>
+                    <tr>
+                      <td width="176">Abs</td>
+                      <td width="429">Specify whether to retain large absolute gradients.<br>
+                        True: K values from the largest absolute gradient are retained.<br>
+                        False: K values from the largest gradient are retained.</td>
+                    </tr>
+                    <tr>
+                      <td width="176">BaseAxis</td>
+                      <td width="429">Specify the index of the first axis to take the maximum
+                        value of.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="Sort"></a>Sort</h3>
+                <p>Data is sorted according the magnitude of the value.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td width="176">Axis</td>
+                      <td width="429">Specify the index of the axis to sort.</td>
+                    </tr>
+                    <tr>
+                      <td width="176">Reverse</td>
+                      <td width="429">Specify the sort order.<br>
+                        True: Descending<br>
+                        False: Ascending</td>
+                    </tr>
+                    <tr>
+                      <td width="176">OnlyIndex</td>
+                      <td width="429">Specify the Sort output type.<br>
+                        True: Index before sorting of the data after sorting<br>
+                        False: Data after sorting</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="Prune"></a>Prune</h3>
+                <p>Sets values to zero in order from the smallest absolute value.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td width="176">Rate</td>
+                      <td width="429">Specify the percentage of values to set to zero.<br>
+                        For example, to set 95% of the values to zero in order from the smallest
+                        absolute value, specify 0.95.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="Interpolate"></a>Interpolate</h3>
+                <p>Data is expanded or reduce through interpolation.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td width="176">OutputSize</td>
+                      <td width="429">Specify the output size.</td>
+                    </tr>
+                    <tr>
+                      <td width="176">Mode</td>
+                      <td width="429">Specify the interpolation mode.<br>
+                        linear: Linear interpolation</td>
+                    </tr>
+                    <tr>
+                      <td width="176">AlignCorners</td>
+                      <td width="429">If set to True, corners are aligned so that the input and
+                        output angle positions are matched. As a result, the pixel value of the
+                        output corner will be the same as that of the input corner.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="NmsDetection2d"></a>NmsDetection2d</h3>
+                <p>This layer is provided for compatibility with Neural Network Libraries.</p>
+                <p>&nbsp;</p>
+                <h3><a name="VATNoise"></a>VATNoise</h3>
+                <p>This layer is provided to achieve a method called Virtual Adversarial Training.</p>
+                <p>This layer normalizes and outputs input noise signals during forward calculation.
+                  During backward calculation, the error propagated from the output is stored in Buf.
+                </p>
+                <p>&nbsp;</p>
+                <h3><a name="Unlink"></a>Unlink</h3>
+                <p>The input is output directly during forward calculation, and zero is output during
+                  backward calculation. This is used when you do not want errors to propagate to
+                  layers before the unlink layer.</p>
+                <p>&nbsp;</p>
+                <h3><a name="Identity"></a>Identity</h3>
+                <p>Identity outputs the input as-is. There is no need to use this layer normally, but it
+                  can be inserted to assign a name for identification in certain locations of the
+                  network.</p>
+                <p>&nbsp;</p>
+                <h3><a name="Comment"></a>Comment</h3>
+                <p>This is the layer for inserting comments into the network graph. The Comment layer
+                  has no effect on training or evaluation.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td width="176">Comment</td>
+                      <td width="429">Specify the comment.<br>
+                        The comment text you entered will be displayed on the Comment layer.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h2><a name="_Toc490568744"></a>Other layers (preprocess)</h2>
+                <p>&nbsp;</p>
+                <h3><a name="OneHot"></a>OneHot</h3>
+                <p>OneHot creates one-hot array based on input indices.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Shape</td>
+                      <td>Specify the size of the array to be created<p></p>
+                        <p>The number of dimensions of the Shape must be the same as the number
+                          of elements in the last dimension of the input data
+                        </p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="MeanSubtraction"></a>MeanSubtraction</h3>
+                <p>MeanSubtraction normalizes input to mean 0. Using this as a preprocessing function
+                  has the effect of improving accuracy in image classification and similar tasks.</p>
+                <p>o<sub>x</sub>=i<sub>x</sub>-mean</p>
+                <p>(where o is the output, i is the input, and x is the data index)</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>BaseAxis</td>
+                      <td>Specifies the index of the first axis to take the mean of.</td>
+                    </tr>
+                    <tr>
+                      <td>UpdateRunningMean</td>
+                      <td>Specifies whether to calculate a running mean.</td>
+                    </tr>
+                    <tr>
+                      <td>ParameterScope</td>
+                      <td>Specifies the name of the parameter used by this layer.<p></p>
+                        <p>The parameter is shared between layers with the same ParameterScope.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>mean.*</td>
+                      <td>Specifies the mean of the input data.</td>
+                    </tr>
+                    <tr>
+                      <td>t.*</td>
+                      <td>Specifies the number of mini-batches that was used to calculate the mean
+                        of the input data.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="RandomFlip"></a>RandomFlip</h3>
+                <p>RandomFlip reverses the order of elements of the specified dimension of an array at
+                  50% probability.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Axes</td>
+                      <td>Specifies the index of the axis you want to reverse the order of the
+                        elements.<p></p>
+                        <p>Axis indexes take on values 0, 1, 2, and so on from the left.</p>
+                        <p>For example, to flip a 32 (W) by 24 (H) RGB image “3,24,32”
+                          vertically and horizontally at random, specify “1,2”.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>SkipAtInspection</td>
+                      <td>Specifies whether to skip processing at inspection.<p></p>
+                        <p>To execute RandomFlip only during training, set SkipAtInspection to
+                          True (default).</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="RandomShift"></a>RandomShift</h3>
+                <p>RandomShift randomly shifts the array elements within the specified range.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Shift</td>
+                      <td>Specifies the amount to shift elements by.<p></p>
+                        <p>For example, to shift image data horizontally by ±2 pixels and
+                          vertically by ±3 pixels, specify “3,2”.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>BorderMode</td>
+                      <td>Specifies how to process the ends of arrays whose values will be
+                        undetermined as a result of shifting.<p></p>
+                        <p>nearest: The data at the borders (beginning and end) of the original
+                          array is copied and used.</p>
+                        <p>reflect: Original data at the borders of the original array is
+                          reflected (reversed) and used.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>SkipAtInspection</td>
+                      <td>Specifies whether to skip processing at inspection.<p></p>
+                        <p>To execute RandomFlip only during training, set SkipAtInspection to
+                          True (default).</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="RandomCrop"></a>RandomCrop</h3>
+                <p>RandomCrop randomly extracts a portion of an array.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Shape</td>
+                      <td>Specifies the data size to extract.<p></p>
+                        <p>For example, to randomly extract a portion of the image (3,48,48)
+                          from a 3,64,64 image, specify “3,48,48”.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <h3><a name="ImageAugmentation"></a>ImageAugmentation</h3>
+                <p>ImageAugmentation randomly alters the input image.</p>
+                <table border="1">
+                  <tbody>
+                    <tr>
+                      <td>Shape</td>
+                      <td>Specifies the output image data size.</td>
+                    </tr>
+                    <tr>
+                      <td>MinScale</td>
+                      <td>Specifies the minimum scale ratio when randomly scaling the image.<p>
+                        </p>
+                        <p>For example, to scale down to 0.8 times the size of the original
+                          image, specify “0.8”.</p>
+                        <p>To not apply random scaling, set both MinScale and MaxScale to “1.0”.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>MaxScale</td>
+                      <td>Specifies the maximum scale ratio when randomly scaling the image.<p>
+                        </p>
+                        <p>For example, to scale up to 2 times the size of the original image,
+                          specify “2.0”.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Angle</td>
+                      <td>Specifies the rotation angle range in radians when randomly rotating the
+                        image.<p></p>
+                        <p>The image is randomly rotated in the -Angle to +Angle range.</p>
+                        <p>For example, to rotate in a ±15 degree range, specify “0.26” (15
+                          degrees/360 degrees × 2π).</p>
+                        <p>To not apply random rotation, specify “0.0”.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>AspectRatio</td>
+                      <td>Specifies the aspect ratio variation range when randomly varying the
+                        aspect ratio of the image.<p></p>
+                        <p>For example, if the original image is 1:1, to vary the aspect ratio
+                          between 1:1.3 and 1.3:1, specify 1.3.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Distortion</td>
+                      <td>Specifies the strength range when randomly distorting the image.</td>
+                    </tr>
+                    <tr>
+                      <td>FlipLR</td>
+                      <td>Specifies whether to randomly flip the image horizontally.</td>
+                    </tr>
+                    <tr>
+                      <td>FlipUD</td>
+                      <td>Specifies whether to randomly flip the image vertically.</td>
+                    </tr>
+                    <tr>
+                      <td>Brightness</td>
+                      <td>Specifies the range of values to randomly add to the brightness.<p></p>
+                        <p>A random value in the -Brightness to +Brightness range is added to
+                          the brightness.</p>
+                        <p>For example, to vary the brightness in the -0.05 to +0.05 range,
+                          specify “0.05”.</p>
+                        <p>To not apply random addition to brightness, specify “0.0”.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>BrightnessEach</td>
+                      <td>Specifies whether to apply the random addition to brightness (as
+                        specified by Brightness) to each color channel.<p></p>
+                        <p>True: Brightness is added based on a different random number for each
+                          channel.</p>
+                        <p>False: Brightness is added based on a random number common to all
+                          channels.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Contrast</td>
+                      <td>Specifies the range in which to randomly very the image contrast.<p></p>
+                        <p>The contrast is varied in the 1/Contrast times to Contrast times
+                          range.</p>
+                        <p>The output brightness is equal to (input ? 0.5) * contrast + 0.5.</p>
+                        <p>For example, to vary the contrast in the 0.91 times to 1.1 times
+                          range, specify “1.1”.</p>
+                        <p>To not apply random contrast variation, specify “1.0”.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>ContrastEach</td>
+                      <td>Specifies whether to apply the random contrast variation (as specified
+                        by Contrast) to each color channel.<p></p>
+                        <p>True: Contrast is varied based on a different random number for each
+                          channel.</p>
+                        <p>False: Contrast is varied based on a random number common to all
+                          channels.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>Reference</p>
+                <p>An effective and easy image augmentation verification method is available. In this
+                  method, a network consisting only of image input → image augmentation → squared
+                  error is used for training with maximum epoch set to 0 and the processed result is
+                  monitored with the Run Evaluation button.</p>
+                <p>&nbsp;</p>
+                <h2>Configuration layer</h2>
+                <p>This is a layer for configuring the network.</p>
+                <p>&nbsp;</p>
+                <h3><a name="StructureSearch"></a>StructureSearch</h3>
+                <p>StructureSearch is used to configure the automatic structure search.</p>
+                <table width="605" border="1">
+                  <tbody>
+                    <tr>
+                      <td width="126">Search</td>
+                      <td width="479">Specify whether to include this network in the automatic
+                        structure search.<p></p>
+                        <p>When set to false, the network will not change during automatic
+                          structure search.</p>
+                        <p>The default value when the StructureSearch is not implemented is
+                          true.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- .contents_inner -->
+    </div><!-- .contents -->
+  </div><!-- /.wrapper -->
+  <footer class="footer">
+    <div class="footer_inner">
+      <div class="pageTopBtn">
+        <a href="javascript:void(0)" aria-label="Back to the top of this page." id="js-pageTop">Page Top</a>
+      </div>
+      <div class="footer_sitemap_inner">
+        <div class="sitemap"></div>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

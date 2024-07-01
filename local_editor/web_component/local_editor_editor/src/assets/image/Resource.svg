@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon/Resource</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M12.75,0 L12.75,2.9995 L10.75,2.9995 L10.75,1 L9.2505,1 L9.2505,2.9995 L7.25,2.9995 L7.25,0 L5.7505,0 L5.7505,2.9995 L3.0005,2.9995 L3.0005,16.9995 L17.0005,16.9995 L17.0005,14.2495 L20,14.2495 L20,12.75 L17.0005,12.75 L17.0005,10.7495 L19,10.7495 L19,9.2495 L17.0005,9.2495 L17.0005,7.25 L20,7.25 L20,5.7495 L17.0005,5.7495 L17.0005,2.9995 L14.2505,2.9995 L14.2505,0 L12.75,0 Z M4.5,15.5 L15.5,15.5 L15.5,4.5 L4.5,4.5 L4.5,15.5 Z M0,7.25 L3,7.25 L3,5.7495 L0,5.7495 L0,7.25 Z M1,10.7495 L3.0005,10.7495 L3.0005,9.2495 L1,9.2495 L1,10.7495 Z M0,14.2495 L3,14.2495 L3,12.7495 L0,12.7495 L0,14.2495 Z M12.75,20 L14.2505,20 L14.2505,17 L12.75,17 L12.75,20 Z M9.2505,19 L10.7505,19 L10.7505,16.9995 L9.2505,16.9995 L9.2505,19 Z M5.7505,20 L7.2505,20 L7.2505,17 L5.7505,17 L5.7505,20 Z" id="path-1"></path>
+    </defs>
+    <g id="Icon/Resource" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Color/Gray_5" transform="translate(2.000000, 2.000000)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Mask" fill="#262626" xlink:href="#path-1"></use>
+            <g mask="url(#mask-2)" fill="#262626" id="Color/Gray_5&amp;Layer8">
+                <g transform="translate(-38.000000, -38.000000)">
+                    <rect x="0" y="0" width="96" height="96"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

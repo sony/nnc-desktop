@@ -1,0 +1,21 @@
+[Property]
+Input
+Reps
+Output
+
+[Property_Input]
+Editable=False
+Type=PIntArray
+Value=*GraphInput
+
+[Property_Reps]
+ShortName=Shape
+Type=PIntArray
+Value=2
+Important=True
+ArgumentName=tile_param.reps -f -r
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*UnpoolingOutputSize

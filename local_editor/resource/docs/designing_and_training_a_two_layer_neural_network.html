@@ -1,0 +1,243 @@
+<!-- Copyright 2024 Sony Group Corporation. -->
+<!--
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+
+<!DOCTYPE html>
+<!-- saved from url=(0042)https://support.dl.sony.com/docs/#Tutorial -->
+<html lang="en-US">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="description" content="This is a manual of how to use Neural Network Console.">
+  <meta name="keyword"
+    content="deep learning, sony, neural network, AI, machine learning, framework, Neural Network Libraries">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tutorial.Designing and training a two-layer neural network  –  Docs  - Neural Network Console</title>
+
+  <link rel="shortcut icon" href="/docs/assets/images/common/favicon.ico" type="image/x-icon">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="stylesheet" href="/docs/assets/css/app.css">
+  <script src="/docs/assets/js/app.js"></script>
+  <style>
+    .video-box {
+      position: relative;
+    }
+
+    .video-box video {
+      display: inline-block;
+      vertical-align: middle;
+      width: 100%;
+      height: auto;
+    }
+
+    .video-box #video-img {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      z-index: 10;
+      background: url('/docs/assets/images/common/video_start.png') no-repeat;
+      background-position: center center;
+      background-size: 158px 159px;
+      cursor: pointer;
+    }
+  </style>
+
+</head>
+
+<body class="page-docs docs en-US">
+  <header class="header">
+    <div class="header_inner">
+      <div class="header_content">
+        <p class="header_logo"><img src="/docs/assets/images/common/sony_logo.svg" alt="SONY" width="86"></p>
+      </div>
+    </div>
+  </header>
+  <div class="wrapper" id="js-wrapper">
+    <div class="nav_wrap mf_finder_header" id="js-nav_wrap">
+      <div class="nav_menuBar visibleOnlySmall">
+        <div class="search-box-with-menubar">
+        </div>
+        <div data-toggle="collapse" aria-controls="js-navContent" role="button" aria-label="menu button"
+          class="nav_btnMenu" id="js-nav_btnMenu">
+          <div class="nav_btnMenu_inner">
+            <span class="bar bar-1"></span>
+            <span class="bar bar-2"></span>
+            <span class="bar bar-3"></span>
+          </div>
+        </div>
+      </div>
+      <div class="nav" id="js-nav" aria-expanded="true">
+        <nav aria-expanded="false" class="navContent" id="js-navContent">
+          <div class="navContent_list">
+            <div class="navLeft">
+              <div class="navi-home">
+                <a class="js-hover">
+                  <span class="typo__sstw_L sst_logo">Neural Network</span>
+                  <span class="typo__sstw_B sst_logo">Console</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="contents">
+      <div class="breadcrumbs en-US">
+        <div class="breadcrumbs_inner">
+          <!-- Breadcrumb NavXT 5.7.1 -->
+          <span property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" title="Go to Docs." href="/docs/" class="main-home">
+              <span property="name">Docs</span>
+            </a>
+            <meta property="position" content="1">
+          </span>
+          <span>&gt;</span>
+          <span property="itemListElement" typeof="ListItem">
+            <span property="name">Tutorial. Designing and training a two-layer neural network</span>
+            <meta property="position" content="2">
+          </span>
+        </div>
+      </div>
+      <div class="contents_inner">
+        <a class="contents_home visibleOnlySmall">
+          <span class="typo__sstw_L sst_logo">Neural Network</span>
+          <span class="typo__sstw_B sst_logo">Console</span>
+        </a>
+        <div class="sectionBox">
+          <div class="sectionBox_tit_wrapper">
+            <h1 class="sectionBox_tit">Tutorial. Designing and training a two-layer neural network</h1>
+          </div>
+          <div class="sectionBox_inner">
+            <div class="sectionBox_content">
+              <article class="singleArticle">
+                <div class="articleText">
+                  <div class="video-box">
+                    <video id="video" controls='controls'>
+                      <source src="/docs/assets/videos/designing_and_training_a_two_layer_neural_network.mp4"
+                        type="video/mp4">
+                      <source src="/docs/assets/videos/designing_and_training_a_two_layer_neural_network.webm"
+                        type="video/webm">
+                      <p>Your browser does not support video tags</p>
+                    </video>
+                    <div id="video-img"></div>
+                  </div>
+                  <h3><a name="_Toc489818964"></a>1 Creating a new project</h3>
+                  <p>Start Neural Network Console, click '+ New Project' and input name 'daemon' to create a new
+                    project.
+                  </p>
+                  <p><img class="alignnone size-large wp-image-54"
+                      src="/docs/assets/images/designing_and_training_a_two_layer_neural_network/new_project.png" alt=""
+                      width="1024" height="520"></p>
+                  <h3><a name="_Toc489818965"></a>2 Assigning the datasets</h3>
+                  <p>On the DATASET tab, there are no dataset for Training and Validation yet.</p>
+                  <p><img class="alignnone size-large wp-image-55"
+                      src="/docs/assets/images/designing_and_training_a_two_layer_neural_network/open_dataset.png" alt=""
+                      width="1024" height="484"></p>
+                  <p>&nbsp;</p>
+                  <p>Click Training and 'Not Set' button, and assign mnist.tsmall_mnist_4or9_training to Training</p>
+                  <p><img class="alignnone size-large wp-image-55"
+                      src="/docs/assets/images/designing_and_training_a_two_layer_neural_network/add_dataset_1.png" alt=""
+                      width="1024" height="498"></p>
+                  <p>&nbsp;</p>
+                  <p>Click Validation and 'Not Set' button, and assign mnist.small_mnist_4or9_test to Validation.</p>
+                  <p><img class="alignnone size-large wp-image-56"
+                      src="/docs/assets/images/designing_and_training_a_two_layer_neural_network/add_dataset_2.png" alt=""
+                      width="1024" height="498"></p>
+                  <p>&nbsp;</p>
+                  <h3><a name="_Toc489818966"></a>3 Designing the two-layer neural network</h3>
+                  <ol>
+                    <li>Under “Component” on the left side of the EDIT tab, double-click on Input,
+                      Affine, Tanh, Affine, Sigmoid, and BinaryCrossEntropy, one by one, in order
+                      to add layers to the network graph.</li>
+                  </ol>
+                  <p><img class="alignnone size-full wp-image-57"
+                      src="/docs/assets/images/designing_and_training_a_two_layer_neural_network/design_network.png" alt=""
+                      width="765" height="604"></p>
+                  <p>Note</p>
+                  <p>“Affine” is in the category Basic, “Tanh” and “Sigmoid” are in Activation,
+                    “BinaryCrossEntropy” can be found under Loss.</p>
+                  <p>&nbsp;</p>
+                  <ol start="2">
+                    <li>Click Input layer to select it. Input “1,28,28” (the default value), which
+                      is the size of variable <em>x</em> (input data), in the Size box (click and
+                      input) under Layer Property.</li>
+                  </ol>
+                  <p><img class="alignnone size-full wp-image-58"
+                      src="/docs/assets/images/designing_and_training_a_two_layer_neural_network/input.png" alt=""
+                      width="729" height="503"></p>
+                  <p>&nbsp;</p>
+                  <ol start="3">
+                    <li>Click the first Affine layer in order to select it. Set the number of
+                      intermediate layer nodes (e.g., 100, the default value) in the OutShape box
+                      under Layer Property.</li>
+                  </ol>
+                  <p><img class="alignnone size-full wp-image-59"
+                      src="/docs/assets/images/designing_and_training_a_two_layer_neural_network/affine_1st.png" alt=""
+                      width="728" height="502"></p>
+                  <p>&nbsp;</p>
+                  <ol start="4">
+                    <li>Click the second Affine layer in order to select it. Set the number of
+                      output layer nodes (1, which is the size of variable <em>y</em> (output
+                      data) in this example) in the OutShape box under Layer Property.</li>
+                  </ol>
+                  <p><img class="alignnone size-full wp-image-60"
+                      src="/docs/assets/images/designing_and_training_a_two_layer_neural_network/affine_2nd.png" alt=""
+                      width="729" height="502"></p>
+                  <p>&nbsp;</p>
+                  <h3><a name="_Toc489818968"></a>4 Executing training</h3>
+                  <p>Click the Run Training button. training will start.</p>
+                  <p><img class="alignnone size-large wp-image-61"
+                      src="/docs/assets/images/designing_and_training_a_two_layer_neural_network/training.png" alt=""
+                      width="1024" height="498"></p>
+                </div>
+              </article>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- .contents_inner -->
+    </div><!-- .contents -->
+  </div><!-- /.wrapper -->
+  <footer class="footer">
+    <div class="footer_inner">
+      <div class="pageTopBtn">
+        <a href="javascript:void(0)" aria-label="Back to the top of this page." id="js-pageTop">Page Top</a>
+      </div>
+      <div class="footer_sitemap_inner">
+        <div class="sitemap"></div>
+      </div>
+    </div>
+  </footer>
+</body>
+<script type="text/javascript">
+  let videoImg = document.getElementById('video-img');
+  videoImg.onclick = function () {
+    this.hidden = true;
+    let video = document.getElementById("video");
+    video.play();
+  }
+  video.addEventListener('pause', function () {
+    videoImg.hidden = false;
+  });
+  video.addEventListener('play', function () {
+    videoImg.hidden = true;
+  });
+</script>
+
+</html>

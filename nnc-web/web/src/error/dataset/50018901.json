@@ -1,0 +1,7 @@
+{
+  "code": "50018901",
+  "message": {
+    "ja": "クラウドに接続するためのネットワーク環境の問題もしくはデータセットアップロードツールの問題の可能性があります。ネットワーク環境を見直す、もしくはアップロードツールを最新にして再度お試し下さい。",
+    "en": "There may be a problem with the network environment to connect to the cloud or a problem with the dataset upload tool. Please review the network environment or update the upload tool and try again."
+  }
+}

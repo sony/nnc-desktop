@@ -1,0 +1,7 @@
+{
+  "code": "40018905",
+  "message": {
+    "ja": "データセットCSVファイルに文字列があります。\nファイルのパス以外は数値にしてください。",
+    "en": "Non-numeric characters cannot be used in a dataset file, except for file path including file name."
+  }
+}

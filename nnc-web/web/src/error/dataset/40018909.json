@@ -1,0 +1,7 @@
+{
+  "code": "40018909",
+  "message": {
+    "ja": "CSVデータのフォーマットが不正です。\nアップロードしたCSVデータに数字以外が含まれていないか確認ください。",
+    "en": "Data CSV file is in the wrong format.\nNon-numeric characters cannot be used in a data CSV file."
+  }
+}

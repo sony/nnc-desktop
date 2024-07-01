@@ -1,0 +1,9 @@
+{
+  "code": "40014006",
+  "message": {
+    "ja": "Convolutionレイヤーのプロパティに無効な設定があります。",
+    "en": "One or more invalid settings are found in the property of Convolution layer."
+  },
+  "image_1": "/console/error/image/Convolution_Layer_Property.png",
+  "image_2": "/console/error/image/Convolution_Layer.png"
+}

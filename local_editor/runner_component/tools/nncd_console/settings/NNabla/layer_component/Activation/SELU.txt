@@ -1,0 +1,62 @@
+[Global]
+Reference=Element-wise Scaled Exponential Linear Unit (SELU) function by Klambauer et al. (2017).
+FunctionName=selu
+
+[Display]
+Color=0xd77b6a
+
+[Property]
+Input
+Scale
+Alpha
+Output
+
+CostIf
+CostAdd
+CostMultiply
+CostExp
+
+[Property_Input]
+Editable=False
+Type=PIntArray
+Value=*GraphInput
+
+[Property_Scale]
+Type=Float
+Value=1.05070098735548
+ArgumentName=selu_param.scale
+
+[Property_Alpha]
+Type=Float
+Value=1.673263242354377
+Important=True
+ArgumentName=selu_param.alpha
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*Input
+
+[Property_CostIf]
+Editable=False
+Type=PInt
+Value=*Calc +*Input
+Required=False
+
+[Property_CostAdd]
+Editable=False
+Type=PInt
+Value=*Calc +*Input
+Required=False
+
+[Property_CostMultiply]
+Editable=False
+Type=PInt
+Value=*Calc +*Input:+*Input
+Required=False
+
+[Property_CostExp]
+Editable=False
+Type=PInt
+Value=*Calc +*Input
+Required=False

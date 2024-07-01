@@ -1,0 +1,25 @@
+{
+  "name": "local_editor_top",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && mv dist/project/index.html dist/project/main.html",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@types/jquery": "^3.5.29",
+    "jquery": "^3.7.1",
+    "rollup-plugin-copy": "^3.5.0",
+    "ts-node": "^10.9.2",
+    "vue": "^3.4.4"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.5.29",
+    "@vitejs/plugin-vue": "^4.3.4",
+    "http-proxy-middleware": "^2.0.6",
+    "typescript": "^5.2.0",
+    "vite": "^4.4.9"
+  }
+}

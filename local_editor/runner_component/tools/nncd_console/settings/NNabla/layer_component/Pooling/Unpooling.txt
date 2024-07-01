@@ -1,0 +1,25 @@
+[Display]
+Color=0xa58e7f
+
+[Property]
+Input
+KernelShape
+Output
+
+[Property_Input]
+Editable=False
+Type=PIntArray
+Value=*GraphInput
+
+[Property_KernelShape]
+ShortName=Shape
+Type=PIntArray
+Value=2,2
+Important=True
+ArgumentName=unpooling_param.kernel -f
+SearchParameter=True
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*UnpoolingOutputSize

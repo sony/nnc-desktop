@@ -1,0 +1,25 @@
+[Property]
+Input
+ClipNorm
+Axis
+Output
+
+[Property_Input]
+Editable=False
+Type=PIntArray
+Value=*GraphInput
+
+[Property_ClipNorm]
+Type=Float
+Value=1.0
+ArgumentName=clip_by_norm_param.clip_norm
+
+[Property_Axis]
+Type=UIntArray
+Value=0
+ArgumentName=clip_by_norm_param.axis -a
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*Input

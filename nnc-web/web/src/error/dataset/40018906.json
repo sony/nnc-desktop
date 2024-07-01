@@ -1,0 +1,7 @@
+{
+  "code": "40018906",
+  "message": {
+    "ja": "データセットCSVファイルに日本語などが含まれています。\nアップロードしたデータセットCSVファイルにascii以外が含まれていないか、ご確認ください。",
+    "en": "Non-ASCII characters cannot be used in a dataset file."
+  }
+}

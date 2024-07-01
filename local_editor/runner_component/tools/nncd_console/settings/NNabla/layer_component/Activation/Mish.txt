@@ -1,0 +1,48 @@
+[Global]
+Reference=Diganta Misra, Mish: A Self Regularized Non-Monotonic Activation Function https://arxiv.org/abs/1908.08681
+
+[Display]
+Color=0xd77b6a
+
+[Property]
+Input
+Output
+
+CostAdd
+CostMultiply
+CostDivision
+CostExp
+
+[Property_Input]
+Editable=False
+Type=PIntArray
+Value=*GraphInput
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*Input
+
+[Property_CostAdd]
+Editable=False
+Type=PInt
+Value=*Calc +*Input:*2
+Required=False
+
+[Property_CostMultiply]
+Editable=False
+Type=PInt
+Value=*Calc +*Input
+Required=False
+
+[Property_CostDivision]
+Editable=False
+Type=PInt
+Value=*Calc +*Input
+Required=False
+
+[Property_CostExp]
+Editable=False
+Type=PInt
+Value=*Calc +*Input:*3
+Required=False

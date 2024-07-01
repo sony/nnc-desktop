@@ -1,0 +1,7 @@
+{
+  "code": "40018901",
+  "message": {
+    "ja": "データセットCSVファイルが存在しません。\nWindows版Neural Network Console、nnabla、もしくは最新のUploaderを使ってアップロードしてください。",
+    "en": "Dataset CSV file is not found.\nPlease upload using the Windows version of Neural Network Console, nnabla, or the latest uploader."
+  }
+}
