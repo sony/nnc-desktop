@@ -1,0 +1,13 @@
+[Property]
+Attribute
+ArgName
+
+[Property_Attribute]
+Type=Text
+Value=
+Important=True
+
+[Property_ArgName]
+Type=Text
+Value=
+Required=False

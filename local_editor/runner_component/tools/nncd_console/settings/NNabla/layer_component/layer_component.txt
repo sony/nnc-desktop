@@ -18,11 +18,13 @@ Arithmetic (2 Inputs)
 Arithmetic (N Inputs)
 Logical
 Validation
+Normalization
 Others
 Others(Pre Process)
 Setting
 [IO]
 Input
+Constant
 [Loss]
 SquaredError
 HuberLoss
@@ -42,6 +44,8 @@ Convolution
 DepthwiseConvolution
 Deconvolution
 DepthwiseDeconvolution
+DeformableConvolution
+AdaptiveSeparableConvolution
 Embed
 [Pooling]
 MaxPooling
@@ -72,6 +76,7 @@ Sinc
 Swish
 Mish
 Softmax
+LogSoftmax
 [LoopControl]
 RepeatStart
 RepeatEnd
@@ -80,6 +85,7 @@ RecurrentOutput
 Delay
 [Quantize]
 FixedPointQuantize
+MinMaxQuantize
 Pow2Quantize
 BinaryConnectAffine
 BinaryConnectConvolution
@@ -96,15 +102,20 @@ FFT
 IFFT
 [Math]
 Sum
+CumSum
 Mean
 Prod
+CumProd
 Max
 Min
+Norm
 Log
 Exp
 Sign
 BatchMatmul
 BatchInv
+BatchDet
+BatchLogdet
 Round
 Ceil
 Floor
@@ -166,9 +177,17 @@ IsInf
 [Validation]
 BinaryError
 TopNError
-[Others]
+[Normalization]
 BatchNormalization
 FusedBatchNormalization
+NormNormalization
+WeightStandardization
+WeightNormalization
+SpectralNorm
+LayerNormalization
+InstanceNormalization
+GroupNormalization
+[Others]
 Dropout
 Concatenate
 Reshape
@@ -206,9 +225,11 @@ OneHot
 RandomCrop
 RandomFlip
 RandomShift
+RandomErase
 MeanSubtraction
 ImageAugmentation
 [Setting]
+Import
 TestNetwork
 StructureSearch
 [Compatible]

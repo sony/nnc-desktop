@@ -1,0 +1,12 @@
+[IO]
+Input=Multiple
+Output=Any
+
+[Property]
+NoProperties
+
+[Property_NoProperties]
+Editable=False
+Type=Text
+Value=
+Required=False

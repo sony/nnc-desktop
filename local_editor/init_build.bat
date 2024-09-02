@@ -20,7 +20,8 @@ set DIR_DIST_CONSOLE=dist\console
 set DIR_TOP=top
 set ENV=prod
 
-nvm use 14.21.3
+nvm install 20.15.0
+nvm use 20.15.0
 nvm version
 node -v
 
@@ -51,9 +52,7 @@ PUSHD ..\%DIR_DASHBOARD%
 echo "npm run %ENV%-build"
 CALL npm run %ENV%-build
 
-nvm use 20.9.0
-nvm version
-node -v
+
 CALL npm install -g rimraf suppress-exit-code
 @REM build new top
 echo "PUSHD %DIR_TOP%"

@@ -1,0 +1,11 @@
+[Display]
+Color=0x6ad77b
+[IO]
+Input=Multiple
+Output=Any
+[Property]
+model
+[Property_model]
+Editable=True
+Type=Model
+Required=False

@@ -16,7 +16,7 @@
 # source install python
 FROM rockylinux:8 as build-python
 
-ENV PYTHON_VERSION=3.9.13
+ENV PYTHON_VERSION=3.10.8
 
 RUN dnf -y check-update; exit 0
 RUN dnf group install -y "Development Tools"
@@ -50,7 +50,7 @@ RUN cd /tmp \
          --with-ensurepip=install \
     && make -j8 altinstall
 
-ENV NNABLA_VERSION=1.33.1
+ENV NNABLA_VERSION=1.39.0
 ENV PATH=/tmp/python_bundles/bin:${PATH}
 
 # temporarily not needed
@@ -70,7 +70,7 @@ COPY local_editor/runner_component/tools/console_cli /tmp/console_cli
 RUN python$(echo ${PYTHON_VERSION} | cut -d. -f1-2) -m pip install /tmp/console_cli/*.whl
 
 FROM rockylinux:8
-ENV PYTHON_VERSION=3.9.13
+ENV PYTHON_VERSION=3.10.8
 
 RUN dnf -y check-update; exit 0
 RUN dnf group install -y "Development Tools"
@@ -78,9 +78,13 @@ RUN dnf -y install wget ca-certificates curl gcc gcc-c++ rpm \
     && dnf clean all
 
 
-RUN curl -sL https://rpm.nodesource.com/setup_14.x | bash -
-RUN dnf install -y nodejs \
-    && dnf clean all
+# install node
+ENV NVM_DIR /root/.nvm
+ENV NODE_VERSION 20.17.0
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash \
+    && . $HOME/.nvm/nvm.sh \
+    && nvm install $NODE_VERSION    
+ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 COPY electron_app/ /tmp/electron_app
 RUN actual_hash=$(sha256sum /tmp/electron_app/opt-ex.zip | awk '{print $1}') \

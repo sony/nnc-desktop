@@ -1,0 +1,14 @@
+[Display]
+ComponentType=Comment
+
+[IO]
+Input=None
+Output=None
+
+[Property]
+Comment
+
+[Property_Comment]
+Type=Text
+Value=
+Required=False

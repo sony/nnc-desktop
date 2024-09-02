@@ -12,6 +12,7 @@ Size
 Dataset
 Generator
 GeneratorMultiplier
+Order
 Output
 
 [Property_Size]
@@ -40,6 +41,10 @@ Range
 Editable=True
 Type=Float
 Value=1.0
+
+[Property_Order]
+Type=Int
+Value=-1
 
 [Property_Output]
 Editable=False

@@ -1,3 +1,17 @@
+[AdaBelief]
+reference=Juntang Zhuang, et al. (2020). AdaBelief Optimizer: Adapting Stepsizes by the Belief in Observed Gradients. https://arxiv.org/abs/2010.07468
+argument_name=adabelief_param
+num_param=9
+param_0=Alpha;alpha;0.001
+param_1=Beta1;beta1;0.9
+param_2=Beta2;beta2;0.999
+param_3=Epsilon;eps;1.0e-8
+param_4=Weight Decay;wd;0.0001
+param_5=AMSGrad;amsgrad;0
+param_6=WD Decouple;weight_decouple;0
+param_7=Fixed Decay;fixed_decay;0
+param_8=Rectify;rectify;0
+
 [Adadelta]
 reference=Matthew D. Zeiler. ADADELTA: An Adaptive Learning Rate Method. https://arxiv.org/abs/1212.5701
 argument_name=adadelta_param

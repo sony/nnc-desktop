@@ -1,0 +1,5 @@
+[Sgd]
+argument_name=sgd_param
+num_param=1
+param_0=LearningRate;lr;0.01
+

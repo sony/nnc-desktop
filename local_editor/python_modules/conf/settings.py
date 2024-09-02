@@ -15,6 +15,7 @@
 
 import os
 import sys
+import platform
 from os.path import expanduser
 home = expanduser("~")
 
@@ -29,8 +30,9 @@ if sys.platform == "win32":
     NNCD_CONSOLE_CLI_UTIL = ["cd", NNCD_CONSOLE_CLI_UTIL_PATH, "&&",
         os.path.join(NNCD_CONSOLE_CLI_UTIL_PATH, "nncd_console_cli_util.exe")]
 elif sys.platform == "darwin":
+    executable = './nncd_console_cli_util_mac' if platform.machine() == 'arm64' else './nncd_console_cli_util_mac_x86'
     NNCD_CONSOLE_CLI_UTIL = ["cd", f'"{NNCD_CONSOLE_CLI_UTIL_PATH}"',
-        "&&", "./nncd_console_cli_util_mac"]
+        "&&", executable]
 else:
     NNCD_CONSOLE_CLI_UTIL = ["cd", f'"{NNCD_CONSOLE_CLI_UTIL_PATH}"',  # double quotes for black space of path
         "&&", "./nncd_console_cli_util"]

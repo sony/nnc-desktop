@@ -18,14 +18,14 @@ Type=PIntArray
 Value=*SumOutputSize
 
 [Property_Axes]
-Type=UIntArray
+Type=IntArray
 Value=0
-ArgumentName=min_param.axes -a
+ArgumentName=min_param.axes -a -pyargname=axis
 
 [Property_KeepDims]
 Type=Boolean
 Value=False
-ArgumentName=min_param.keep_dims
+ArgumentName=min_param.keep_dims -pyargname=keepdims
 
 [Property_WithIndex]
 Editable=False
