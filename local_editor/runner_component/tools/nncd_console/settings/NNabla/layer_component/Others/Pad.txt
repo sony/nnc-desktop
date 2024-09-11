@@ -25,6 +25,7 @@ ArgumentName=pad_param.mode
 [Property_Mode_Option]
 constant
 reflect
+repeat
 
 [Property_ConstantValue]
 Type=Float

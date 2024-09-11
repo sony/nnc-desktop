@@ -16,14 +16,14 @@ Type=PIntArray
 Value=*SumOutputSize
 
 [Property_Axes]
-Type=UIntArray
+Type=IntArray
 Value=0
-ArgumentName=prod_param.axes -a
+ArgumentName=prod_param.axes -a -pyargname=axis
 
 [Property_KeepDims]
 Type=Boolean
 Value=False
-ArgumentName=prod_param.keep_dims
+ArgumentName=prod_param.keep_dims -pyargname=keepdims
 
 [Property_CostMultiply]
 Editable=False

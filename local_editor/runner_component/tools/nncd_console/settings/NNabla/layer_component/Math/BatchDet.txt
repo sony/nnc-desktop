@@ -1,0 +1,45 @@
+[Global]
+FunctionName=batch_logdet
+
+[Property]
+Input
+Output
+
+CostAdd
+CostMultiply
+CostMultiplyAdd
+CostDivision
+
+[Property_Input]
+Editable=False
+Type=PIntArray
+Value=*GraphInput
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*BatchDetOutputSize
+
+[Property_CostAdd]
+Editable=False
+Type=PInt
+Value=*Calc +Input[1]:*Input[1]
+Required=False
+
+[Property_CostMultiply]
+Editable=False
+Type=PInt
+Value=*Calc +Input[1]
+Required=False
+
+[Property_CostMultiplyAdd]
+Editable=False
+Type=PInt
+Value=*Calc +Input[1]:*Input[1]:*Input[1]
+Required=False
+
+[Property_CostDivision]
+Editable=False
+Type=PInt
+Value=*Calc +Input[1]:*Input[1]
+Required=False

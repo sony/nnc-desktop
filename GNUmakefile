@@ -29,9 +29,9 @@ NNCD_DOCKER_RUN_OPTS += -u $$(id -u):$$(id -g)
 
 # create web console directory for electron app
 ELECTRON_TAG=$(shell find ./local_editor/ -type f -exec md5sum {} \; | md5sum |cut -d \  -f 1)
-DOCKER_IMAGE_NNCD_WEB_PAGE_BUILD=nnabla/nnabla-console-web-page-build:${ELECTRON_TAG}
-DOCKER_IMAGE_NNCD_DEB_BUILD=nnabla/nnabla-console-deb-build:${ELECTRON_TAG}
-DOCKER_IMAGE_NNCD_RPM_BUILD=nnabla/nnabla-console-rpm-build:${ELECTRON_TAG}
+DOCKER_IMAGE_NNCD_WEB_PAGE_BUILD=sony/nnc-desktop-web-page-build:${ELECTRON_TAG}
+DOCKER_IMAGE_NNCD_DEB_BUILD=sony/nnc-desktop-deb-build:${ELECTRON_TAG}
+DOCKER_IMAGE_NNCD_RPM_BUILD=sony/nnc-desktop-rpm-build:${ELECTRON_TAG}
 
 docker-image-nncd-web-page:
 	docker build \

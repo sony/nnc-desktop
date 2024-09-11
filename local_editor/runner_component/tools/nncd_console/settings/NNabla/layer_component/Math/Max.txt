@@ -18,14 +18,14 @@ Type=PIntArray
 Value=*SumOutputSize
 
 [Property_Axes]
-Type=UIntArray
+Type=IntArray
 Value=0
-ArgumentName=max_param.axes -a
+ArgumentName=max_param.axes -a -pyargname=axis
 
 [Property_KeepDims]
 Type=Boolean
 Value=False
-ArgumentName=max_param.keep_dims
+ArgumentName=max_param.keep_dims -pyargname=keepdims
 
 [Property_WithIndex]
 Editable=False

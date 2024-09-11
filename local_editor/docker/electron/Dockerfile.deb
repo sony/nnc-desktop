@@ -16,7 +16,7 @@
 # source install python
 FROM ubuntu:20.04 as build-python
 
-ENV PYTHON_VERSION=3.9.13
+ENV PYTHON_VERSION=3.10.8
 ARG BUILD_TYPE 
 
 RUN apt-get update \
@@ -66,7 +66,7 @@ RUN wget --no-check-certificate https://www.python.org/ftp/python/${PYTHON_VERSI
     && make -j8 altinstall \
     && ln -s /tmp/python_bundles/bin/pip$(echo ${PYTHON_VERSION} | cut -d. -f1-2) /tmp/python_bundles/bin/pip
 
-ENV NNABLA_VERSION=1.33.1
+ENV NNABLA_VERSION=1.39.0
 ENV PATH=/tmp/python_bundles/bin:${PATH}
 
 RUN if [ "$BUILD_TYPE" = "cpu" ]; then \
@@ -78,7 +78,7 @@ RUN if [ "$BUILD_TYPE" = "cpu" ]; then \
         pip install --upgrade pip && \
         pip install \
             nnabla_converter==${NNABLA_VERSION} \
-            https://nnabla.org/whl/nnabla_ext_cuda_alllib/nnabla_ext_cuda_alllib-${NNABLA_VERSION}-cp$(echo ${PYTHON_VERSION} | cut -d. -f1-2 | tr -d '.')-cp$(echo ${PYTHON_VERSION} | cut -d. -f1-2 | tr -d '.')-manylinux_2_17_x86_64.whl; \
+            https://nnabla.org/whl/nnabla_ext_cuda_alllib/nnabla_ext_cuda_alllib-${NNABLA_VERSION}-cp$(echo ${PYTHON_VERSION} | cut -d. -f1-2 | tr -d '.')-cp$(echo ${PYTHON_VERSION} | cut -d. -f1-2 | tr -d '.')-manylinux_2_28_x86_64.whl; \
     fi
 
 COPY local_editor/requirements.txt /tmp/requirements.txt
@@ -101,10 +101,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get -yqq clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
-    && apt-get install -y nodejs \
-    && apt-get -yqq clean \
-    && rm -rf /var/lib/apt/lists/*
+
+# install node
+ENV NVM_DIR /root/.nvm
+ENV NODE_VERSION 20.17.0
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash \
+    && . $HOME/.nvm/nvm.sh \
+    && nvm install $NODE_VERSION    
+ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 COPY electron_app/ /tmp/electron_app
 

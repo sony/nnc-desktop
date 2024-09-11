@@ -1,0 +1,53 @@
+[Property]
+Input
+P
+Axes
+KeepDims
+Output
+
+CostAdd
+CostMultiply
+CostExp
+
+[Property_Input]
+Editable=False
+Type=PIntArray
+Value=*GraphInput
+
+[Property_P]
+Type=Float
+Value=2
+ArgumentName=norm_param.p
+
+[Property_Axes]
+Type=IntArray
+Value=0
+ArgumentName=norm_param.axes -a -pyargname=axis
+
+[Property_KeepDims]
+Type=Boolean
+Value=False
+ArgumentName=norm_param.keep_dims -pyargname=keepdims
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*SumOutputSize
+
+[Property_CostAdd]
+Editable=False
+Type=PInt
+Value=*Calc +*Input
+Required=False
+
+[Property_CostMultiply]
+Editable=False
+Type=PInt
+Value=*Calc +*Input:*2
+Required=False
+
+[Property_CostExp]
+Editable=False
+Type=PInt
+Value=*Calc +*Input:*2
+Required=False

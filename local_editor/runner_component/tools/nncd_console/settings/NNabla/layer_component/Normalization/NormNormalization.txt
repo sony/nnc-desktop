@@ -1,0 +1,53 @@
+[Property]
+Input
+P
+Axes
+Epsilon
+Output
+
+CostAdd
+CostMultiply
+CostExp
+
+[Property_Input]
+Editable=False
+Type=PIntArray
+Value=*GraphInput
+
+[Property_P]
+Type=Float
+Value=2
+ArgumentName=norm_normalization_param.p
+
+[Property_Axes]
+Type=IntArray
+Value=-1,0,1,2
+ArgumentName=norm_normalization_param.axes -a
+
+[Property_Epsilon]
+Type=Float
+Value=1e-12
+ArgumentName=norm_normalization_param.eps
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*Input
+
+[Property_CostAdd]
+Editable=False
+Type=PInt
+Value=*Calc +*Input
+Required=False
+
+[Property_CostMultiply]
+Editable=False
+Type=PInt
+Value=*Calc +*Input:*3
+Required=False
+
+[Property_CostExp]
+Editable=False
+Type=PInt
+Value=*Calc +*Input:*2
+Required=False

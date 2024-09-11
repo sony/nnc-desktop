@@ -1,0 +1,29 @@
+[Global]
+Reference=Siyuan Qiao, Huiyu Wang, Chenxi Liu, Wei Shen, Alan Yuille, Weight Standardization https://arxiv.org/pdf/1903.10520v1.pdf
+
+[Property]
+Input
+ChannelAxis
+Epsilon
+Output
+
+[Property_Input]
+Editable=False
+Type=PIntArray
+Value=*GraphIO
+
+[Property_ChannelAxis]
+Type=UInt
+Value=0
+ArgumentName=weight_standardization_param.channel_axis -a
+
+[Property_Epsilon]
+Type=Float
+Value=1e-5
+ArgumentName=weight_standardization_param.eps
+
+[Property_Output]
+Editable=False
+Type=PIntArray
+Value=*Input
+

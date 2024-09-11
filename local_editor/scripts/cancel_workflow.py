@@ -18,7 +18,7 @@ import sys
 from github import Github
 
 
-REPOSITORY = 'nnabla/nnabla-console'
+REPOSITORY = 'sony/nnc-desktop'
 
 
 def main(args):

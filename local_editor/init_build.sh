@@ -27,7 +27,7 @@ ENV="prod"
 cd ${ROOT}/
 echo "cd ${ROOT}/"
 
-nvm use 14.21.3
+nvm use 20.15.0
 ##############################
 ###  install package       ###
 ##############################
@@ -62,7 +62,6 @@ npm run ${ENV}-build
 popd
 
 
-nvm use 20.9.0
 ##############################
 ### install & build new editor ###
 ##############################

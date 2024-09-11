@@ -1,5 +1,6 @@
 /build/
 tmp*
+.DS_Store
 electron_app/console/
 electron_app/node_modules/
 electron_app/dist/
@@ -11,3 +12,7 @@ dist/
 opt*.zip
 node_modules/
 !nnc-web/**/dist
+
+nnabla-workdir
+.node-version
+.python-version

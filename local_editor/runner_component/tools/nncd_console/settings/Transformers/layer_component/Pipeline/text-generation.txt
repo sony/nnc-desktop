@@ -1,0 +1,16 @@
+[Display]
+Color=0x6ad77b
+[IO]
+Output=Any
+[Property]
+model
+max_length
+[Property_model]
+Editable=True
+Type=Model
+Required=False
+[Property_max_length]
+Type=PInt
+Value=512
+ArgumentName=max_length
+Required=False

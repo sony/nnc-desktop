@@ -28,6 +28,7 @@ Padding
 Strides
 Dilation
 Group
+ChannelLast
 BaseAxis
 WithBias
 ParameterScope
@@ -84,6 +85,11 @@ ArgumentName=deconvolution_param.dilation
 Type=PInt
 Value=1
 ArgumentName=deconvolution_param.group
+
+[Property_ChannelLast]
+Type=Boolean
+Value=False
+ArgumentName=deconvolution_param.channel_last
 
 [Property_ParameterScope]
 Type=Text

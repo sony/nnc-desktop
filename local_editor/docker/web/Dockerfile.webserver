@@ -34,8 +34,7 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | b
     && export NVM_DIR="$HOME/.nvm" \
     && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" \
     && [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" \
-    && nvm install 14.21.3 \
-    && nvm install 20.9.0
+    && nvm install 20.15.0
 
 COPY nnc-web/common/ /tmp/nnc-web/common
 COPY nnc-web/web/ /tmp/nnc-web/web

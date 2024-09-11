@@ -1,0 +1,11 @@
+[Display]
+Color=0x6ad77b
+[IO]
+Output=Any
+[Property]
+model
+[Property_model]
+Editable=True
+Value=Salesforce/blip-image-captioning-base
+Type=Model
+Required=False

@@ -34,7 +34,7 @@ let pythonExecutable = null
 let isWinPlatform = process.platform === 'win32'
 
 const pythonSourceDir = process.env.NODE_ENV !== "develop" ? path.join(__dirname, '..') : __dirname
-pythonExecutable = path.join(pythonSourceDir, 'python_bundles', 'bin', 'python3.9')
+pythonExecutable = path.join(pythonSourceDir, 'python_bundles', 'bin', 'python3.10')
 if (isWinPlatform) {
   pythonExecutable = path.join(pythonSourceDir, 'python_bundles', 'python.exe')
 }
@@ -381,9 +381,10 @@ if (!appInstanceLock) {
 
 // Except for macOS, the program will quit when all windows are closed.
 // Therefore, it is generally necessary for the program and its icon in the taskbar to remain active until the user quits using Cmd + Q.
-app.on('window-all-closed', function () {
-  if (process.platform !== 'darwin') app.quit()
-})
+// temporarily disable this for right click quit doesn't work
+// app.on('window-all-closed', function () {
+//   if (process.platform !== 'darwin') app.quit()
+// })
 
 // In this file, you can include the code for all the remaining parts of the application,
 // or you can split it into several files and import it using require.
