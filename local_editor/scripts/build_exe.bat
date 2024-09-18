@@ -39,6 +39,8 @@ ROBOCOPY local_editor\runner_component\tools\nncd_console electron_app\py\connec
 
 PUSHD electron_app
 
+powershell -Command "Invoke-WebRequest https://nnabla.org/pkg/nncd-opt-ex.zip -OutFile opt-ex.zip"
+
 set "file_path=./opt-ex.zip"
 set "expected_hash=363c93b4cc77060543fb74dbd7d071c6ff23d52dd5fbbcfd54f5b9c8d35d96c7"
 
