@@ -55,21 +55,24 @@ docker-image-nncd-rpm-build:
 
 .PHONY: build-web-page
 build-web-page: docker-image-nncd-web-page
-	docker run --rm -v $$(pwd):$$(pwd) -w $$(pwd) --entrypoint= $(DOCKER_IMAGE_NNCD_WEB_PAGE_BUILD) \
-		bash -c "cp -r /opt/dist/console ./ && chown -R $$(id -u):$$(id -g) console"
+	$(eval CONTAINER_ID := $(shell docker run --rm -d $(DOCKER_IMAGE_NNCD_WEB_PAGE_BUILD) bash -c "tail -f /dev/null"))
+	docker cp $(CONTAINER_ID):/opt/dist/console ./
+	docker stop $(CONTAINER_ID)
 
 .PHONY: build-cpu-deb
 build-cpu-deb: docker-image-nncd-cpu-deb-build
-	docker run --rm -v $$(pwd):$$(pwd) -w $$(pwd)  $(DOCKER_IMAGE_NNCD_DEB_BUILD) \
-		bash -c "cp -r /tmp/electron_app/dist ./ && chown -R $$(id -u):$$(id -g) dist"
+	$(eval CONTAINER_ID := $(shell docker run --rm -d $(DOCKER_IMAGE_NNCD_DEB_BUILD) bash -c "tail -f /dev/null"))
+	docker cp $(CONTAINER_ID):/tmp/electron_app/dist ./
+	docker stop $(CONTAINER_ID)
 
 .PHONY: build-deb
 build-deb: docker-image-nncd-deb-build
-	docker run --rm -v $$(pwd):$$(pwd) -w $$(pwd)  $(DOCKER_IMAGE_NNCD_DEB_BUILD) \
-		bash -c "cp -r /tmp/electron_app/dist ./ && chown -R $$(id -u):$$(id -g) dist"
+	$(eval CONTAINER_ID := $(shell docker run --rm -d $(DOCKER_IMAGE_NNCD_DEB_BUILD) bash -c "tail -f /dev/null"))
+	docker cp $(CONTAINER_ID):/tmp/electron_app/dist ./
+	docker stop $(CONTAINER_ID)
 
 .PHONY: build-rpm
 build-rpm: docker-image-nncd-rpm-build
-	docker run --rm -v $$(pwd):$$(pwd) -w $$(pwd)  $(DOCKER_IMAGE_NNCD_RPM_BUILD) \
-		bash -c "cp -r /tmp/electron_app/dist ./ && chown -R $$(id -u):$$(id -g) dist"
-
+	$(eval CONTAINER_ID := $(shell docker run --rm -d $(DOCKER_IMAGE_NNCD_RPM_BUILD) bash -c "tail -f /dev/null"))
+	docker cp $(CONTAINER_ID):/tmp/electron_app/dist ./
+	docker stop $(CONTAINER_ID)

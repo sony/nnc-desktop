@@ -143,3 +143,5 @@ RUN if [ "$BUILD_TYPE" = "cpu" ]; then \
         cd /tmp/electron_app && \
         npm run linux-gpu-deb; \
     fi
+
+RUN cd /tmp/electron_app/dist && find . -not -name '*.deb' -delete
