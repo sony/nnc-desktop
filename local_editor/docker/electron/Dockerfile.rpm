@@ -87,6 +87,9 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | b
 ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 COPY electron_app/ /tmp/electron_app
+
+RUN wget https://nnabla.org/pkg/nncd-opt-ex.zip -O /tmp/electron_app/opt-ex.zip
+
 RUN actual_hash=$(sha256sum /tmp/electron_app/opt-ex.zip | awk '{print $1}') \
     && expected_hash="363c93b4cc77060543fb74dbd7d071c6ff23d52dd5fbbcfd54f5b9c8d35d96c7" \
     && echo "actual_hash: $actual_hash" \

@@ -3,7 +3,7 @@
 
 # Build from source
 ## Linux platform (ubuntu && rockylinux)
-**Make sure you have installed Docker, and checkout submodule correctly**
+**Make sure Docker is installed**
 
 If you intend to build docker images locally behind a proxy, ensure http_proxy and https_proxy have been correctly set in environment.
 
@@ -14,6 +14,8 @@ Please execute following commands under directory `nnc-desktop`:
 make build-web-page
 make build-deb
 ```
+
+A successful build will generate an installer in the `dist` directory.
 
 ### For Rockylinux8 (tested on rockylinux8.8 sucessfully) (experimental)
 Please execute following commands under directory `nnc-desktop`:
@@ -37,6 +39,7 @@ Download nvm installer from https://github.com/coreybutler/nvm-windows/releases/
 After nvm installation is complete, execute the following commands in cmd:
 ```
 nvm install 20.15.0
+nvm use 20.15.0
 ```
 
 Then execute following commands in cmd under directory `nnc-desktop`:
@@ -64,12 +67,12 @@ pyenv install 3.10.14
 
 Install Node 20.15.0 by:
 ```bash
-nvm install 20.15.0
+nodenv install 20.15.0
 ```
 
 Then execute following commands in cmd under directory `nnc-desktop`:
 ```
-bash local_editor\scripts\build_mac_applesilicon.sh
+bash local_editor/scripts/build_mac_applesilicon.sh
 ```
 
 You can find the installer under `electron_app/dist` directory after building process finished.

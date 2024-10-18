@@ -17,6 +17,10 @@
   "author": "nncd",
   "homepage": "https://github.com/sony/nnc-desktop",
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sony/nnc-desktop.git"
+  },
   "build": {
     "appId": "com.nncd.nnabla",
     "productName": "NeuralNetworkConsoleDesktop",
@@ -68,7 +72,8 @@
       "artifactName": "NeuralNetworkConsoleDesktop.exe"
     },
     "npmRebuild": false,
-    "buildVersion": "0.1.0"
+    "buildVersion": "0.1.0",
+    "publish": null
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
