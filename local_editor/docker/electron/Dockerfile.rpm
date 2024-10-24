@@ -117,3 +117,5 @@ ENV LD_LIBRARY_PATH=/tmp/electron_app/python_bundles/lib:${LD_LIBRARY_PATH}
 RUN cd /tmp/electron_app \
     && npm install \
     && npm run linux-rpm
+
+RUN cd /tmp/electron_app/dist && find . -not -name '*.rpm' -delete
