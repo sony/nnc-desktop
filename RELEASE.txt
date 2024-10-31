@@ -1,3 +1,11 @@
+NNCD/v0.2.0
+=====================
+feature:
+*update macos arm64 build script
+*update building script and document.
+*build the linux version of nnc-desktop under rootless docker
+
 NNCD/v0.1.0
 =====================
-initial release
+feature:
+*initial release
