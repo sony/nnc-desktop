@@ -10,7 +10,7 @@
     "copy-html": "cp ./src/*.html ../dist/console/",
     "copy-image": "cp -r ./src/image ../dist/console",
     "copy-css": "cp -r ./src/css ../dist/console && cp ./node_modules/sweetalert2/dist/sweetalert2.min.css ../dist/console/lib/css/ && cp ./node_modules/vue2-timepicker/dist/VueTimepicker.css ../dist/console/lib/css/",
-    "copy-browser": "cp -r ./src/browser/ ../dist/console",
+    "copy-browser": "cp -r ./src/browser ../dist/console",
     "copy-project-converter-js": "cp ../new_editor/shared_scripts/ProjectConverter.js ../dist/console/js/",
     "copy-empty-configuration-js": "cp ../new_editor/shared_scripts/EmptyConfiguration.js ../dist/console/js/",
     "copy-nnabla-corelib-defs-js": "cp ../new_editor/shared_scripts/nnabla-corelib-defs.js ../dist/console/js/",

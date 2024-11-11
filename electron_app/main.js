@@ -32,6 +32,7 @@ let pyConnectorPort = 5556
 let pyConnectorProc = null
 let pythonExecutable = null
 let isWinPlatform = process.platform === 'win32'
+const isMacOS = process.platform === 'darwin'
 
 const pythonSourceDir = process.env.NODE_ENV !== "develop" ? path.join(__dirname, '..') : __dirname
 pythonExecutable = path.join(pythonSourceDir, 'python_bundles', 'bin', 'python3.10')
@@ -112,11 +113,11 @@ async function precheck() {
 
 let lib_path = path.join(pythonSourceDir, 'python_bundles', "lib")
 if (!isWinPlatform) {
-  if (typeof(process.env.LD_LIBRARY_PATH) == "undefined") {
-    process.env.LD_LIBRARY_PATH = lib_path
-  } else {
-    process.env.LD_LIBRARY_PATH = lib_path + ':' + process.env.LD_LIBRARY_PATH
-  }
+  const envVar = isMacOS ? 'DYLD_LIBRARY_PATH' : 'LD_LIBRARY_PATH';
+  process.env[envVar] =
+    process.env[envVar]
+      ? lib_path + ':' + process.env[envVar]
+      : lib_path;
 }
 
 async function createServer() {
@@ -263,14 +264,14 @@ function createWindow () {
           height: 200,
           autoHideMenuBar: true
         });
-  
+
         aboutWindow.loadURL(url);
-  
+
         aboutWindow.on('closed', () => {
           aboutWindow = null;
         });
       }
-  
+
       return { action: 'deny' }; // Default window opening is not allowed
     } else if (url.startsWith(`http://127.0.0.1:${pyServerPort}/docs/`)) {
       return {
@@ -340,18 +341,18 @@ if (!appInstanceLock) {
   })
   app.whenReady().then(() => {
     createWindow()
-  
+
     // deal with the signal of Ctrl+C
     process.on("SIGINT", () => {
       app.quit()
     })
-  
+
     const filter = {
       // urls: ['file:///console/*', `file://${__dirname}/console/editor*`]
       urls: ['file:///console/*', 'file:///docs/*']
     }
     session.defaultSession.webRequest.onBeforeRequest(filter, (details, callback) => {
-  
+
       const url = new URL(details.url);
       if (url.pathname.startsWith('/docs')) {
         if (url.pathname.endsWith('html/')) {
@@ -369,7 +370,7 @@ if (!appInstanceLock) {
         });
       }
     });
-  
+
     app.on('activate', function () {
        // Typically on macOS, when the application icon in the dock is clicked
        // if there are no other open windows, the program will create a new window.
