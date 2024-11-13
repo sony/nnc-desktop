@@ -12,7 +12,7 @@ NNC-D provides both cpu and gpu build versions, here we use cpu version as an ex
 
 2. Install NNC-D using the provided `.deb` package:
    ```bash
-   sudo apt install -y ./nncd_cpu_0.2.0_amd64.deb
+   sudo apt install -y ./nncd_cpu_0.2.1_amd64.deb
    ```
 
 ### Start NNC-D:
@@ -24,7 +24,7 @@ NNC-D provides both cpu and gpu build versions, here we use cpu version as an ex
 
 ### Installation Steps:
 
-1. Double-click `NeuralNetworkConsoleDesktop-cpu Setup 0.2.0.exe` to start the installation.
+1. Double-click `NeuralNetworkConsoleDesktop-cpu Setup 0.2.1.exe` to start the installation.
    ![Loading](/docs/images/loading.png)
 
 2. Select the desired users for installation.  
