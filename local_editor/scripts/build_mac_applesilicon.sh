@@ -85,22 +85,20 @@ cp -rf local_editor/runner_component/tools/nncd_console electron_app/py/connecto
 cp -rf ~/.anyenv/envs/pyenv/versions/3.10.14 electron_app/python_bundles
 
 # # copy lib
-cp -P /opt/homebrew/Cellar/gettext/0.22.5/lib/libintl.8.dylib electron_app/python_bundles/bin/ || exit 1
-cp -P /opt/homebrew/Cellar/openssl@3/3.3.0/lib/libssl.3.dylib electron_app/python_bundles/lib/python3.10/lib-dynload/ || exit 1
-cp -P /opt/homebrew/Cellar/openssl@3/3.3.0/lib/libcrypto.3.dylib electron_app/python_bundles/lib/python3.10/lib-dynload/ || exit 1
+libs=(
+  "/opt/homebrew/lib/libintl.8.dylib"
+  "/opt/homebrew/lib/libssl.3.dylib"
+  "/opt/homebrew/lib/libcrypto.3.dylib"
+  "/opt/homebrew/opt/readline/lib/libreadline.8.dylib"
+  "/opt/homebrew/opt/ncurses/lib/libncursesw.6.dylib"
+  "/opt/homebrew/opt/ncurses/lib/libpanelw.6.dylib"
+  "/opt/homebrew/opt/xz/lib/liblzma.5.dylib"
+)
 
-install_name_tool \
-    -change /opt/homebrew/lib/libintl.8.dylib "@executable_path/libintl.8.dylib" \
-    electron_app/python_bundles/bin/python3 || exit 1
-install_name_tool \
-    -change /opt/homebrew/lib/libssl.3.dylib "@loader_path/libssl.3.dylib" \
-    electron_app/python_bundles/lib/python3.10/lib-dynload/_ssl.cpython-310-darwin.so || exit 1
-install_name_tool \
-    -change /opt/homebrew/lib/libcrypto.3.dylib "@loader_path/libcrypto.3.dylib" \
-    electron_app/python_bundles/lib/python3.10/lib-dynload/_ssl.cpython-310-darwin.so || exit 1
-install_name_tool \
-    -change /opt/homebrew/Cellar/openssl@3/3.3.0/lib/libcrypto.3.dylib "@loader_path/libcrypto.3.dylib" \
-    electron_app/python_bundles/lib/python3.10/lib-dynload/libssl.3.dylib || exit 1
+for lib in "${libs[@]}"; do
+  cp -L "$lib" electron_app/python_bundles/lib/ || exit 1
+done
+
 
 # # pip install
 electron_app/python_bundles/bin/python3.10 -m pip install --upgrade pip || exit 1

@@ -30,6 +30,7 @@ popd
 cp -r top/dist/assets dist/console/
 cp -r top/dist/project dist/console/
 cp -r local_editor/resource/docs dist/console/
+cp common/favicon.ico dist/console/
 rm -rf dist/console/lib/dummy
 popd
 
