@@ -1,4 +1,4 @@
-# NNCD release-v0.2.0
+# NNCD release-v0.2.1
 ## Quickstart
 
 # Build from source

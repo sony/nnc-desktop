@@ -1,3 +1,8 @@
+NNCD/v0.2.1
+=====================
+feature:
+*fix dynamic library loading for macos arm64 platform
+
 NNCD/v0.2.0
 =====================
 feature:

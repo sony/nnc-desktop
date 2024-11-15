@@ -19,7 +19,7 @@ import platform
 from os.path import expanduser
 home = expanduser("~")
 
-NNCD_VERSION = '0.2.0' # should be updated after test finished
+NNCD_VERSION = '0.2.1' # should be updated after test finished
 RESULT_DIR = os.path.join(home, 'nncd_bucket')
 INSTANCE_CONF_DIR = f"{os.getcwd()}/py/server/instance_config/nncd_cli"
 
