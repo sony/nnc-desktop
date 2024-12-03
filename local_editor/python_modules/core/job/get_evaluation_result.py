@@ -105,9 +105,9 @@ def get_evaluation_result(user_id: str, project_id: int, job_id: int):
         # raise Exception('Invalid row or column parameters')  
         pass
 
-    elif last_task.end_time:
+    elif last_task.end_time and last_task.start_time:
         evaluate_data_list = make_evaluation_result_by_row_column(
-            project_id, job_id, row, column, last_task.end_time
+            project_id, job_id, row, column, last_task.start_time
         )
         if evaluate_data_list:
             evaluation_result['result'] = evaluate_data_list

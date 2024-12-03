@@ -133,19 +133,19 @@ def _convert_image_path_for_classification_result(rows: list, user_id:int, proje
         if row['type'] != 'text/uri-list':
             continue
         file_name = os.path.basename(row['data'])
-        if re.match(r'(\.[/\\])*data[/\\].*', row['data']):
-            if tenant_id is None or dataset_id is None:
-                row['data'] = ''
-                continue
-            file_path = os.path.join(settings.DATASETS_DIR, tenant_id, dataset_id, row['data'])
-            thumb_path = os.path.join(settings.DATASETS_DIR, tenant_id, 'thumbs', dataset_id, file_name)
-        else:
-            if job_type == Jobs._meta.INFERENCE:
-                file_path = row['data']
-                row['path'] = row['data']
-            else:
-                file_path = os.path.join(job_results_dir, file_name)
+        if job_type == Jobs._meta.INFERENCE:
+            file_path = row['data']
+            row['path'] = row['data']
             thumb_path = os.path.join(settings.PROJECTS_DIR, str(project_id), 'thumbs', str(job_id), file_name)
+        else:
+            thumb_path = os.path.join(settings.DATASETS_DIR, tenant_id, 'thumbs', dataset_id, file_name)
+            if re.match(r'(\.[/\\])*data[/\\].*', row['data']):
+                if tenant_id is None or dataset_id is None:
+                    row['data'] = ''
+                    continue
+                file_path = os.path.join(settings.DATASETS_DIR, tenant_id, dataset_id, row['data'])
+            else:
+                file_path = row['data'] if os.path.isabs(row['data']) else os.path.join(job_results_dir, file_name)
 
         _makedirs_if_not_exist(os.path.dirname(thumb_path))
 

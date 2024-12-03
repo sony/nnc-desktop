@@ -16,6 +16,7 @@
 /// <reference path="../@types/index.d.ts" />
 import Vue from 'vue';
 import store from '../store/index';
+import axios from 'axios';
 import { Prop } from 'vue-property-decorator';
 import {SwalUtil} from '../util/SwalUtil';
 import Component from 'vue-class-component';
@@ -36,12 +37,14 @@ export default class CreateDataset extends Vue {
   private datasetPath: string = '';
   private isUploading: boolean = false;
   private save_dir: string = '';
+  private fileServicePort: number = 0;
 
-  public mounted() {
+  public async mounted() {
     const userId: any = localStorage.getItem('u');
     CoreApiClient.getDatasetSaveDir(userId, this.selectedTenantId).then((result: any) => {
       this.save_dir = result;
     })
+    this.fileServicePort = await window.electron.getFileServicePort();
   }
 
   public onClickStart(e:any): void {
@@ -73,6 +76,23 @@ export default class CreateDataset extends Vue {
         });
       });
     });
+  }
+
+  public async openFile():Promise<void> {
+    try {
+      const response = await axios.get(`http://localhost:${this.fileServicePort}/open-file`);
+      if (response.status === 204) {
+        console.log('user cancellation.');
+      } else {
+        this.datasetPath = response.data.filePath;
+      }
+    } catch (error) {
+      console.error('failed:', error);
+    }
+  }
+
+  public clearDatasetPath():void {
+    this.datasetPath = '';
   }
 
   public close(): void {

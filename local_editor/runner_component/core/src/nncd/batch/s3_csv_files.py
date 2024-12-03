@@ -41,7 +41,7 @@ class S3File(object):
             self.bucket_name, f'{self.base_path}/{self.file_name}'
         )
 
-    def get_partial_date(self, offset, limit):
+    def get_partial_data(self, offset, limit):
         return s3util.get_object_range(
             self.bucket_name, f'{self.base_path}/{self.file_name}',
             offset, limit
@@ -73,7 +73,7 @@ class LocalFile(object):
         print(f'get_content_length {self.bucket_name}, {self.file_name}')
         return os.path.getsize(f'{self.bucket_name}/{self.base_relative_path}/{self.file_name}')
 
-    def get_partial_date(self, offset, limit):
+    def get_partial_data(self, offset, limit):
         try:
             key = f'{self.bucket_name}/{self.base_relative_path}/{self.file_name}'
             with open(key, 'rb') as f:
@@ -152,3 +152,30 @@ class LocalInferResultCsvFile(LocalFile):
 
     def __str__(self):
         return f'LocalInferResultCsvFile({super().__str__()})'
+
+
+class UserFile(object):
+    def __init__(self, file_path):
+        self.file_path = file_path
+        self.file_name = os.path.basename(file_path)
+
+    @property
+    def file_name_wo_ext(self):
+        base_name, _ = os.path.splitext(self.file_name)
+        return base_name
+
+    def get_content_length(self):
+        print(f'get_content_length {self.file_path}')
+        return os.path.getsize(self.file_path)
+
+    def get_partial_data(self, offset, limit):
+        try:
+            with open(self.file_path, 'rb') as f:
+                f.seek(offset, 0)
+                data = f.read(limit)
+        except Exception:
+            return
+        return data
+
+    def __str__(self):
+        return f'LocalFile({self.file_name})'

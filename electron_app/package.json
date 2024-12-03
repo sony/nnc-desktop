@@ -32,6 +32,8 @@
       "node_modules/",
       "asset/",
       "main.js",
+      "preload.js",
+      "utils/**",
       "package.json"
     ],
     "extraResources": [
@@ -84,6 +86,8 @@
     "tar": "^7.0.1",
     "@trodi/electron-splashscreen": "^1.0.2",
     "electron-squirrel-startup": "^1.0.0",
-    "electron-window-state": "5.0.3"
+    "electron-window-state": "5.0.3",
+    "express": "^4.21.1",
+    "cors": "^2.8.5"
   }
 }

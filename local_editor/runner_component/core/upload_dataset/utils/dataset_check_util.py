@@ -50,8 +50,12 @@ def _check_number(item):
         return False
 
 
+def _get_item_path(dataset_dir, item):
+    return item if os.path.isabs(item) else os.path.join(dataset_dir, item)
+
+
 def _check_exist_file(dataset_dir, item):
-    file_path = '{}/{}'.format(dataset_dir, item)
+    file_path = _get_item_path(dataset_dir, item)
     if not os.path.exists(file_path):
         logger.error(f'Data file not found[{item}]')
         raise BaseError(
@@ -138,7 +142,7 @@ def check_csv_data(filename):
             elif os.path.splitext(item)[1].lower() in consts.PLOT_CONTENT_TYPE:
                 _check_exist_file(dataset_dir, item)
                 extention_str.append(os.path.splitext(item)[1])
-                file_path = f'{dataset_dir}/{item}'
+                file_path = _get_item_path(dataset_dir, item)
                 # Check the data contents of the input csv data file
                 _check_plot_csv_data(file_path)
             else:
@@ -178,7 +182,7 @@ def check_csv_data(filename):
                     if not os.path.splitext(item)[1] == extention_str[column_index]:
                         mismatch = True
                     else:
-                        file_path = f'{dataset_dir}/{item}'
+                        file_path = _get_item_path(dataset_dir, item)
                         _check_plot_csv_data(file_path)
                 else:
                     mismatch = True

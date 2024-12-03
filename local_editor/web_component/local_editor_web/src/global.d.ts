@@ -12,14 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
+export {};
 
-// preload.js
-
-// All Node.js APIs can be used during the preload phase.
-// It has the same sandbox as Chrome extensions.
-
-const { contextBridge, ipcRenderer } = require('electron');
-
-contextBridge.exposeInMainWorld('electron', {
-  getFileServicePort: () => ipcRenderer.invoke('get-file-service-port')
-});
+declare global {
+  interface Window {
+    electron: {
+      getFileServicePort: () => Promise<number>;
+    };
+  }
+}

@@ -24,6 +24,7 @@ const { session, ipcMain } = require('electron')
 const windowStateKeeper = require('electron-window-state');
 const Splashscreen = require('@trodi/electron-splashscreen');
 const appInstanceLock = app.requestSingleInstanceLock()
+const { createFileService } = require('./utils/fileService');
 
 const pythonBundlesPack = 'python_bundles.tar.br'
 let pyServerProc = null
@@ -33,6 +34,7 @@ let pyConnectorProc = null
 let pythonExecutable = null
 let isWinPlatform = process.platform === 'win32'
 const isMacOS = process.platform === 'darwin'
+let fileServicePort = null;
 
 const pythonSourceDir = process.env.NODE_ENV !== "develop" ? path.join(__dirname, '..') : __dirname
 pythonExecutable = path.join(pythonSourceDir, 'python_bundles', 'bin', 'python3.10')
@@ -40,7 +42,7 @@ if (isWinPlatform) {
   pythonExecutable = path.join(pythonSourceDir, 'python_bundles', 'python.exe')
 }
 process.env.PYTHON_EXECUTABLE = pythonExecutable
-process.env.DESKTOP_SRC_DIR = process.env.NODE_ENV !== "develop" ?  path.dirname(app.getAppPath()) : app.getAppPath()
+process.env.DESKTOP_SRC_DIR = process.env.NODE_ENV !== "develop" ? path.dirname(app.getAppPath()) : app.getAppPath()
 process.env.PYTHONNOUSERSITE = 1
 
 
@@ -56,7 +58,7 @@ function setAvailablePort(port) {
         reject(err)
       }
     })
-    server.once("listening", function() {
+    server.once("listening", function () {
       server.close()
       resolve(port)
     })
@@ -68,12 +70,12 @@ function setAvailablePort(port) {
 const check_precheck = (res) => {
   if (res.indexOf('precheck ok') !== -1) {
     createServer().then(e => {
-        const temp = e.split(':')
-        if (temp.length === 5 && temp[3].trim() === 'web server serve at port') {
-          createConnector()
-          mainWindow.webContents.loadURL(`http://127.0.0.1:${pyServerPort}/#/dashboard`)
-        }
-      })
+      const temp = e.split(':')
+      if (temp.length === 5 && temp[3].trim() === 'web server serve at port') {
+        createConnector()
+        mainWindow.webContents.loadURL(`http://127.0.0.1:${pyServerPort}/#/dashboard`)
+      }
+    })
   } else {
     console.log(`precheck res: ${res}`)
   }
@@ -99,7 +101,7 @@ async function precheck() {
 }
 
 // Set avilable port to server and connector
-(async() => {
+(async () => {
   try {
     pyServerPort = await setAvailablePort(pyServerPort)
     pyConnectorPort = await setAvailablePort(pyServerPort + 1)
@@ -186,7 +188,7 @@ const exitBackend = (event) => {
 app.on('will-quit', exitBackend)
 
 let mainWindow = null
-function createWindow () {
+function createWindow() {
   let mainWindowState = windowStateKeeper({
     file: 'nncd_winstate.json',
     defaultWidth: 1300,
@@ -202,7 +204,7 @@ function createWindow () {
     icon: path.join(__dirname, 'asset', 'icon', '256x256.png'),
     autoHideMenuBar: true,
     webPreferences: {
-      // preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, 'preload.js'),
       spellcheck: false
     },
     show: false
@@ -290,10 +292,10 @@ function createWindow () {
     // compressed python bundle only in win package
     const python_bundle_compressed = path.join(pythonSourceDir, pythonBundlesPack)
     const win_first_launch = python_bundle_compressed && fs.existsSync(python_bundle_compressed)
-    if(success) {
-      if(win_first_launch) {
+    if (success) {
+      if (win_first_launch) {
         ret.splashScreen.webContents.send("splash_status", "Extracting python bundles...");
-        try{
+        try {
           const stats = fs.statSync(python_bundle_compressed)
           const totalSize = stats.size
           let currentSize = 0
@@ -303,14 +305,14 @@ function createWindow () {
             const progress = currentSize / totalSize * 100
             ret.splashScreen.webContents.send("extract_percent", progress.toFixed(2));
           })
-          .pipe(zlib.createBrotliDecompress())
-          .pipe(tar.x({ C: pythonSourceDir }))
-          .on('finish', () => {
-            fs.unlink(python_bundle_compressed, err => console.error(`delete ${python_bundle_compressed} error:${err}`))
-            ret.splashScreen.webContents.send("splash_status", "Extracting complete. Launching...")
-            precheck()
-          });
-        }catch(ex) {
+            .pipe(zlib.createBrotliDecompress())
+            .pipe(tar.x({ C: pythonSourceDir }))
+            .on('finish', () => {
+              fs.unlink(python_bundle_compressed, err => console.error(`delete ${python_bundle_compressed} error:${err}`))
+              ret.splashScreen.webContents.send("splash_status", "Extracting complete. Launching...")
+              precheck()
+            });
+        } catch (ex) {
           console.error('Extracting extensions environment cache error: ', ex);
           ret.splashScreen.webContents.send("splash_status", `Extracting failed: ${ex}`);
         }
@@ -340,7 +342,21 @@ if (!appInstanceLock) {
     }
   })
   app.whenReady().then(() => {
-    createWindow()
+    const fileService = createFileService();
+
+    // waiting for fileService ready
+    fileService.on('listening', () => {
+      fileServicePort = fileService.address().port;
+      createWindow();
+    });
+
+    fileService.on('error', (error) => {
+      console.error('File service failed to start:', error);
+    });
+
+    ipcMain.handle('get-file-service-port', () => {
+      return fileServicePort;
+    });
 
     // deal with the signal of Ctrl+C
     process.on("SIGINT", () => {
