@@ -83,13 +83,13 @@ def get_inference_result(user_id: str, project_id: int, job_id: int):
             or row < 0 or column < 0):
         # raise Exception('Invalid row or column parameters')  
         pass
-    if last_task.end_time:
+    if last_task.end_time and last_task.start_time:
         inference_res_list = make_inference_result(
             project_id, 
             job_id, 
             row, 
             column,
-            last_task.end_time
+            last_task.start_time
         )
         if inference_res_list:
             inference_result['result'] = inference_res_list

@@ -15,13 +15,12 @@
 
 <!-- src/components/CreateDataset.vue -->
 <template>
-  
+
   <div id="copy-area" @click.stop>
     <div class="box box-pack-justify">
       <div id="upload-dataset-message">
         <span>
-          Please copy or move the dataset folder to 
-          <span id="save-dir">{{save_dir}}</span>, and then enter that folder name below.
+          Please select your dataset csv file:
         </span>
       </div>
       <div class="remove-icon pointer" @click="close">
@@ -29,42 +28,81 @@
       </div>
     </div>
     <div id="upload-dataset-url-area" @click.stop>
-      <label for="dataset-upload-input" id="dataset-upload-input-label">
-        <span>Folder Name </span>
+      <label for="dataset-upload-input">
+        <span>File Path:</span>
       </label>
-      <input id="upload-dataset-input" type='text' v-model="datasetPath" spellcheck="false">
+      <div class="input-container">
+        <button v-show="!datasetPath.length" class="button-area pointer input-part" @click="openFile">click to select</button>
+        <input v-show="datasetPath" disabled class="input-part" id="upload-dataset-input" type="text"
+          v-model="datasetPath" spellcheck="false" />
+        <button v-show="datasetPath.length" class="clear-button" @click="clearDatasetPath">×</button>
+      </div>
     </div>
 
     <div id="upload-dataset-button-area" class="box box-pack-justify">
-      <button :disabled="!datasetPath.length || isUploading" class="button-area pointer" id='start-btn' @click="onClickStart">Start</button>
+      <button :disabled="!datasetPath.length || isUploading" class="button-area pointer" id='start-btn'
+        @click="onClickStart">Start</button>
     </div>
   </div>
 
 </template>
 
-<script lang="ts" src="./CreateDataset.ts"></script>>
+<script lang="ts" src="./CreateDataset.ts"></script>
 <style scoped>
-  #upload-dataset-url-area {
-    border: none;
-  }
-  #upload-dataset-input {
-    border: 0.1rem solid var(--color-gray2);
-    border-radius: 0.2rem;
-    padding-left: 0;
-    color: initial;
-    font-size: 1.5rem;
-    width: 30.8rem;
-  }
-  #dataset-upload-input-label {
-    padding-right: 0.2rem;
-  }
-  #start-btn {
-    width: 100%;
-  }
-  #start-btn[disabled] {
-    opacity: 0.4;
-  }
-  #save-dir{
-    color: var(--color-brand);
-  }
+#upload-dataset-url-area {
+  border: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+#upload-dataset-url-area .input-part {
+  margin-left: 1rem;
+  width: 100%;
+  border: 0.1rem solid var(--color-gray2);
+  border-radius: 0.2rem;
+  padding-left: 0;
+  color: initial;
+  font-size: 1.5rem;
+  padding-right: 2rem;
+}
+
+#upload-dataset-url-area label {
+  width: 15%;
+}
+
+.input-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 85%;
+}
+
+.clear-button {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--color-gray2);
+}
+
+.clear-button:hover {
+  color: #333;
+}
+
+#start-btn {
+  width: 100%;
+}
+
+#start-btn[disabled] {
+  opacity: 0.4;
+}
+
+#save-dir {
+  color: var(--color-brand);
+}
 </style>

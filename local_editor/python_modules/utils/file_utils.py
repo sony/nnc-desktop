@@ -13,9 +13,11 @@
 # limitations under the License.
 
 import os
-from typing import Optional
 import shutil
+import csv
+from typing import Optional
 from conf import settings, consts
+
 
 
 class ProjectFile(object):
@@ -133,3 +135,41 @@ class DatasetFile():
         with open(self.file_path, "r") as f:
             data = f.read()
         return data
+
+
+def format_stock_file(origin: str, stockfile: str):
+    def _is_float_str(num_str: str) -> bool:
+        try:
+            float(num_str)
+            return True
+        except ValueError:
+            return False
+        
+    def _is_absolute_or_s3(path):
+        return os.path.isabs(path) or path.startswith("s3://")
+
+    def _need_change_path(record):
+        if not record.find(".") > -1 or _is_absolute_or_s3(record):
+            return False
+
+        extension = record.rsplit('.', 1)[1].lower()
+        return not _is_float_str(extension) and extension in (consts.CSV_EXTENSION, *consts.DATA_CONTENT_TYPE.keys())
+    
+    with open(origin, mode="r") as infile, \
+        open(stockfile, mode="w", encoding="utf-8", newline="") as outfile:
+        
+        reader = csv.reader(infile)
+        writer = csv.writer(outfile)
+        base_path = os.path.dirname(origin)
+
+        # skip header
+        header = next(reader)
+        writer.writerow(header)
+
+        for row in reader:
+            processed_row = [
+                os.path.abspath(os.path.join(base_path, cell)) if _need_change_path(cell)
+                else cell
+                for cell in row
+            ]
+            writer.writerow(processed_row)

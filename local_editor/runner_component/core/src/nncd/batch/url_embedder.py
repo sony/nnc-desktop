@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import re
+import os
 from logging import getLogger
 
 from chalicelib.nncd.common.exceptions import NNcdException
@@ -75,7 +76,11 @@ class UrlEmbedder(object):
                         col_data['data'] = f's3://{bucket_name}/{key}'
                     else:
                         if job_type == 'evaluate':
-                            col_data['data'] = f'{local_consts.LOCAL_MAPPING_DIR}/{bucket_name}/{key}'
+                            col_data["data"] = (
+                                columns[col_num]
+                                if os.path.isabs(columns[col_num])
+                                else f"{local_consts.LOCAL_MAPPING_DIR}/{bucket_name}/{key}"
+                            )
                         else:
                             if col_num == 0:
                                 col_data['path'] = columns[col_num]

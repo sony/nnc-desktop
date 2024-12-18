@@ -13,49 +13,37 @@
 # limitations under the License.
 
 import os
-import sys
 import shutil
 import json
 from flask import request
 
 from conf import settings
-from sqlite3db.models import Datasets, Users
+from utils import common
+from sqlite3db.models import Datasets, Users, DatasetMetadatas
 from utils.request_runner import start_uploading_dataset
+from utils.file_utils import format_stock_file
 
 
 def upload_dataset(user_id: str):
     user_id = 1
 
-    tenant_id = request.args.get('tenant_id')
-    path = request.args.get('path', '').strip()
+    tenant_id = request.args.get("tenant_id")
+    path = request.args.get("path", "").strip()
 
-    orignal_path = os.path.join(settings.UPLOAD_DATASET_PATH, path)
-
-    if path not in os.listdir(settings.UPLOAD_DATASET_PATH):
-        return {
-            'status': 'failed',
-            'message': f'the folder `{path}` do not exist.'
-        }
+    if not os.path.isfile(path):
+        return {"status": "failed", "message": f"the file `{path}` do not exist."}
     if not tenant_id:
         user = Users.select().where(Users.user_id == user_id).first()
         tenant_id = user.tenant_id
 
-    dataset_name = os.path.basename(orignal_path)
+    dataset_name = os.path.splitext(os.path.basename(path))[0]
     dataset = Datasets.select().where(
         Datasets.name == dataset_name, Datasets.deleted == False
     )
     if dataset:
         return {
-            'status': 'failed',
-            'message': f'Duplicate dataset name {dataset_name}.'
-        }
-    # check whether index.csv file and data folder exist
-    index_path = os.path.join(orignal_path, 'index.csv')
-    data_path = os.path.join(orignal_path, 'data')
-    if not (os.path.exists(index_path) and os.path.isdir(data_path)):
-        return {
-            'status': 'failed',
-            'message': 'Not find the index.csv file or data folder.'
+            "status": "failed",
+            "message": f"Duplicate dataset name {dataset_name}.",
         }
 
     # insert a data into Datasets table
@@ -64,31 +52,36 @@ def upload_dataset(user_id: str):
         owner_user_id=user_id,
         name=dataset_name,
         status=Datasets._meta.READY,
-        description=None
+        description=None,
     )
     new_dataset.save()
 
-    # create symbolic link to connect dataset floder
-    create_symlink(tenant_id, new_dataset.dataset_id, index_path, data_path)
+    # create dataset and dataset_cache dir
+    stock_filepath = prepare_dataset_stock(tenant_id, new_dataset.dataset_id, path)
+    user_metadata_name = common.add_user_metadata_mark("index_file_path")
+    DatasetMetadatas.create(
+        dataset_id=new_dataset.dataset_id, item_name=user_metadata_name, text_value=path
+    )
 
     # Run upload dataset docker
-    upload_dataset_args = json.dumps({
-        'tenant_id': tenant_id, 'dataset_id': new_dataset.dataset_id})
+    upload_dataset_args = json.dumps(
+        {
+            "tenant_id": tenant_id,
+            "dataset_id": new_dataset.dataset_id,
+            "index_file_path": stock_filepath,
+        }
+    )
     start_uploading_dataset(new_dataset.dataset_id, upload_dataset_args)
-    return {
-        'status': 'OK',
-        'message': 'Start uploading the dataset.'
-    }
+    return {"status": "OK", "message": "Start uploading the dataset."}
 
 
-def create_symlink(tenant_id: str, dataset_id: int, index_path, data_path):
+def prepare_dataset_stock(tenant_id: str, dataset_id: int, filepath: str) -> str:
     for path in [settings.DATASET_CACHE_DIR, settings.DATASETS_DIR]:
         dir_path = os.path.join(path, tenant_id, str(dataset_id))
         os.makedirs(dir_path, exist_ok=True)
+        
+    stockfile = os.path.join(settings.DATASETS_DIR, tenant_id, str(dataset_id), "index.csv")
 
-    if sys.platform == "win32":
-        shutil.copyfile(index_path, os.path.join(dir_path, 'index.csv'))
-        shutil.copytree(data_path, os.path.join(dir_path, 'data'))
-    else:
-        os.symlink(index_path, os.path.join(dir_path, 'index.csv'))
-        os.symlink(data_path, os.path.join(dir_path, 'data'))
+    format_stock_file(filepath, stockfile)
+    
+    return stockfile

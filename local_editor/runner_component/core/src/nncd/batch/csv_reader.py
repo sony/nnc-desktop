@@ -36,7 +36,7 @@ class CsvReader(object):
         while True:
             logger.info(f'#### read = offset{offset}, limit={consts.OBJECT_RANGE_SIZE}')
             #
-            read_data = self.csv_file.get_partial_date(offset, consts.OBJECT_RANGE_SIZE)
+            read_data = self.csv_file.get_partial_data(offset, consts.OBJECT_RANGE_SIZE)
             if read_data is None:
                 return
             rows = (self.remaining_data + read_data.decode('utf-8')).splitlines(True)
