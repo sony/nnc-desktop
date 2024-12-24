@@ -57,7 +57,7 @@ def get_datasets(user_id: str):
         dataset["owner_user_id"] = str(row.owner_user_id)
         dataset["dataset_name"] = str(row.name)
         dataset["storage_used"] = int(row.storage_used)
-        dataset["description"] = str(row.description)
+        dataset["description"] = row.description
 
         # get status
         status = row.status
@@ -87,7 +87,7 @@ def get_datasets(user_id: str):
         dataset["features"] = []
         if row.hash:
             dataset['hash'] = row.hash.upper()
-
+        dataset["location"] = _find_dataset_location(row.dataset_id)
         dataset_list.append(dataset)
 
     result_json = {
@@ -128,7 +128,7 @@ def _find_dataset_list_and_total(user_id: int, limit: int, offset: int, keyword:
         len(datasets),
         datasets.order_by(db_sort_by).offset(offset).limit(limit)
     )
-        
+
 
 def _make_dataset_metadata_filters(search_filter: Optional[str]):
     # tags eq aaa and labels contains bbb
@@ -153,3 +153,10 @@ def _find_dataset_labels(dataset_id: int):
         DatasetMetadatas.item_name == common.add_user_metadata_mark("labels")
     )
     return [x.text_value for x in metadata_list]
+
+
+def _find_dataset_location(dataset_id: int):
+    metadata = DatasetMetadatas.select().where(
+        DatasetMetadatas.dataset_id == dataset_id,
+        DatasetMetadatas.item_name == common.add_user_metadata_mark("location")).first()
+    return metadata.text_value if metadata else None
