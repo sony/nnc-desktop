@@ -68,8 +68,9 @@ def _get_folder_size(folder_path: str, size=0):
 class ConvertStatus:
 
     def __init__(self, destination: str):
+        dest = destination.replace('.cache', '')
 
-        paths = destination.split(os.sep)
+        paths = dest.split(os.sep)
         self.tenant_id = paths[-2]
         self.dataset_id = paths[-1]
 
@@ -334,7 +335,7 @@ def main(argv: list):
                 "Not `dataset_id` or `tenant_id` arg.", Code.E_NNCD_ARGS_ERROR
             )
 
-        cache_dir = os.path.join(consts.CACHE_DIR_NAME, tenant_id, str(dataset_id))
+        cache_dir = os.path.join(consts.CACHE_DIR_NAME, tenant_id, f"{dataset_id}.cache")
 
         # init status
         status = init_status(cache_dir, index_file_path)

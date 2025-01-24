@@ -44,7 +44,7 @@ def delete_dataset(user_id: str, dataset_id: int):
     # remove dataset files
     file_path_list = [
         os.path.join(settings.DATASETS_DIR, str(dataset.tenant_id), str(dataset_id)),
-        os.path.join(settings.DATASET_CACHE_DIR, str(dataset.tenant_id), str(dataset_id))
+        os.path.join(settings.DATASET_CACHE_DIR, str(dataset.tenant_id), f"{dataset_id}.cache")
     ]
     for file_path in file_path_list:
         if os.path.exists(file_path):

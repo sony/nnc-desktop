@@ -25,7 +25,6 @@ import zipfile
 import logging
 import hashlib
 import requests
-import tempfile
 import argparse
 import traceback
 import subprocess
@@ -51,7 +50,6 @@ class Runner(object):
     LOCAL_PROJECTS_BUCKET = os.path.join(LOCAL_MAPPING_DIR, 'nncd-projects-rdc')
     LOCAL_DATASETS_BUCKET = os.path.join(LOCAL_MAPPING_DIR, 'nncd-datasets-rdc')
     LOCAL_DATASET_CACHE_BUCKET = os.path.join(LOCAL_MAPPING_DIR, 'nncd-dataset-cache-rdc')
-    LOCAL_MOUNT_POINT = '/tmp/nncd-local-editor'
 
     SYNC_LOG = 'rsync_status.log'
     INTERMEDIATE_DIR_NAME = 'outputs'
@@ -90,18 +88,18 @@ class Runner(object):
 
     EMPTY_YAML = os.path.join(BASE_DIR, "empty_monitoring_report.yml")
 
-    def __init__(self, args: dict, result_dir: str):
+    def __init__(self, args: dict, result_dir: str='/tmp/nncd-local-editor'):
         # args from outside script
         self.task_id = args.get("task_id")
         self.priority = args.get("priority")
         self.instance_group = args.get("instance_group")
         self.nnabla_command = args.get("command")
-        self.infer_inputs = args.get("inputs", [])
-        self.infer_header = args.get("infer_header", None)
+        self.infer_inputs = args.get("inputs", []) # for inference inputs
+        self.infer_header = args.get("infer_header", None) # for inference
         self.parallel_num = args.get("parallel_num")
         self.local_config_file = args.get("config")
         self.local_param_file = args.get("param")
-        self.local_dataset_csv = args.get("dataset")
+        self.local_dataset_csv = args.get("dataset") # for evaluate/inference "{tenant_id}/{dataset_id}.cache"
         self.local_output_dir = args.get("outdir")
         self.mutate_path = args.get("mutate")
         self.ss_enable = args.get("ss_enable")
@@ -111,7 +109,7 @@ class Runner(object):
         self.mutate_base_job_id = args.get("base_job_id")
 
         # env params
-        self.result_dir = result_dir
+        self.result_dir = result_dir # tmp dir for immediate artifact
         self.WORK_DIR = os.path.join(self.result_dir, "work")
         self.OUTPUT_DIR = os.path.join(self.result_dir, "results")
         for d in [self.WORK_DIR, self.OUTPUT_DIR]:
@@ -145,16 +143,16 @@ class Runner(object):
 
         # check dataset csv
         # TODO: temporarily
-        self.LOCAL_MOUNT_POINT = self.result_dir
         if self.local_dataset_csv:
-            os.makedirs(self.LOCAL_MOUNT_POINT, exist_ok=True)
-            self.local_dataset_csv = f"{self.LOCAL_MOUNT_POINT}/{self.local_dataset_csv}"
+            os.makedirs(self.result_dir, exist_ok=True)
+            self.forward_tenant_id, self.forward_dataset_id =  self.local_dataset_csv.replace('.cache', '').split('/')
+            self.local_dataset_csv = f"{self.LOCAL_DATASET_CACHE_BUCKET}/{self.local_dataset_csv}"
         if self.local_dataset_csv and self.local_dataset_csv.endswith(".csv"):
             self.local_dataset_csv = f"{os.path.dirname(self.local_dataset_csv)}.cache"
 
         # check nnabla_command
         if self.nnabla_command not in ["train", "evaluate", "profile", "inference"]:
-            raise ValueError(f"Unknown nnabla command: ${self.NNABLA_COMMAND}")
+            raise ValueError(f"Unknown nnabla command: ${self.nnabla_command}")
         self.job_type = self.nnabla_command
         self.nnabla_command = "forward" if self.nnabla_command in ["evaluate", "inference"] else self.nnabla_command
 
@@ -276,7 +274,7 @@ class Runner(object):
             if not os.path.isfile(prototxt_file):
                 raise RuntimeError(f"failed to create file: {prototxt_file}")
             # Expand Dataset URI and Change Dataset Cache Dir
-            self._extend_dataset_path(prototxt_file, self.LOCAL_DATASETS_BUCKET, self.LOCAL_MOUNT_POINT)
+            self._extend_dataset_path(prototxt_file, self.LOCAL_DATASETS_BUCKET, self.LOCAL_DATASET_CACHE_BUCKET)
             self._copy_file(param_file, os.path.join(
                 self.local_output_dir, os.path.basename(param_file)))
             self._copy_file(prototxt_file, os.path.join(
@@ -295,7 +293,7 @@ class Runner(object):
         # replace original *.nnp file.
         os.replace(temp_zip_path, nnp_file)
     
-    def _extend_dataset_path(self, raw_config_txt, dataset_bucket, mount_point):
+    def _extend_dataset_path(self, raw_config_txt, dataset_bucket, dataset_cache_bucket):
         with open(raw_config_txt, "r") as f:
             config_content = f.readlines()
         tenant_id = dataset_id = None
@@ -315,17 +313,15 @@ class Runner(object):
                 split_list = line.split('"')
                 if not tenant_id or not dataset_id:
                     cache_path = os.path.join(
-                        mount_point, "unknown")
+                        dataset_cache_bucket, "unknown")
                 else:
                     cache_path = os.path.join(
-                        mount_point, tenant_id, f"{dataset_id}.cache")
+                        dataset_cache_bucket, tenant_id, f"{dataset_id}.cache")
                 config_content[i] = '"'.join(
                     [split_list[0], cache_path.replace("\\", "\\\\"), split_list[2]])
-        # Ensure Cache Parent Directory
-        for line in config_content:
-            if line.replace(" ", '').startswith("cache_dir:"):
+                # Ensure Cache Parent Directory
                 os.makedirs(os.path.dirname(
-                    line.split('"')[1]), exist_ok=True)
+                    config_content[i].split('"')[1]), exist_ok=True)
         with open(raw_config_txt, 'w') as f:
             f.writelines(config_content)
         self.logger.debug(
@@ -711,53 +707,22 @@ class Runner(object):
                 continue
 
             dataset_path_parts = os.path.join(tenant_id, dataset_id)
-            ebs_path = os.path.join(
-                self.LOCAL_MOUNT_POINT, f"{dataset_path_parts}.cache")
-            if not os.path.isfile(os.path.join(ebs_path, "cache_index.csv")):
-                local_cache_path = os.path.join(
-                    self.LOCAL_DATASET_CACHE_BUCKET, dataset_path_parts)
-                if os.path.isdir(local_cache_path):
-                    local_cache_complete = os.path.join(
-                        local_cache_path, "cache_index.csv")
-                    if os.path.isfile(local_cache_complete):
-                        self.logger.info(
-                            f"cache mapping (local_storage -> work dir: {dataset_id})")
-                        os.makedirs(os.path.dirname(ebs_path), exist_ok=True)
-                        if sys.platform == "win32":
-                            shutil.copytree(local_cache_path, ebs_path)
-                        else:
-                            os.symlink(local_cache_path, ebs_path)
+            cache_path = os.path.join(
+                self.LOCAL_DATASET_CACHE_BUCKET, f"{dataset_path_parts}.cache")
 
-        # replace dataset cache dir
-        if self.config_file.endswith("nnp"):
-            with tempfile.TemporaryDirectory() as tmp_dir:
-                tmp_zip = os.path.join(tmp_dir, "tmp.nnp")
-                with zipfile.ZipFile(self.config_file) as inzip, zipfile.ZipFile(tmp_zip, "w") as outzip:
-                    for inzipinfo in inzip.infolist():
-                        with inzip.open(inzipinfo) as infile:
-                            if inzipinfo.filename != "network.prototxt":
-                                outzip.writestr(
-                                    inzipinfo.filename, infile.read())
-                                continue
-                            # modify network.prototxt file
-                            prototxt = infile.readlines()
-                            for i, line in enumerate(prototxt):
-                                line = line.decode()
-                                if not line.replace(" ", '').startswith("cache_dir:"):
-                                    continue
-                                split_list = line.split('"')
-                                path_list = split_list[1].rsplit(os.sep, 2)[-1]
-                                if len(path_list) != 3:
-                                    cache_path = os.path.join(
-                                        self.LOCAL_MOUNT_POINT, "unknown")
-                                else:
-                                    cache_path = os.path.join(
-                                        self.LOCAL_MOUNT_POINT, path_list[-2], path_list[-1])
-                                prototxt[i] = '"'.join(
-                                    [split_list[0], cache_path.replace("\\", "\\\\"), split_list[2]]).encode()
-                            outzip.writestr(inzipinfo.filename,
-                                            b''.join(prototxt))
-                shutil.copyfile(tmp_zip, self.config_file)
+            # check cache existence
+            if os.path.isfile(os.path.join(cache_path, "cache_index.csv")):
+                continue
+
+            origin_csv_path = os.path.join(
+                self.LOCAL_DATASETS_BUCKET, dataset_path_parts, 'index.csv')
+            if not os.path.isfile(origin_csv_path):
+                raise RuntimeError(
+                        f"Dataset {dataset_id} index csv file is missing, "
+                        f"please check {origin_csv_path}. You may need to re-import this dataset."
+                    )
+            # trying csv file for evaluation when cache is missing
+            self.local_dataset_csv = origin_csv_path if self.local_dataset_csv else None
 
     def sync_train_results(self):
         """sync result files (log.txt, status.json, and so on.)"""
@@ -1154,10 +1119,7 @@ class Runner(object):
     def create_paging_file(self):
         if self.nnabla_command == "forward" and self.nnabla_result_status == 0:
             try:
-                dataset_id = os.path.basename(os.path.splitext(self.local_dataset_csv)[0])
-                tenant_id = os.path.basename(os.path.dirname(
-                    os.path.splitext(self.local_dataset_csv)[0]))
-                contents = Content(self.project_id, self.job_id, tenant_id, dataset_id)
+                contents = Content(self.project_id, self.job_id, self.forward_tenant_id, self.forward_dataset_id)
                 contents.create_page_files(self.job_type)
                 self.logger.info("Completed to paging file creator.")
             except Exception:
