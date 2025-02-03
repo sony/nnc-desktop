@@ -93,6 +93,7 @@ libs=(
   "/opt/homebrew/opt/ncurses/lib/libncursesw.6.dylib"
   "/opt/homebrew/opt/ncurses/lib/libpanelw.6.dylib"
   "/opt/homebrew/opt/xz/lib/liblzma.5.dylib"
+  "/opt/homebrew/opt/sqlite/lib/libsqlite3.dylib"
 )
 
 for lib in "${libs[@]}"; do

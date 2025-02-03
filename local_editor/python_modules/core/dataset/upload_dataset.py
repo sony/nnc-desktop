@@ -76,11 +76,10 @@ def upload_dataset(user_id: str):
 
 
 def prepare_dataset_stock(tenant_id: str, dataset_id: int, filepath: str) -> str:
-    for path in [settings.DATASET_CACHE_DIR, settings.DATASETS_DIR]:
-        dir_path = os.path.join(path, tenant_id, str(dataset_id))
-        os.makedirs(dir_path, exist_ok=True)
+    dir_path = os.path.join(settings.DATASETS_DIR, tenant_id, str(dataset_id))
+    os.makedirs(dir_path, exist_ok=True)
         
-    stockfile = os.path.join(settings.DATASETS_DIR, tenant_id, str(dataset_id), "index.csv")
+    stockfile = os.path.join(dir_path, "index.csv")
 
     format_stock_file(filepath, stockfile)
     
