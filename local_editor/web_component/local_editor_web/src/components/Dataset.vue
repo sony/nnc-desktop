@@ -44,7 +44,7 @@
             </label>
           </div>
           <!--nncd: add create-dataset and v-if-->
-          <create-dataset 
+          <create-dataset
             v-if="shouldShowCopyArea"
             :selectedTenantId="selectedTenantId"
             :getAllTenantDatasets="getAllTenantDatasets"
@@ -172,8 +172,9 @@
                         </div>
                       </div>
                     </div>
-                    <div class="dataset-additional-info-list box">
-                        <span class="update-datetime-area">{{dataset.description}}</span>
+                    <div class="dataset-additional-info-list ellipsis">
+                        <span class="update-datetime-area" v-if="dataset.description">{{dataset.description}}</span>
+                        <span class="update-datetime-area" v-else>{{dataset.location}}</span>
                     </div>
                   </div>
                 </div>

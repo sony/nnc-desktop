@@ -58,7 +58,7 @@ def upload_dataset(user_id: str):
 
     # create dataset and dataset_cache dir
     stock_filepath = prepare_dataset_stock(tenant_id, new_dataset.dataset_id, path)
-    user_metadata_name = common.add_user_metadata_mark("index_file_path")
+    user_metadata_name = common.add_user_metadata_mark("location")
     DatasetMetadatas.create(
         dataset_id=new_dataset.dataset_id, item_name=user_metadata_name, text_value=path
     )
@@ -78,9 +78,9 @@ def upload_dataset(user_id: str):
 def prepare_dataset_stock(tenant_id: str, dataset_id: int, filepath: str) -> str:
     dir_path = os.path.join(settings.DATASETS_DIR, tenant_id, str(dataset_id))
     os.makedirs(dir_path, exist_ok=True)
-        
+
     stockfile = os.path.join(dir_path, "index.csv")
 
     format_stock_file(filepath, stockfile)
-    
+
     return stockfile
