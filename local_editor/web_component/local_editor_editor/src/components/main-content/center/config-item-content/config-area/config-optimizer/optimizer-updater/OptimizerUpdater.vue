@@ -23,7 +23,6 @@ import UpdaterInputNumber from './UpdaterInputNumber.vue'
 import LrScheduler from './LrScheduler.vue'
 import LrInputNumber from './LrInputNumber.vue'
 import LrInputSelect from './LrInputSelect.vue'
-import LrInputStep from './LrInputStep.vue'
 const languages_store = useLanguageStore()
 const config_store = useConfigStore()
 const nnabla_core_def_store = useNNABLACoreDefStore()
@@ -102,13 +101,12 @@ function showableSteps() {
         <LrScheduler
             label="Scheduler" 
             :option-list="schedulerList" 
-            :value="data[active.index].warmup_length"
-            :option-list-unit="intervalUnitList" :selected-unit="data[active.index].warmup_length_unit"
+            :option-list-unit="intervalUnitList"
             class="config-parameter"
-            @input="(value: any) => data[active.index].scheduler = value"
-            @input_warmup_scheduler="(value: any) => data[active.index].warmup_scheduler = value"
-            @input_warmup_length="(value: any) => data[active.index].warmup_length = value"
-            @change="(value: any) => data[active.index].warmup_length_unit = value"
+            v-model:selected-unit="data[active.index].warmup_length_unit"
+            v-model:warmup_length="data[active.index].warmup_length"
+            v-model:warmup_scheduler="data[active.index].warmup_scheduler"
+            v-model:scheduler="data[active.index].scheduler"
         />
         <LrInputNumber
             v-if="showableMultiplier()"
@@ -126,19 +124,20 @@ function showableSteps() {
         />
         <LrInputSelect
             v-if="showableInterval()"
-            label="Update Interval" :option-list="intervalUnitList" :selected="data[active.index].update_interval_unit"
-            :value="data[active.index].update_interval"
+            label="Update Interval"
+            :option-list="intervalUnitList"
+            v-model:value="data[active.index].update_interval"
+            v-model:selected="data[active.index].update_interval_unit"
             class="config-parameter"
-            @input="(value: any) => data[active.index].update_interval = value"
-            @change="(value: any) => data[active.index].update_interval_unit = value"
         />
-        <LrInputStep
+
+        <LrInputSelect
             v-if="showableSteps()"
-            label="Update Steps" :option-list="intervalUnitList" :selected="data[active.index].update_interval_unit"
-            :value="data[active.index].steps"
+            label="Update Steps"
+            :option-list="intervalUnitList"
+            v-model:value="data[active.index].steps"
+            v-model:selected="data[active.index].update_interval_unit"
             class="config-parameter"
-            @input="(value: any) => data[active.index].steps = value"
-            @change="(value: any) => data[active.index].update_interval_unit = value"
         />
     </table>
 </div>

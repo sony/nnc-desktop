@@ -12,15 +12,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 -->
-
 <script setup lang="ts">
 const props = defineProps<{
     label: string, 
-    modelValue: string, 
+    modelValue: number,
     unit: string
 }>()
 
+const emit = defineEmits<{
+    (event: 'update:modelValue', value: number): void;
+}>()
+
+const handleInput = (event: Event) => {
+    const value = (event.target as HTMLInputElement).valueAsNumber;
+    emit('update:modelValue', isNaN(value) ? 1 : value);
+}
 </script>
+
 <template>
 <tr>
     <td style="padding-right: 5px;"></td>
@@ -28,10 +36,16 @@ const props = defineProps<{
         <label class="config-label">{{ label }}</label>
     </td>
     <td style="padding-right: 5px;">
-        <input type="number" class="config-short-input no-spin-buttons" :value="modelValue" @input="(event: any) => $emit('input', event.target.value)" step="any" >
+        <input
+            type="number"
+            class="config-short-input no-spin-buttons"
+            :value="modelValue"
+            @input="handleInput"
+            step="any"
+        >
     </td>
     <td v-if="unit">
-        <span class="config-unit">{{unit}}</span>
+        <span class="config-unit">{{ unit }}</span>
     </td>
 </tr>
 </template>

@@ -15,10 +15,19 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-    modelValue: string, 
+    modelValue: number,
     label: string,
     unit: string
 }>()
+
+const emit = defineEmits<{
+    (e: 'update:modelValue', value: number): void;
+}>()
+
+const handleInput = (event: Event) => {
+    const value = (event.target as HTMLInputElement).valueAsNumber;
+    emit('update:modelValue', isNaN(value) ? 1 : value);
+}
 </script>
 <template>
 <tr>
@@ -30,7 +39,7 @@ const props = defineProps<{
             type="number" 
             class="config-short-input no-spin-buttons" 
             :value="modelValue" 
-            @input="(event: any) => $emit('input', event.target.value)" 
+            @input="handleInput"
             step="any" 
         >
     </td>
