@@ -21,23 +21,18 @@ DIR_DIST="dist"
 DIR_DIST_CONSOLE="dist/console"
 DIR_TOP="top"
 ENV="prod"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 cd ${ROOT}/
 echo "cd ${ROOT}/"
 
-nvm use 20.15.0
 ##############################
 ###  install package       ###
 ##############################
-
-
 echo "cd ${DIR_DASHBOARD}"
 pushd ${DIR_DASHBOARD}
 echo "npm install"
 rm -rf node_modules/
-npm install
+npm ci
 popd
 
 ##############################
@@ -78,7 +73,7 @@ popd
 pushd ${DIR_NEW_EDITOR}
 echo "npm install"
 rm -rf node_modules/
-npm install
+npm ci
 if [ ${ENV} == "local" ]; then
     echo "Build new editor with local env do nothing."
 else

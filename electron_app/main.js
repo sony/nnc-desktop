@@ -26,7 +26,7 @@ const Splashscreen = require('@trodi/electron-splashscreen');
 const appInstanceLock = app.requestSingleInstanceLock()
 const { createFileService } = require('./utils/fileService');
 
-const pythonBundlesPack = 'python_bundles.tar.br'
+const pythonBundlesPack = 'python_bundles.tgz'
 let pyServerProc = null
 let pyServerPort = 5555
 let pyConnectorPort = 5556
@@ -305,7 +305,7 @@ function createWindow() {
             const progress = currentSize / totalSize * 100
             ret.splashScreen.webContents.send("extract_percent", progress.toFixed(2));
           })
-            .pipe(zlib.createBrotliDecompress())
+            .pipe(zlib.createGunzip())
             .pipe(tar.x({ C: pythonSourceDir }))
             .on('finish', () => {
               fs.unlink(python_bundle_compressed, err => console.error(`delete ${python_bundle_compressed} error:${err}`))

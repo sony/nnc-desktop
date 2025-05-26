@@ -18,7 +18,7 @@ set NNABLA_VER=1.39.0
 set PYTHON_VERSION_MAJOR_MINOR=310
 
 MKDIR electron_app\python_bundles
-ROBOCOPY C:\Python%PYTHON_VERSION_MAJOR_MINOR% electron_app\python_bundles /E /XD /NFL /NDL .git
+ROBOCOPY %pythonLocation% electron_app\python_bundles /E /XD /NFL /NDL .git
 
 electron_app\python_bundles\python.exe -m pip install -U pip || GOTO :error_pip
 
@@ -56,8 +56,8 @@ if "%actual_hash%"=="%expected_hash%" (
 
 @REM compress python_bundles
 SET source_folder=python_bundles
-SET br_file=%source_folder%.tar.br
-CALL tar -cf - %source_folder% | brotli.exe -9 > %br_file% || GOTO :error_pack
+SET br_file=%source_folder%.tgz
+CALL tar -czf %br_file% %source_folder% || GOTO :error_pack
 rmdir /s /q %source_folder%
 
 CALL npm list -g cross-env || CALL npm install cross-env || GOTO :error
