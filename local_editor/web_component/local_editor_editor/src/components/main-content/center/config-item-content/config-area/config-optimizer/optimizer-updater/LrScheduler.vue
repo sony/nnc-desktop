@@ -14,19 +14,33 @@
 -->
 
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
 import NncCheckbox from '@/components/shared-components/NncCheckbox.vue'
-import {useConfigStore} from '@/stores/config'
-const config_store = useConfigStore()
+
 const props = defineProps<{
     label: string, 
     optionList: any, 
-    value: string, 
+    warmup_length: number,
     optionListUnit: any, 
-    selectedUnit: string
+    selectedUnit: string,
+    warmup_scheduler: boolean,
+    scheduler: string
 }>()
-const {data, active} = storeToRefs(config_store)
 
+const emit = defineEmits<{
+    (event: 'update:warmup_length', value: number): void;
+    (event: 'update:selectedUnit', value: string): void;
+    (event: 'update:scheduler', value: string): void;
+    (event: 'update:warmup_scheduler', value: boolean): void;
+}>()
+
+const handleCheck = (event: Event) => {
+    emit('update:warmup_scheduler', event)
+};
+
+const handleInput = (event: Event) => {
+    const value = (event.target as HTMLInputElement).valueAsNumber;
+    emit('update:warmup_length', isNaN(value) ? 1 : value);
+}
 </script>
 <template>
 <tr>
@@ -38,8 +52,10 @@ const {data, active} = storeToRefs(config_store)
     </td>
     <td class="config-optimizer-select" style="padding-right: 5px;">
         <label class="select_label optimizer">
-            <select class="select_menu" name="updater-type" @change="(event: any) => $emit('input', event.target.value)" v-model="data[active.index].scheduler">
-                <option v-for="option in optionList" :value="option.name">
+            <select class="select_menu" name="updater-type"
+                :value="scheduler"
+                @change="$emit('update:scheduler', $event.target.value)">
+                <option v-for="option in optionList" :key="option.name" :value="option.name">
                     {{ option.name }}
                 </option>
             </select>
@@ -48,15 +64,23 @@ const {data, active} = storeToRefs(config_store)
     <td style="padding-right: 5px;"></td>
     <NncCheckbox 
         label="Warmup" 
-        v-model="data[active.index].warmup_scheduler" 
+        :modelValue="warmup_scheduler"
+        @update:modelValue="handleCheck"
         :disabled="false"
     />
     <td style="padding-right: 5px;">
-        <input :disabled="!data[active.index].warmup_scheduler" type="number" class="config-short-input no-spin-buttons" :value="value" @input="(event: any) => $emit('input_warmup_length', event.target.value)" step="any" >
+        <input :disabled="!warmup_scheduler"
+        type="number"
+        class="config-short-input no-spin-buttons"
+        :value="warmup_length"
+        @input="handleInput"
+        step="any" />
     </td>
     <td class="config-optimizer-select" style="padding-right: 5px;">
         <label class="select_label optimizer">
-            <select :disabled="!data[active.index].warmup_scheduler" class="select_menu" name="updater-type" @change="(event: any) => $emit('change', event.target.value)" :value="selectedUnit">
+            <select :disabled="!warmup_scheduler" class="select_menu" name="updater-type"
+                @change="$emit('update:selectedUnit', $event.target.value)"
+                :value="selectedUnit">
                 <option v-for="option in optionListUnit" :value="option.value">
                     {{ option.name }}
                 </option>

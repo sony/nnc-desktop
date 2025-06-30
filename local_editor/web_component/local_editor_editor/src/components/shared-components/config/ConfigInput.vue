@@ -14,32 +14,33 @@
 -->
 
 <script setup lang="ts">
-const props = defineProps<{
-    label: string, 
-    modelValue: string, 
-}>()
-const emit = defineEmits([
-    'input', 
-])
 
-function stripMultiByteChar(value: any) {
-    var newValue = value.replace(/[^\x20-\x7E]+/g, '');
-    // this.value = newValue;
-    emit('input', newValue);
+const props = defineProps<{
+  label: string,
+  modelValue: string,
+}>()
+
+const emit = defineEmits(["update:modelValue"])
+
+function stripMultiByteChar(value: string) {
+  const newValue = value.replace(/[^\x20-\x7E]+/g, "");
+  emit("update:modelValue", newValue);
 }
 </script>
+
 <template>
-<div>
+  <div>
     <span class="config-label">
-        <label class="config-label">{{ label }}:</label>
+      <label class="config-label">{{ label }}:</label>
     </span>
     <span>
-        <input 
-            type="text" 
-            class="config-input" 
-            :value="modelValue" 
-            @input="(event: any) => $emit('input', event.target.value)" 
-            @blur="(event: any) => stripMultiByteChar(event.target.value)" >
+      <input
+        type="text"
+        class="config-input"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
+        @blur="stripMultiByteChar(modelValue)"
+      />
     </span>
-</div>
+  </div>
 </template>
