@@ -1,0 +1,283 @@
+name: Build nncd
+
+on:
+  push:
+    branches:
+    - $default-branch
+    - 'release/**'
+    - 'feature/**'
+  workflow_dispatch:
+
+jobs:
+  web-page-linux:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: clone nnc-desktop
+      uses: actions/checkout@v4
+
+    - name: setup for Node v20.15.0
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.15.0
+
+    - name: restore npm ci cache
+      id: npm-cache-restore
+      uses: actions/cache/restore@v4
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-web-page-linux-${{ hashFiles('local_editor/web_component/*/package-lock.json') }}
+
+    - name: build pages for Linux
+      run: |
+        bash local_editor/scripts/build-web-page.sh
+
+    - name: save npm ci cache
+      id: npm-cache-save
+      uses: actions/cache/save@v4
+      with:
+        path: ~/.npm
+        key: ${{ steps.npm-cache-restore.outputs.cache-primary-key }}
+
+    - name: upload built pages
+      uses: actions/upload-artifact@v4
+      with:
+        name: console-pages
+        path: ./console/
+        retention-days: 1
+
+
+  app-linux-cpu:
+    runs-on: ubuntu-latest
+    needs: web-page-linux
+
+    steps:
+    - name: checkout nnc-desktop
+      uses: actions/checkout@v4
+
+    - name: download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: console-pages
+        path: ./console/
+
+    - name: setup for Node v20.15.0
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.15.0
+
+    - name: setup for python v3.10
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: install python packages
+      run: |
+        pip install -U pip
+        pip install nnabla==1.39.0 nnabla_converter==1.39.0
+        pip install -r local_editor/requirements.txt
+        pip install local_editor/runner_component/tools/console_cli/*.whl
+
+    - name: make cpu deb
+      run: |
+        bash local_editor/scripts/build_app.sh ${{ env.pythonLocation }} linux-cpu-deb
+
+    - name: upload built cpu deb
+      uses: actions/upload-artifact@v4
+      with:
+        name: linux-cpu-deb
+        path: ./dist/*.deb
+        retention-days: 1
+
+
+  app-linux-gpu:
+    runs-on: ubuntu-latest
+    needs: web-page-linux
+
+    steps:
+    - name: checkout nnc-desktop
+      uses: actions/checkout@v4
+
+    - name: download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: console-pages
+        path: ./console/
+
+    - name: setup for Node v20.15.0
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.15.0
+
+    - name: setup for python v3.10
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: install python packages
+      run: |
+        echo pythonLocationx
+        echo ${{ env.pythonLocation }}
+        pip install -U pip
+        pip install https://nnabla.org/whl/nnabla_ext_cuda_alllib/nnabla_ext_cuda_alllib-1.39.0-cp310-cp310-manylinux_2_28_x86_64.whl
+        pip install nnabla_converter==1.39.0
+        pip install -r local_editor/requirements.txt
+        pip install local_editor/runner_component/tools/console_cli/*.whl
+
+    - name: make gpu deb
+      run: |
+        bash local_editor/scripts/build_app.sh ${{ env.pythonLocation }} linux-gpu-deb
+
+    - name: upload built gpu deb
+      uses: actions/upload-artifact@v4
+      with:
+        name: linux-gpu-deb
+        path: ./dist/*.deb
+        retention-days: 1
+
+
+  app-windows-cpu:
+    runs-on: windows-latest
+    needs: web-page-linux
+
+    steps:
+    - name: Support longpaths
+      run: git config --system core.longpaths true
+
+    - name: checkout nnc-desktop
+      uses: actions/checkout@v4
+
+    - name: download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: console-pages
+        path: ./console/
+
+    - name: setup for Node v20.15.0
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.15.0
+
+    - name: setup for python v3.10
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: install python packages
+      run: |
+        pip install -U pip
+        pip install nnabla==1.39.0 nnabla_converter==1.39.0
+        pip install -r local_editor\requirements.txt
+        dir local_editor
+        dir local_editor\runner_component
+        dir local_editor\runner_component\tools
+        dir local_editor\runner_component\tools\console_cli
+        pip install local_editor\runner_component\tools\console_cli\nnabla_console-10.2.0-py3-none-any.whl
+
+    - name: make cpu installer
+      shell: powershell
+      run: |
+        Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -ErrorAction Stop
+        .\local_editor\scripts\build_app_win.ps1 ${{ env.pythonLocation }} win-cpu-dist
+
+    - name: upload built cpu installer
+      uses: actions/upload-artifact@v4
+      with:
+        name: windows-cpu-installer
+        path: .\dist\NeuralNetworkConsoleDesktop*.exe
+        retention-days: 1
+
+  app-windows-gpu:
+    runs-on: windows-latest
+    needs: web-page-linux
+
+    steps:
+    - name: Support longpaths
+      run: git config --system core.longpaths true
+
+    - name: checkout nnc-desktop
+      uses: actions/checkout@v4
+
+    - name: download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: console-pages
+        path: ./console/
+
+    - name: setup for Node v20.15.0
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.15.0
+
+    - name: setup for python v3.10
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: install python packages
+      run: |
+        pip install -U pip
+        pip install -U https://nnabla.org/whl/nnabla_ext_cuda_alllib/nnabla_ext_cuda_alllib-1.39.0-cp310-cp310-win_amd64.whl
+        pip install nnabla_converter==1.39.0
+        pip install -r local_editor\requirements.txt
+        pip install local_editor\runner_component\tools\console_cli\nnabla_console-10.2.0-py3-none-any.whl
+
+    - name: make gpu installer
+      shell: powershell
+      run: |
+        Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -ErrorAction Stop
+        .\local_editor\scripts\build_app_win.ps1 ${{ env.pythonLocation }} win-gpu-dist
+
+    - name: upload built gpu installer
+      uses: actions/upload-artifact@v4
+      with:
+        name: windows-gpu-installer
+        path: .\dist\NeuralNetworkConsoleDesktop*.exe
+        retention-days: 1
+
+
+  app-macos-cpu:
+    runs-on: macos-latest
+    needs: web-page-linux
+
+    steps:
+    - name: checkout nnc-desktop
+      uses: actions/checkout@v4
+
+    - name: download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: console-pages
+        path: ./console/
+
+    - name: setup for Node v20.15.0
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.15.0
+
+    - name: setup for python v3.10
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: build nnabla
+      run: |
+        bash local_editor/scripts/build_nnabla.sh
+
+    - name: install python packages
+      run: |
+        pip install -U pip
+        pip install ./nnabla-*.whl ./nnabla_converter-*.whl
+        pip install -r local_editor/requirements.txt
+        pip install local_editor/runner_component/tools/console_cli/*.whl
+
+    - name: make cpu dmg
+      run: |
+        bash local_editor/scripts/build_app.sh ${{ env.pythonLocation }} mac-dist
+
+    - name: upload built cpu dmg
+      uses: actions/upload-artifact@v4
+      with:
+        name: macos-cpu-dmg
+        path: ./dist/*.dmg
+        retention-days: 1

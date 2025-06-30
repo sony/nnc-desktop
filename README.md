@@ -72,7 +72,8 @@ nodenv install 20.15.0
 
 Then execute following commands in cmd under directory `nnc-desktop`:
 ```
-bash local_editor/scripts/build_mac_applesilicon.sh
+bash local_editor/scripts/build_nnabla.sh
+bash local_editor/scripts/build_app.sh [pyenvLocation] mac-dist
 ```
 
 You can find the installer under `electron_app/dist` directory after building process finished.

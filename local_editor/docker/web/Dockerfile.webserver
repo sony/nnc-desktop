@@ -45,6 +45,9 @@ RUN export NVM_DIR="$HOME/.nvm" \
     && cp -rf web_component/local_editor_web/* /tmp/nnc-web/web \
     && cp -rf web_component/local_editor_editor/ /tmp/nnc-web/new_editor \
     && cp -rf web_component/local_editor_top/ /tmp/nnc-web/top \
+    && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" \
+    && [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" \
+    && nvm use 20.15.0 \
     && bash init_build.sh \
     && cd /tmp/nnc-web \
     && cp -r dist /opt/dist \
