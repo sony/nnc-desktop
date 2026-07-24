@@ -1,3 +1,6 @@
+> This project has reached end of life on [April 3, 2025].
+> No further development or security support is provided.
+
 # NNCD release-v0.2.1
 ## Quickstart
 
